@@ -12,6 +12,7 @@ Filters live in the URL, so you can share a filtered view:
 - `?topic=ai,telemetry`: workshops matching any of those topics
 - `?material=0`: include workshops with no material yet (by default only ones with material show)
 - `?oss=1`: hide vendor product tutorials (keeps open source and mostly open)
+- `?naf=intent`: workshops covering one NAF Framework block (presentation, observability, orchestration, intent, collector, executor, infrastructure, practices)
 - `?q=nokia`: free-text search
 - `#c3`: jump straight to one workshop
 

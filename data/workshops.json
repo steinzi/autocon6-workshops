@@ -16,7 +16,8 @@
       "Times are local (MST, UTC-7).",
       "Workshop wifi: use the Autocon6 SSID, which is set aside for workshops.",
       "Many workshops offer a recording or remote option because of flight cancellations. Check the workshop's Slack channel.",
-      "\"Open source\" means the whole stack is free and open. \"Mostly open\" means open-source tooling with some vendor kit or SaaS. \"Vendor product\" means it's mainly a tutorial for a commercial product. The Free & open source toggle hides that last group."
+      "\"Open source\" means the whole stack is free and open. \"Mostly open\" means open-source tooling with some vendor kit or SaaS. \"Vendor product\" means it's mainly a tutorial for a commercial product. The Free & open source toggle hides that last group.",
+      "The NAF Framework mapping is a best guess from each workshop's description. It isn't an official NAF classification."
     ]
   },
   "workshops": [
@@ -54,7 +55,17 @@
         "closedloop"
       ],
       "openness": "product",
-      "openness_note": "Built around Tines, a commercial automation platform."
+      "openness_note": "Built around Tines, a commercial automation platform.",
+      "naf_core": [
+        "orchestration",
+        "observability"
+      ],
+      "naf_touch": [
+        "presentation",
+        "collector",
+        "executor"
+      ],
+      "naf_note": "Tines workflows orchestrate LLM/MCP triage over telemetry, with human approval gates."
     },
     {
       "code": "A2",
@@ -85,7 +96,17 @@
         "ansible"
       ],
       "openness": "open",
-      "openness_note": "Nautobot and AWX are both open source."
+      "openness_note": "Nautobot and AWX are both open source.",
+      "naf_core": [
+        "intent",
+        "executor",
+        "orchestration"
+      ],
+      "naf_touch": [
+        "presentation",
+        "collector"
+      ],
+      "naf_note": "Nautobot is the intent, Ansible executes, and AWX workflows with approvals orchestrate."
     },
     {
       "code": "A3",
@@ -119,7 +140,14 @@
         "clab"
       ],
       "openness": "open",
-      "openness_note": "Plain Linux networking: OVS/OVN, eBPF, DPDK, FRR."
+      "openness_note": "Plain Linux networking: OVS/OVN, eBPF, DPDK, FRR.",
+      "naf_core": [
+        "infrastructure"
+      ],
+      "naf_touch": [
+        "collector"
+      ],
+      "naf_note": "Linux as the network: bridges, OVS/OVN, eBPF, DPDK and switchdev offload."
     },
     {
       "code": "A4",
@@ -154,7 +182,16 @@
         "twin"
       ],
       "openness": "product",
-      "openness_note": "Built around Forward Predict, a commercial product."
+      "openness_note": "Built around Forward Predict, a commercial product.",
+      "naf_core": [
+        "intent",
+        "practices"
+      ],
+      "naf_touch": [
+        "orchestration",
+        "observability"
+      ],
+      "naf_note": "A GitHub Actions pipeline uses Forward Predict to validate intended changes before they ship."
     },
     {
       "code": "B1",
@@ -179,7 +216,16 @@
         "clab"
       ],
       "openness": "product",
-      "openness_note": "Built around Supertrace's st-cli, a commercial tool."
+      "openness_note": "Built around Supertrace's st-cli, a commercial tool.",
+      "naf_core": [
+        "presentation",
+        "collector"
+      ],
+      "naf_touch": [
+        "executor",
+        "observability"
+      ],
+      "naf_note": "An AI-native SSH terminal as the interface for reading and troubleshooting the network."
     },
     {
       "code": "B2",
@@ -206,7 +252,17 @@
         "cicd"
       ],
       "openness": "mostly",
-      "openness_note": "AVD, pyavd and ANTA are open source, but it's all aimed at Arista EOS."
+      "openness_note": "AVD, pyavd and ANTA are open source, but it's all aimed at Arista EOS.",
+      "naf_core": [
+        "intent",
+        "executor"
+      ],
+      "naf_touch": [
+        "collector",
+        "observability",
+        "orchestration"
+      ],
+      "naf_note": "AVD turns the design into config and deploys it, and ANTA tests the running network."
     },
     {
       "code": "B3",
@@ -234,7 +290,15 @@
         "sot"
       ],
       "openness": "product",
-      "openness_note": "Built around ExactNet's discovery platform."
+      "openness_note": "Built around ExactNet's discovery platform.",
+      "naf_core": [
+        "collector",
+        "observability"
+      ],
+      "naf_touch": [
+        "intent"
+      ],
+      "naf_note": "Discovery feeds telemetry, inventory and topology into a graph for analysis."
     },
     {
       "code": "B4",
@@ -259,7 +323,17 @@
         "closedloop"
       ],
       "openness": "product",
-      "openness_note": "Built around BackBox (Kilter), a commercial product."
+      "openness_note": "Built around BackBox (Kilter), a commercial product.",
+      "naf_core": [
+        "orchestration",
+        "executor",
+        "observability"
+      ],
+      "naf_touch": [
+        "collector",
+        "intent"
+      ],
+      "naf_note": "Scheduled backups and compliance checks, with drift remediation and verified changes that can roll back."
     },
     {
       "code": "C1",
@@ -337,7 +411,12 @@
         "ai"
       ],
       "openness": "mostly",
-      "openness_note": "Spec Kit and the techniques are open; there's a short Itential demo and it uses commercial LLMs."
+      "openness_note": "Spec Kit and the techniques are open; there's a short Itential demo and it uses commercial LLMs.",
+      "naf_core": [
+        "practices"
+      ],
+      "naf_touch": [],
+      "naf_note": "Loop engineering and spec-driven development with AI coding agents. This is a way of working rather than a single block."
     },
     {
       "code": "C2",
@@ -368,7 +447,15 @@
         "clab"
       ],
       "openness": "open",
-      "openness_note": "Infrahub (community), AVD, Ansible and Containerlab are all open source."
+      "openness_note": "Infrahub (community), AVD, Ansible and Containerlab are all open source.",
+      "naf_core": [
+        "intent",
+        "executor"
+      ],
+      "naf_touch": [
+        "orchestration"
+      ],
+      "naf_note": "Infrahub holds the fabric intent, AVD renders per-device config, and Ansible pushes it."
     },
     {
       "code": "C3",
@@ -399,7 +486,16 @@
         "clab"
       ],
       "openness": "open",
-      "openness_note": "SONiC, FRR, Containerlab and gNMI/OpenConfig are open source."
+      "openness_note": "SONiC, FRR, Containerlab and gNMI/OpenConfig are open source.",
+      "naf_core": [
+        "infrastructure",
+        "collector"
+      ],
+      "naf_touch": [
+        "executor",
+        "observability"
+      ],
+      "naf_note": "SONiC as the NOS, with gNMI/OpenConfig telemetry and automated config deployment."
     },
     {
       "code": "C4",
@@ -423,7 +519,17 @@
         "iac"
       ],
       "openness": "product",
-      "openness_note": "Open tooling (Terraform, Robot Framework), but it drives Cisco Meraki."
+      "openness_note": "Open tooling (Terraform, Robot Framework), but it drives Cisco Meraki.",
+      "naf_core": [
+        "intent",
+        "executor",
+        "practices"
+      ],
+      "naf_touch": [
+        "orchestration",
+        "observability"
+      ],
+      "naf_note": "Network as Code: YAML/Terraform intent, applied to Meraki through a CI pipeline with Robot tests."
     },
     {
       "code": "D1",
@@ -456,7 +562,15 @@
         "ai"
       ],
       "openness": "mostly",
-      "openness_note": "Vendor-neutral and mostly open source (LangChain, Pydantic, Streamlit); uses cloud LLMs and Arize."
+      "openness_note": "Vendor-neutral and mostly open source (LangChain, Pydantic, Streamlit); uses cloud LLMs and Arize.",
+      "naf_core": [
+        "presentation",
+        "practices"
+      ],
+      "naf_touch": [
+        "observability"
+      ],
+      "naf_note": "A chat co-pilot UI for the network, with proper evaluation and hallucination testing."
     },
     {
       "code": "D2",
@@ -481,7 +595,12 @@
         "design"
       ],
       "openness": "open",
-      "openness_note": "Infrahub community edition and the NAF framework."
+      "openness_note": "Infrahub community edition and the NAF framework.",
+      "naf_core": [
+        "intent"
+      ],
+      "naf_touch": [],
+      "naf_note": "Designing a source of intent in Infrahub: schemas, GraphQL, validation, branches, generators and transforms."
     },
     {
       "code": "D3",
@@ -509,7 +628,15 @@
         "clab"
       ],
       "openness": "open",
-      "openness_note": "Containerlab and FRRouting."
+      "openness_note": "Containerlab and FRRouting.",
+      "naf_core": [
+        "infrastructure"
+      ],
+      "naf_touch": [
+        "intent",
+        "practices"
+      ],
+      "naf_note": "Emulating a 200+ router fabric with Containerlab and FRR, with scripts generated live."
     },
     {
       "code": "D4",
@@ -541,7 +668,17 @@
         "ansible"
       ],
       "openness": "mostly",
-      "openness_note": "Open-source stack (Telegraf, InfluxDB, Grafana, NetBox, Ansible), running on Juniper cRPD/cSRX."
+      "openness_note": "Open-source stack (Telegraf, InfluxDB, Grafana, NetBox, Ansible), running on Juniper cRPD/cSRX.",
+      "naf_core": [
+        "intent",
+        "collector",
+        "observability",
+        "orchestration",
+        "executor",
+        "presentation"
+      ],
+      "naf_touch": [],
+      "naf_note": "The full NAF loop: NetBox/YAML intent, Telegraf/gNMI collection, InfluxDB/Kapacitor, the NAF orchestrator, PyEZ/Ansible, and Grafana/ntfy."
     }
   ],
   "topics": [
@@ -593,5 +730,121 @@
       "id": "iac",
       "label": "Terraform & IaC"
     }
-  ]
+  ],
+  "naf": {
+    "url": "https://reference.networkautomation.forum/Framework/Framework/",
+    "blocks": [
+      {
+        "id": "presentation",
+        "name": "Presentation",
+        "color": "#f5c518",
+        "on": "#1d1a05",
+        "tier": "User interface",
+        "desc": "Where people meet the automation: dashboards, CLI, chat, ITSM and approvals. It works both ways, so you can view state, start tasks and approve changes.",
+        "subs": [
+          "Dashboards",
+          "CLI",
+          "ChatOps",
+          "ITSM",
+          "API gateway"
+        ]
+      },
+      {
+        "id": "observability",
+        "name": "Observability",
+        "color": "#00e676",
+        "on": "#04210f",
+        "tier": "Logic",
+        "desc": "Stores the actual network state, normalizes it and analyzes it. It raises events when reality drifts away from intent.",
+        "subs": [
+          "Observed state",
+          "Normalization",
+          "Analytics",
+          "Drift events"
+        ]
+      },
+      {
+        "id": "orchestration",
+        "name": "Orchestration",
+        "color": "#00d4ff",
+        "on": "#03222b",
+        "tier": "Logic",
+        "desc": "Coordinates work across the other blocks in response to events: workflows, scheduling, dry-run and rollback. It never touches devices itself.",
+        "subs": [
+          "Events",
+          "Workflows",
+          "Scheduling",
+          "Rollback"
+        ]
+      },
+      {
+        "id": "intent",
+        "name": "Intent",
+        "color": "#ff6d2e",
+        "on": "#2a1105",
+        "tier": "Logic",
+        "desc": "The desired state and the source of truth, plus the logic to validate it and render it into vendor config.",
+        "subs": [
+          "Source of truth",
+          "Data models",
+          "Validation",
+          "Rendering"
+        ]
+      },
+      {
+        "id": "collector",
+        "name": "Collector",
+        "color": "#f43f5e",
+        "on": "#ffffff",
+        "tier": "Transport",
+        "desc": "Reads the actual state from the network: live reads, streaming telemetry, SNMP, syslog, flows, normalized across vendors.",
+        "subs": [
+          "Read ops",
+          "gNMI / SNMP",
+          "Syslog / flows"
+        ]
+      },
+      {
+        "id": "executor",
+        "name": "Executor",
+        "color": "#6366f1",
+        "on": "#ffffff",
+        "tier": "Transport",
+        "desc": "Writes changes to the network based on intended state: config pushes, upgrades, reboots. It should be idempotent and support dry-run.",
+        "subs": [
+          "Write ops",
+          "Idempotent",
+          "Dry-run"
+        ]
+      },
+      {
+        "id": "infrastructure",
+        "name": "Infrastructure",
+        "color": "#64748b",
+        "on": "#ffffff",
+        "tier": "Resources",
+        "desc": "The network itself: routers, switches, firewalls, load balancers, cloud fabric and the operating systems they run.",
+        "subs": [
+          "Routers & switches",
+          "NOS",
+          "Cloud fabric",
+          "Compute"
+        ]
+      },
+      {
+        "id": "practices",
+        "name": "Engineering practices",
+        "color": "#a3a3a3",
+        "on": "#111111",
+        "tier": "Cross-cutting",
+        "desc": "Not a framework block. These are the habits the framework expects under every component: Git, CI/CD, testing and documented APIs, plus the newer AI-assisted way of building them.",
+        "subs": [
+          "Git",
+          "CI/CD",
+          "Testing",
+          "AI-assisted dev"
+        ]
+      }
+    ]
+  }
 }

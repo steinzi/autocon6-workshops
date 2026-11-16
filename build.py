@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 REPO_URL = "https://github.com/steinzi/autocon6-workshops"
+SITE_URL = "https://steinzi.com/autocon6-workshops/"
 SLACK_TEAM = "T05GX70T5FY"
 SLACK_IDS = {
     "ac6-ws-a1": "C0CH1Q3023S", "ac6-ws-a2": "C0CG77YDUFL",
@@ -239,6 +240,7 @@ def main():
             .replace("{{CITY}}", e(ev["city"]))
             .replace("{{OFFICIAL}}", e(ev["official_url"]))
             .replace("{{REPO}}", REPO_URL)
+            .replace("{{SITE}}", SITE_URL)
             .replace("{{TABS}}", "".join(tabs))
             .replace("{{CHIPS}}", chips)
             .replace("{{SECTIONS}}", "\n".join(sections))
@@ -255,9 +257,19 @@ TEMPLATE = r"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AutoCon 6 Workshop Guide</title>
+<title>AutoCon 6 Workshop Guide (unofficial)</title>
 <meta name="description" content="What each AutoCon 6 workshop covers, what to set up beforehand, and where the material lives.">
 <meta name="theme-color" content="#1b1430">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AutoCon 6 Workshop Guide (unofficial)">
+<meta property="og:description" content="TL;DRs, setup steps, rooms and material for all 16 AutoCon 6 workshops.">
+<meta property="og:url" content="{{SITE}}">
+<meta property="og:image" content="{{SITE}}img/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{SITE}}img/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -292,6 +304,31 @@ button{font:inherit;color:inherit;cursor:pointer}
 .mast:after{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;
   background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'><path d='M0 70 L0 52 L90 40 L170 50 L260 28 L330 42 L420 22 L500 38 L600 18 L690 36 L760 26 L860 44 L950 30 L1040 46 L1120 34 L1200 44 L1200 70Z' fill='%23140f22' opacity='.55'/><path d='M0 70 L0 60 L120 54 L230 62 L340 50 L470 60 L590 48 L720 58 L840 52 L980 62 L1100 54 L1200 58 L1200 70Z' fill='%23140f22'/></svg>") bottom/100% 100% no-repeat}
 .mast .in{position:relative;z-index:1;padding-top:40px;padding-bottom:84px}
+.mast-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,400px);gap:8px 28px;align-items:end}
+.mast-art{position:relative;margin-bottom:-84px;align-self:end}
+.mast-art img{display:block;width:100%;height:auto;filter:drop-shadow(0 18px 28px rgba(10,5,25,.45))}
+.stamp{position:absolute;top:14%;left:-6%;transform:rotate(-12deg);font:700 15px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;
+  color:#ffe066;border:3px solid #ffe066;border-radius:6px;padding:7px 10px 6px;background:rgba(27,20,48,.55);box-shadow:0 0 0 2px rgba(27,20,48,.35);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.unof{display:inline-block;margin-right:10px;padding:3px 6px;border:1px solid rgba(255,224,102,.7);border-radius:4px;color:#ffe066;opacity:1}
+.gta{margin-top:20px;display:inline-flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,42,122,.22),rgba(0,212,255,.14));border:1px solid rgba(255,120,180,.45);box-shadow:0 0 30px -8px rgba(255,42,122,.55)}
+.gta-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px;opacity:.95}
+.gta-tag{font:800 13px/1 var(--sans);letter-spacing:.02em;padding:4px 7px;border-radius:5px;color:#1b1430;background:linear-gradient(90deg,#ff7eb6,#ffd8a8)}
+.gta-clock{display:flex;gap:8px}
+.gta-clock span{display:flex;flex-direction:column;align-items:center;min-width:58px;padding:7px 6px 6px;border-radius:9px;background:rgba(10,5,25,.45);border:1px solid rgba(255,255,255,.12)}
+.gta-clock b{font:600 26px/1 var(--mono);letter-spacing:-.02em;color:#fff;text-shadow:0 0 12px rgba(255,126,182,.7)}
+.gta-clock i{font:500 10px/1 var(--mono);font-style:normal;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-top:5px}
+.gta-done{font-weight:600;font-size:15px}
+.gta-done[hidden],.gta-clock[hidden]{display:none}
+@media (max-width:760px){
+  .mast-in{grid-template-columns:1fr}
+  .mast-art{width:min(300px,78vw);justify-self:center;margin-top:8px;margin-bottom:-72px}
+  .stamp{font-size:12px;left:-4%;top:10%}
+  .gta{display:flex}
+  .gta-clock span{min-width:0;flex:1}
+  .gta-clock b{font-size:22px}
+}
 .kicker{font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.8}
 .mast h1{margin:10px 0 8px;font-size:clamp(34px,7vw,64px);line-height:.98;font-weight:800;letter-spacing:-.035em}
 .mast h1 b{display:block;font-weight:800;color:#ffd8a8}
@@ -545,14 +582,25 @@ footer.site a{color:var(--ink)}
 </head>
 <body>
 <header class="mast">
-  <div class="in">
-    <div class="kicker">{{CITY}} · Mon 16 &amp; Tue 17 Nov</div>
-    <h1>AutoCon 6<b>Workshop Guide</b></h1>
-    <p>What each workshop covers, what to set up before you sit down, and where the slides, repos and labs are.</p>
-    <div class="stats">
-      <span><strong>{{N}}</strong> workshops</span>
-      <span><strong>{{NMAT}}</strong> with material posted</span>
-      <span><i class="pulse"></i>Updated <time datetime="{{UPDATED_ISO}}">{{UPDATED}}</time> MST</span>
+  <div class="in mast-in">
+    <div class="mast-txt">
+      <div class="kicker"><span class="unof">Unofficial</span>Tucson · 16 &amp; 17 Nov</div>
+      <h1>AutoCon 6<b>Workshop Guide</b></h1>
+      <p>What each workshop covers, what to set up before you sit down, and where the slides, repos and labs are.</p>
+      <div class="stats">
+        <span><strong>{{N}}</strong> workshops</span>
+        <span><strong>{{NMAT}}</strong> with material posted</span>
+        <span><i class="pulse"></i>Updated <time datetime="{{UPDATED_ISO}}">{{UPDATED}}</time> MST</span>
+      </div>
+      <div class="gta" id="gta" role="timer" aria-live="off">
+        <div class="gta-head"><span class="gta-tag">GTA VI</span><span>drops Thu 19 Nov. Attention span remaining:</span></div>
+        <div class="gta-clock" id="gtaClock"><span><b data-u="d">-</b><i>days</i></span><span><b data-u="h">--</b><i>hrs</i></span><span><b data-u="m">--</b><i>min</i></span><span><b data-u="s">--</b><i>sec</i></span></div>
+        <div class="gta-done" id="gtaDone" hidden>It's out. If you see me at the conference, no you didn't.</div>
+      </div>
+    </div>
+    <div class="mast-art">
+      <img src="img/logo.webp" width="840" height="863" alt="The guide's mascot: a guy in a cowboy hat giving two thumbs up, framed by orange corner brackets" fetchpriority="high">
+      <span class="stamp">Unofficial</span>
     </div>
   </div>
 </header>
@@ -716,6 +764,18 @@ footer.site a{color:var(--ink)}
     $$('[data-start]').forEach(el=>{const live=now>=Date.parse(el.dataset.start)&&now<Date.parse(el.dataset.end);el.classList.toggle('is-live',live);});
   }
   markLive(); setInterval(markLive,60000);
+
+  // GTA VI countdown: midnight local time, Thu 19 Nov 2026
+  const gtaAt=new Date(2026,10,19,0,0,0).getTime(), clock=$('#gtaClock'), done=$('#gtaDone');
+  const pad=n=>String(n).padStart(2,'0');
+  function tick(){
+    let t=Math.max(0,Math.floor((gtaAt-Date.now())/1000));
+    if(!t){clock.hidden=true;done.hidden=false;return;}
+    const d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),s=t%60;
+    clock.querySelector('[data-u=d]').textContent=d; clock.querySelector('[data-u=h]').textContent=pad(h);
+    clock.querySelector('[data-u=m]').textContent=pad(m); clock.querySelector('[data-u=s]').textContent=pad(s);
+  }
+  tick(); setInterval(tick,1000);
 
   readURL(); apply();
   if(location.hash){const t=document.querySelector(location.hash);if(t)setTimeout(()=>t.scrollIntoView(),50);}

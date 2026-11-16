@@ -43,6 +43,9 @@ def card(w, blocks, topic_labels):
                        " ".join(topic_labels[t] for t in w.get("topics", []))]).lower()
 
     flags = []
+    op = w.get("openness", "product")
+    op_label = {"open": "Open source", "mostly": "Mostly open", "product": "Vendor product"}[op]
+    flags.append(f'<span class="flag flag-{op}" title="{e(w.get("openness_note", ""))}">{op_label}</span>')
     if has_links:
         flags.append('<span class="flag flag-mat">Material</span>')
     elif w.get("prep"):
@@ -55,7 +58,7 @@ def card(w, blocks, topic_labels):
     when = blocks[b]
     room = f'<span class="room">Room {e(w["room"])}</span>' if w.get("room") else '<span class="room room-tbd">Room not posted</span>'
 
-    out = [f'<article class="ws" id="{w["code"].lower()}" data-block="{b}" data-mat="{int(has_links)}" '
+    out = [f'<article class="ws" id="{w["code"].lower()}" data-block="{b}" data-mat="{int(has_links)}" data-oss="{op}" '
            f'data-topics="{" ".join(w.get("topics", []))}" data-search="{e(search)}">']
     out.append(f'<div class="ws-top"><a class="ws-code b-{b}" href="#{w["code"].lower()}">{e(w["code"])}</a>'
                f'<span class="ws-org">{e(w["org"])}</span><span class="flags">{"".join(flags)}</span></div>')
@@ -79,6 +82,8 @@ def card(w, blocks, topic_labels):
         details.append("<h4>Good to know</h4>" + ul(w["notes"]))
     details.append(f'<h4>People</h4><p>{e(", ".join(w["proctors"]))}</p>')
     details.append(f'<h4>Level</h4><p>{e(w["levels"])}</p>')
+    if w.get("openness_note"):
+        details.append(f'<h4>{op_label}</h4><p>{e(w["openness_note"])}</p>')
     ch = w.get("slack")
     if ch:
         url = f"https://app.slack.com/client/{SLACK_TEAM}/{SLACK_IDS.get(ch, '')}"
@@ -153,6 +158,7 @@ TEMPLATE = r"""<!doctype html>
   --a:var(--sun); --b:var(--rose); --c:var(--sky); --d:var(--dusk);
   --mat-bg:#e3f6e7; --mat-ink:#1f7a33; --prep-bg:#fff2d6; --prep-ink:#8f5b00; --none-bg:#eceef2; --none-ink:#6b7280;
   --sold-bg:#fde7ec; --sold-ink:#b02a4f; --focus:#1c7ed6;
+  --oss-bg:#dff3f5; --oss-ink:#0b7285; --oss-line:#8fd3dc; --prod-bg:#f0ecfb; --prod-ink:#5f3dc4;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --sans:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
@@ -160,6 +166,7 @@ TEMPLATE = r"""<!doctype html>
   --bg:#0d0f14; --panel:#161a22; --ink:#eceff4; --sub:#9aa3b2; --hair:#272d38; --soft:#1c212b;
   --mat-bg:#173322; --mat-ink:#7fdc95; --prep-bg:#3a2c10; --prep-ink:#f5c76a; --none-bg:#22262f; --none-ink:#9aa3b2;
   --sold-bg:#3a1824; --sold-ink:#f49ab3; --focus:#74b9ff;
+  --oss-bg:#10323a; --oss-ink:#66d9e8; --oss-line:#1f5c66; --prod-bg:#271f42; --prod-ink:#b8a6f5;
 }}
 *{box-sizing:border-box}
 html{scroll-padding-top:120px;-webkit-text-size-adjust:100%}
@@ -268,6 +275,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .flag{font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;white-space:nowrap}
 .flag-mat{background:var(--mat-bg);color:var(--mat-ink)} .flag-prep{background:var(--prep-bg);color:var(--prep-ink)}
 .flag-none{background:var(--none-bg);color:var(--none-ink)} .flag-sold{background:var(--sold-bg);color:var(--sold-ink)}
+.flag-open{background:var(--oss-bg);color:var(--oss-ink)} .flag-mostly{background:transparent;color:var(--oss-ink);box-shadow:inset 0 0 0 1px var(--oss-line)}
+.flag-product{background:var(--prod-bg);color:var(--prod-ink)}
+.flags .flag-open,.flags .flag-mostly,.flags .flag-product{order:-1}
 .ws h3{margin:10px 0 4px;font-size:17px;line-height:1.3;font-weight:700;letter-spacing:-.01em}
 .ws-when{margin:0 0 10px;font:500 12.5px/1.5 var(--mono);color:var(--sub)}
 .room{margin-left:6px;padding-left:8px;border-left:1px solid var(--hair);color:var(--ink)}
@@ -327,6 +337,7 @@ footer.site a{color:var(--ink)}
         <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
           <input id="q" type="search" placeholder="Search titles, vendors, people…" autocomplete="off" aria-label="Search workshops"></label>
         <label class="toggle"><input type="checkbox" id="mat"> Has material</label>
+        <label class="toggle" title="Hide workshops that are mainly a tutorial for a commercial product"><input type="checkbox" id="oss"> Free &amp; open source</label>
       </div>
       <div class="chips" role="group" aria-label="Topics">{{CHIPS}}</div>
     </div>
@@ -349,9 +360,9 @@ footer.site a{color:var(--ink)}
 (function(){
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
   const cards=$$('.ws'), sections=$$('.blk'), tabs=$$('.tab'), chips=$$('.chip');
-  const q=$('#q'), mat=$('#mat'), count=$('#count'), clear=$('#clear'), empty=$('#empty');
+  const q=$('#q'), mat=$('#mat'), oss=$('#oss'), count=$('#count'), clear=$('#clear'), empty=$('#empty');
   const fbtn=$('#fbtn'), panel=$('#panel'), fcount=$('#fcount');
-  const state={block:'',topics:new Set(),q:'',mat:true};
+  const state={block:'',topics:new Set(),q:'',mat:true,oss:false};
 
   // jump strip
   const jump=$('#jump');
@@ -362,7 +373,7 @@ footer.site a{color:var(--ink)}
     const p=new URLSearchParams(location.search);
     state.block=(p.get('slot')||'').toUpperCase().replace(/[^A-D]/g,'').slice(0,1);
     state.topics=new Set((p.get('topic')||'').split(',').filter(Boolean));
-    state.q=p.get('q')||''; state.mat=p.get('material')!=='0';
+    state.q=p.get('q')||''; state.mat=p.get('material')!=='0'; state.oss=p.get('oss')==='1';
   }
   function writeURL(){
     const p=new URLSearchParams();
@@ -370,6 +381,7 @@ footer.site a{color:var(--ink)}
     if(state.topics.size)p.set('topic',[...state.topics].join(','));
     if(state.q)p.set('q',state.q);
     if(!state.mat)p.set('material','0');
+    if(state.oss)p.set('oss','1');
     const s=p.toString().replace(/%2C/g,',');
     history.replaceState(null,'',(s?'?'+s:location.pathname)+location.hash);
   }
@@ -381,6 +393,7 @@ footer.site a{color:var(--ink)}
       const ok=(!state.block||c.dataset.block===state.block)
         &&(!state.topics.size||t.some(x=>state.topics.has(x)))
         &&(!state.mat||c.dataset.mat==='1')
+        &&(!state.oss||c.dataset.oss!=='product')
         &&words.every(w=>c.dataset.search.includes(w));
       c.hidden=!ok; if(ok)shown++;
       c.querySelectorAll('.tag').forEach(g=>g.classList.toggle('hit',state.topics.has(g.dataset.topic)));
@@ -390,17 +403,17 @@ footer.site a{color:var(--ink)}
     tabs.forEach(b=>{const on=b.dataset.block===state.block;b.setAttribute('aria-pressed',String(on));
       if(on){const t=b.parentElement;t.scrollLeft=Math.max(0,b.offsetLeft-t.clientWidth/2+b.offsetWidth/2);}});
     chips.forEach(b=>b.setAttribute('aria-pressed',String(state.topics.has(b.dataset.topic))));
-    q.value=state.q; mat.checked=state.mat;
-    const nf=state.topics.size+(state.q?1:0);
+    q.value=state.q; mat.checked=state.mat; oss.checked=state.oss;
+    const nf=state.topics.size+(state.q?1:0)+(state.oss?1:0);
     fcount.textContent=nf; fbtn.classList.toggle('on',nf>0);
     const any=nf>0||state.block||!state.mat;
     clear.hidden=!any;
-    count.textContent=shown===cards.length?'Showing all '+cards.length+' workshops':(state.mat?'Showing '+shown+' with material':'Showing '+shown+' of '+cards.length);
+    count.textContent=shown===cards.length?'Showing all '+cards.length+' workshops':(state.mat?shown+' with material':shown+' of '+cards.length)+(state.oss&&shown<cards.length?' · open source':'');
     const sa=$('#showall'); sa.hidden=!state.mat; sa.textContent='Show all '+cards.length;
     empty.classList.toggle('show',shown===0);
     writeURL();
   }
-  function reset(){state.block='';state.topics.clear();state.q='';state.mat=true;apply();}
+  function reset(){state.block='';state.topics.clear();state.q='';state.mat=true;state.oss=false;apply();}
   $('#showall').addEventListener('click',()=>{state.mat=false;apply();});
 
   tabs.forEach(b=>b.addEventListener('click',()=>{state.block=b.dataset.block;apply();
@@ -411,6 +424,7 @@ footer.site a{color:var(--ink)}
     const t=g.dataset.topic;state.topics.has(t)?state.topics.delete(t):state.topics.add(t);apply();});
   let tm;q.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{state.q=q.value.trim();apply();},120);});
   mat.addEventListener('change',()=>{state.mat=mat.checked;apply();});
+  oss.addEventListener('change',()=>{state.oss=oss.checked;apply();});
   clear.addEventListener('click',reset); $('#clear2').addEventListener('click',reset);
   fbtn.addEventListener('click',()=>{const o=panel.classList.toggle('open');fbtn.setAttribute('aria-expanded',String(o));if(o)q.focus({preventScroll:true});});
   document.addEventListener('keydown',ev=>{if(ev.key==='/'&&document.activeElement!==q){ev.preventDefault();panel.classList.add('open');q.focus();}});

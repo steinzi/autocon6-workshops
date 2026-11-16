@@ -15,7 +15,8 @@
     "notes": [
       "Times are local (MST, UTC-7).",
       "Workshop wifi: use the Autocon6 SSID, which is set aside for workshops.",
-      "Many workshops offer a recording or remote option because of flight cancellations. Check the workshop's Slack channel."
+      "Many workshops offer a recording or remote option because of flight cancellations. Check the workshop's Slack channel.",
+      "\"Open source\" means the whole stack is free and open. \"Mostly open\" means open-source tooling with some vendor kit or SaaS. \"Vendor product\" means it's mainly a tutorial for a commercial product. The Free & open source toggle hides that last group."
     ]
   },
   "workshops": [
@@ -51,7 +52,9 @@
       "topics": [
         "ai",
         "closedloop"
-      ]
+      ],
+      "openness": "product",
+      "openness_note": "Built around Tines, a commercial automation platform."
     },
     {
       "code": "A2",
@@ -80,7 +83,9 @@
       "topics": [
         "sot",
         "ansible"
-      ]
+      ],
+      "openness": "open",
+      "openness_note": "Nautobot and AWX are both open source."
     },
     {
       "code": "A3",
@@ -112,7 +117,9 @@
         "linux",
         "fabric",
         "clab"
-      ]
+      ],
+      "openness": "open",
+      "openness_note": "Plain Linux networking: OVS/OVN, eBPF, DPDK, FRR."
     },
     {
       "code": "A4",
@@ -145,7 +152,9 @@
       "topics": [
         "cicd",
         "twin"
-      ]
+      ],
+      "openness": "product",
+      "openness_note": "Built around Forward Predict, a commercial product."
     },
     {
       "code": "B1",
@@ -168,7 +177,9 @@
       "topics": [
         "ai",
         "clab"
-      ]
+      ],
+      "openness": "product",
+      "openness_note": "Built around Supertrace's st-cli, a commercial tool."
     },
     {
       "code": "B2",
@@ -193,7 +204,9 @@
         "design",
         "fabric",
         "cicd"
-      ]
+      ],
+      "openness": "mostly",
+      "openness_note": "AVD, pyavd and ANTA are open source, but it's all aimed at Arista EOS."
     },
     {
       "code": "B3",
@@ -219,7 +232,9 @@
       "topics": [
         "telemetry",
         "sot"
-      ]
+      ],
+      "openness": "product",
+      "openness_note": "Built around ExactNet's discovery platform."
     },
     {
       "code": "B4",
@@ -242,7 +257,9 @@
       "topics": [
         "cicd",
         "closedloop"
-      ]
+      ],
+      "openness": "product",
+      "openness_note": "Built around BackBox (Kilter), a commercial product."
     },
     {
       "code": "C1",
@@ -318,7 +335,9 @@
       "notes": [],
       "topics": [
         "ai"
-      ]
+      ],
+      "openness": "mostly",
+      "openness_note": "Spec Kit and the techniques are open; there's a short Itential demo and it uses commercial LLMs."
     },
     {
       "code": "C2",
@@ -347,7 +366,9 @@
         "fabric",
         "ansible",
         "clab"
-      ]
+      ],
+      "openness": "open",
+      "openness_note": "Infrahub (community), AVD, Ansible and Containerlab are all open source."
     },
     {
       "code": "C3",
@@ -376,7 +397,9 @@
         "fabric",
         "telemetry",
         "clab"
-      ]
+      ],
+      "openness": "open",
+      "openness_note": "SONiC, FRR, Containerlab and gNMI/OpenConfig are open source."
     },
     {
       "code": "C4",
@@ -398,7 +421,9 @@
       "topics": [
         "cicd",
         "iac"
-      ]
+      ],
+      "openness": "product",
+      "openness_note": "Open tooling (Terraform, Robot Framework), but it drives Cisco Meraki."
     },
     {
       "code": "D1",
@@ -429,7 +454,9 @@
       ],
       "topics": [
         "ai"
-      ]
+      ],
+      "openness": "mostly",
+      "openness_note": "Vendor-neutral and mostly open source (LangChain, Pydantic, Streamlit); uses cloud LLMs and Arize."
     },
     {
       "code": "D2",
@@ -452,7 +479,9 @@
       "topics": [
         "sot",
         "design"
-      ]
+      ],
+      "openness": "open",
+      "openness_note": "Infrahub community edition and the NAF framework."
     },
     {
       "code": "D3",
@@ -478,7 +507,9 @@
         "twin",
         "fabric",
         "clab"
-      ]
+      ],
+      "openness": "open",
+      "openness_note": "Containerlab and FRRouting."
     },
     {
       "code": "D4",
@@ -508,7 +539,9 @@
         "closedloop",
         "clab",
         "ansible"
-      ]
+      ],
+      "openness": "mostly",
+      "openness_note": "Open-source stack (Telegraf, InfluxDB, Grafana, NetBox, Ansible), running on Juniper cRPD/cSRX."
     }
   ],
   "topics": [

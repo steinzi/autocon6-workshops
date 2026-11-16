@@ -4,9 +4,19 @@ A one-page site with a TL;DR, prep steps, rooms and material links for every Aut
 
 Live: https://steinzi.github.io/autocon6-workshops/
 
+## Sharing filtered views
+
+Filters live in the URL, so you can share a filtered view:
+
+- `?slot=D`: Tuesday afternoon only (slots A to D)
+- `?topic=ai,telemetry`: workshops matching any of those topics
+- `?material=1`: only workshops with material posted
+- `?q=nokia`: free-text search
+- `#c3`: jump straight to one workshop
+
 ## How it works
 
-- `data/workshops.json` holds all the content. Edit it there.
+- `data/workshops.json` holds all the content, including the topic tags. Edit it there.
 - `python3 build.py` regenerates `index.html` from it.
 - GitHub Pages serves `index.html` from `main`.
 

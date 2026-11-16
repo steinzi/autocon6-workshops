@@ -5,7 +5,12 @@
     "city": "Tucson, AZ",
     "venue": "The Westin La Paloma Resort & Spa",
     "workshop_days": "Mon 16 & Tue 17 Nov 2026",
-    "blocks": {"A": "Mon 16 Nov · 09:00–13:00", "B": "Mon 16 Nov · 14:00–18:00", "C": "Tue 17 Nov · 09:00–13:00", "D": "Tue 17 Nov · 14:00–18:00"},
+    "blocks": {
+      "A": "Mon 16 Nov · 09:00–13:00",
+      "B": "Mon 16 Nov · 14:00–18:00",
+      "C": "Tue 17 Nov · 09:00–13:00",
+      "D": "Tue 17 Nov · 14:00–18:00"
+    },
     "official_url": "https://networkautomation.forum/autocon6",
     "notes": [
       "Times are local (MST, UTC-7).",
@@ -15,24 +20,53 @@
   },
   "workshops": [
     {
-      "code": "A1", "title": "Agentic NetOps in Tines: Moving from Brittle Scripts to Autonomous Workflows with Human-in-the-Loop Control",
-      "org": "Tines", "proctors": ["Sif Baksh"], "levels": "Net Intermediate · Linux Beginner · Prog Intermediate",
-      "sold_out": true, "room": null, "slack": "ac6-ws-a1",
+      "code": "A1",
+      "title": "Agentic NetOps in Tines: Moving from Brittle Scripts to Autonomous Workflows with Human-in-the-Loop Control",
+      "org": "Tines",
+      "proctors": [
+        "Sif Baksh"
+      ],
+      "levels": "Net Intermediate · Linux Beginner · Prog Intermediate",
+      "sold_out": true,
+      "room": null,
+      "slack": "ac6-ws-a1",
       "tldr": "Build an agentic NetOps workflow in Tines that hooks LLMs and MCP up to telemetry for AI-driven triage, with guardrails and human approval gates.",
       "prep": [
         "Log in to the Tines training tenant with the email you used for AutoCon. Use the link below if the invite email never arrived or went to spam.",
         "Before the session, power on an always-on Cisco DevNet sandbox device that doesn't need VPN, and note its address and credentials."
       ],
       "links": [
-        {"label": "Tines training login", "url": "https://bootcamp-training.tines.com"},
-        {"label": "Cisco DevNet sandboxes", "url": "https://developer.cisco.com/sandbox"}
+        {
+          "label": "Tines training login",
+          "url": "https://bootcamp-training.tines.com"
+        },
+        {
+          "label": "Cisco DevNet sandboxes",
+          "url": "https://developer.cisco.com/sandbox"
+        }
       ],
-      "notes": ["Session is being recorded. Remote Zoom link is in the Slack channel."]
+      "notes": [
+        "Session is being recorded. Remote Zoom link is in the Slack channel."
+      ],
+      "topics": [
+        "ai",
+        "closedloop"
+      ]
     },
     {
-      "code": "A2", "title": "From Intent to Execution: Nautobot and Ansible, Better Together",
-      "org": "Network to Code", "proctors": ["Israel Pineda", "Brandon Donohoe", "Nikos Kallergis", "Chris Murray"], "levels": "Net Intermediate · Linux Intermediate · Prog Intermediate",
-      "sold_out": true, "room": null, "slack": "ac6-ws-a2",
+      "code": "A2",
+      "title": "From Intent to Execution: Nautobot and Ansible, Better Together",
+      "org": "Network to Code",
+      "proctors": [
+        "Israel Pineda",
+        "Brandon Donohoe",
+        "Nikos Kallergis",
+        "Chris Murray"
+      ],
+      "levels": "Net Intermediate · Linux Intermediate · Prog Intermediate",
+      "sold_out": true,
+      "room": null,
+      "slack": "ac6-ws-a2",
       "tldr": "Use Nautobot as the source of truth driving Ansible/AWX: dynamic inventory, Config Contexts, Dynamic Groups, GraphQL-rendered configs, Job Buttons, writing state back, and event-triggered workflows with approval.",
       "prep": [
         "Bring a laptop with a browser and a charger. Nothing to install.",
@@ -40,65 +74,189 @@
         "You should have run an Ansible playbook before. No Nautobot, AWX or Python experience needed."
       ],
       "links": [],
-      "notes": ["AWX stands in for Ansible Automation Platform, so the concepts carry over directly."]
+      "notes": [
+        "AWX stands in for Ansible Automation Platform, so the concepts carry over directly."
+      ],
+      "topics": [
+        "sot",
+        "ansible"
+      ]
     },
     {
-      "code": "A3", "title": "Into the Unknown: Deep Dive into the Linux Network Stack",
-      "org": "CodiLime", "proctors": ["Adam Kułagowski", "Pavel Raunou", "Monika Antoniak"], "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
-      "sold_out": false, "room": null, "slack": "ac6-ws-a3-into-the-unknown",
+      "code": "A3",
+      "title": "Into the Unknown: Deep Dive into the Linux Network Stack",
+      "org": "CodiLime",
+      "proctors": [
+        "Adam Kułagowski",
+        "Pavel Raunou",
+        "Monika Antoniak"
+      ],
+      "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
+      "sold_out": false,
+      "room": null,
+      "slack": "ac6-ws-a3-into-the-unknown",
       "tldr": "Linux networking from bridges to OVS/OVN, plus eBPF, DPDK, switchdev offload, BGP/IS-IS/MPLS, EVPN/VXLAN and performance testing.",
-      "prep": ["The FAQ is a canvas in the Slack channel (also sent by email)."],
-      "links": [{"label": "Workshop instructions", "url": "https://codilime.github.io/autocon"}],
-      "notes": ["Recorded. Slides and Containerlab files to run the labs locally are promised after the workshop."]
+      "prep": [
+        "The FAQ is a canvas in the Slack channel (also sent by email)."
+      ],
+      "links": [
+        {
+          "label": "Workshop instructions",
+          "url": "https://codilime.github.io/autocon"
+        }
+      ],
+      "notes": [
+        "Recorded. Slides and Containerlab files to run the labs locally are promised after the workshop."
+      ],
+      "topics": [
+        "linux",
+        "fabric",
+        "clab"
+      ]
     },
     {
-      "code": "A4", "title": "Know Before You Deploy: Hands-On Network CI/CD with Forward Predict",
-      "org": "Forward Networks", "proctors": ["Craig Johnson", "Sean Deveci", "Mike Lossmann"], "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
-      "sold_out": false, "room": "Indigo (lower level)", "slack": "ac6-ws-a4",
+      "code": "A4",
+      "title": "Know Before You Deploy: Hands-On Network CI/CD with Forward Predict",
+      "org": "Forward Networks",
+      "proctors": [
+        "Craig Johnson",
+        "Sean Deveci",
+        "Mike Lossmann"
+      ],
+      "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
+      "sold_out": false,
+      "room": "Indigo (lower level)",
+      "slack": "ac6-ws-a4",
       "tldr": "Build a CI/CD pipeline with GitHub Actions and Forward Predict that catches behaviour regressions before deployment.",
       "prep": [
         "You need a browser and a GitHub account. The lab runs in a GitHub Codespace.",
         "Get a seat at the link below (opened 08:30 Monday): press Get a seat, accept the GitHub invite, then open it in Codespaces.",
         "Stuck? Post \"@wsa4 help seat-NN\" in Slack."
       ],
-      "links": [{"label": "Get a seat", "url": "https://tinyurl.com/wsa4go"}],
-      "notes": ["Recorded. Zoom is for remote attendees only (\"In room? No Zoom!\")."]
+      "links": [
+        {
+          "label": "Get a seat",
+          "url": "https://tinyurl.com/wsa4go"
+        }
+      ],
+      "notes": [
+        "Recorded. Zoom is for remote attendees only (\"In room? No Zoom!\")."
+      ],
+      "topics": [
+        "cicd",
+        "twin"
+      ]
     },
     {
-      "code": "B1", "title": "Old Protocol, New Brain: Hands-On Troubleshooting with an AI-Native SSH Terminal",
-      "org": "Supertrace", "proctors": ["Mahir Kalra", "Alex Typaldos", "Pete Cho", "Andrei Shevtsov"], "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
-      "sold_out": true, "room": null, "slack": "ac6-ws-b1",
+      "code": "B1",
+      "title": "Old Protocol, New Brain: Hands-On Troubleshooting with an AI-Native SSH Terminal",
+      "org": "Supertrace",
+      "proctors": [
+        "Mahir Kalra",
+        "Alex Typaldos",
+        "Pete Cho",
+        "Andrei Shevtsov"
+      ],
+      "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
+      "sold_out": true,
+      "room": null,
+      "slack": "ac6-ws-b1",
       "tldr": "Troubleshoot a Containerlab network with st-cli using natural language or plain commands, through guided failure scenarios with a human in the loop.",
-      "prep": [], "links": [], "notes": []
-    },
-    {
-      "code": "B2", "title": "Design Driven Automation: Architect, Validate and Deploy an EVPN VXLAN Fabric with Arista AVD",
-      "org": "Arista Networks", "proctors": ["Carl Buchmann", "Noel Thompson", "Marcus McPeek", "Jordan Hemann", "Kyle Bush"], "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
-      "sold_out": true, "room": null, "slack": "ac6-ws-b2",
-      "tldr": "Architect, validate and deploy a leaf-spine EVPN/VXLAN fabric as code with arista.avd, pyavd and ANTA, covering Day 0 and Day 2 plus multi-vendor extension.",
-      "prep": [], "links": [], "notes": []
-    },
-    {
-      "code": "B3", "title": "Who Gets the Truck Roll? Joining Telemetry, Topology, and a Graph through Discovery",
-      "org": "ExactNet", "proctors": ["Jeff Cook", "Pieter van Os"], "levels": "Net Intermediate · Linux Intermediate · Prog Beginner",
-      "sold_out": false, "room": null, "slack": "ac6-ws-b3",
-      "tldr": "Discover a multi-vendor network and join telemetry, inventory and topology in a graph database, on a hosted lab simulating an MPLS/PON backbone.",
-      "prep": ["A FAQ was promised by email."],
+      "prep": [],
       "links": [],
-      "notes": ["Jeff Cook is presenting remotely because of travel problems. Pieter van Os is in the room.", "The whole workshop is hosted online, so you can also follow it remotely."]
+      "notes": [],
+      "topics": [
+        "ai",
+        "clab"
+      ]
     },
     {
-      "code": "B4", "title": "Building Network Automations with BackBox",
-      "org": "BackBox", "proctors": ["Sandra Topalovic", "Irfahn Khimji"], "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
-      "sold_out": false, "room": null, "slack": "ac6-ws-b4",
+      "code": "B2",
+      "title": "Design Driven Automation: Architect, Validate and Deploy an EVPN VXLAN Fabric with Arista AVD",
+      "org": "Arista Networks",
+      "proctors": [
+        "Carl Buchmann",
+        "Noel Thompson",
+        "Marcus McPeek",
+        "Jordan Hemann",
+        "Kyle Bush"
+      ],
+      "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
+      "sold_out": true,
+      "room": null,
+      "slack": "ac6-ws-b2",
+      "tldr": "Architect, validate and deploy a leaf-spine EVPN/VXLAN fabric as code with arista.avd, pyavd and ANTA, covering Day 0 and Day 2 plus multi-vendor extension.",
+      "prep": [],
+      "links": [],
+      "notes": [],
+      "topics": [
+        "design",
+        "fabric",
+        "cicd"
+      ]
+    },
+    {
+      "code": "B3",
+      "title": "Who Gets the Truck Roll? Joining Telemetry, Topology, and a Graph through Discovery",
+      "org": "ExactNet",
+      "proctors": [
+        "Jeff Cook",
+        "Pieter van Os"
+      ],
+      "levels": "Net Intermediate · Linux Intermediate · Prog Beginner",
+      "sold_out": false,
+      "room": null,
+      "slack": "ac6-ws-b3",
+      "tldr": "Discover a multi-vendor network and join telemetry, inventory and topology in a graph database, on a hosted lab simulating an MPLS/PON backbone.",
+      "prep": [
+        "A FAQ was promised by email."
+      ],
+      "links": [],
+      "notes": [
+        "Jeff Cook is presenting remotely because of travel problems. Pieter van Os is in the room.",
+        "The whole workshop is hosted online, so you can also follow it remotely."
+      ],
+      "topics": [
+        "telemetry",
+        "sot"
+      ]
+    },
+    {
+      "code": "B4",
+      "title": "Building Network Automations with BackBox",
+      "org": "BackBox",
+      "proctors": [
+        "Sandra Topalovic",
+        "Irfahn Khimji"
+      ],
+      "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
+      "sold_out": false,
+      "room": null,
+      "slack": "ac6-ws-b4",
       "tldr": "Build, test and deploy automations in BackBox (Kilter) in a live lab: backup, compliance, drift remediation, scheduling, and change verification with rollback.",
-      "prep": [], "links": [],
-      "notes": ["Remote Zoom details are in the Slack channel."]
+      "prep": [],
+      "links": [],
+      "notes": [
+        "Remote Zoom details are in the Slack channel."
+      ],
+      "topics": [
+        "cicd",
+        "closedloop"
+      ]
     },
     {
-      "code": "C1", "title": "Loop Engineering, Spec Driven Development, and the Future of VibeOps",
-      "org": "Itential", "proctors": ["John Capobianco", "Joksan Flores", "Elliot Connor"], "levels": "Net Beginner · Linux Beginner · Prog Intermediate",
-      "sold_out": true, "room": null, "slack": "ac6-ws-c1",
+      "code": "C1",
+      "title": "Loop Engineering, Spec Driven Development, and the Future of VibeOps",
+      "org": "Itential",
+      "proctors": [
+        "John Capobianco",
+        "Joksan Flores",
+        "Elliot Connor"
+      ],
+      "levels": "Net Beginner · Linux Beginner · Prog Intermediate",
+      "sold_out": true,
+      "room": null,
+      "slack": "ac6-ws-c1",
       "tldr": "Lectures on LLMs, Ralph loops and spec-driven development with GitHub Spec Kit, then build a networking game in teams of six and show it off.",
       "prep": [
         "Set up your build environment from the repo before Tuesday so the session isn't spent on setup.",
@@ -106,34 +264,104 @@
         "When you arrive, get a group-number sticker from John (10 teams of 6). Don't leave valuables where you first sit, because groups move."
       ],
       "links": [
-        {"label": "Workshop repo", "url": "https://github.com/automateyournetwork/NAF_AC6"},
-        {"label": "Example games (Arcade)", "url": "https://automateyournetwork.com/arcade/"}
+        {
+          "label": "Workshop repo",
+          "url": "https://github.com/automateyournetwork/NAF_AC6"
+        },
+        {
+          "label": "Example games (Arcade)",
+          "url": "https://automateyournetwork.com/arcade/"
+        }
       ],
       "agenda": [
-        ["09:00", "Lecture: LLMs, Ralph loops, SDD and Spec Kit"],
-        ["09:35", "Demo: Itential Builder Skills"],
-        ["09:45", "Lecture: loop engineering"],
-        ["09:50", "Set up your project"],
-        ["10:00", "Lecture: gamification of networking"],
-        ["10:15", "Group activity: ideas and templates"],
-        ["10:45", "Break"],
-        ["11:15", "Group activity, continued"],
-        ["11:30", "Bring your idea to life"],
-        ["12:30", "Show your games"]
+        [
+          "09:00",
+          "Lecture: LLMs, Ralph loops, SDD and Spec Kit"
+        ],
+        [
+          "09:35",
+          "Demo: Itential Builder Skills"
+        ],
+        [
+          "09:45",
+          "Lecture: loop engineering"
+        ],
+        [
+          "09:50",
+          "Set up your project"
+        ],
+        [
+          "10:00",
+          "Lecture: gamification of networking"
+        ],
+        [
+          "10:15",
+          "Group activity: ideas and templates"
+        ],
+        [
+          "10:45",
+          "Break"
+        ],
+        [
+          "11:15",
+          "Group activity, continued"
+        ],
+        [
+          "11:30",
+          "Bring your idea to life"
+        ],
+        [
+          "12:30",
+          "Show your games"
+        ]
       ],
-      "notes": []
+      "notes": [],
+      "topics": [
+        "ai"
+      ]
     },
     {
-      "code": "C2", "title": "Open Source Design-Driven Automation: From Fabric Intent to Running Config with Infrahub and AVD",
-      "org": "OpsMill", "proctors": ["Adam Byczkowski", "Damien Garros", "Pete Crocker", "Alex Gittings", "Jordan Hemann", "Noel Thompson", "Carl Buchmann"], "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
-      "sold_out": false, "room": null, "slack": "ac6-ws-c2",
+      "code": "C2",
+      "title": "Open Source Design-Driven Automation: From Fabric Intent to Running Config with Infrahub and AVD",
+      "org": "OpsMill",
+      "proctors": [
+        "Adam Byczkowski",
+        "Damien Garros",
+        "Pete Crocker",
+        "Alex Gittings",
+        "Jordan Hemann",
+        "Noel Thompson",
+        "Carl Buchmann"
+      ],
+      "levels": "Net Intermediate · Linux Beginner · Prog Beginner",
+      "sold_out": false,
+      "room": null,
+      "slack": "ac6-ws-c2",
       "tldr": "An open-source pipeline on the NAF framework: Infrahub as the intent source, AVD generating per-device config, and Ansible pushing to a Containerlab fabric.",
-      "prep": [], "links": [], "notes": []
+      "prep": [],
+      "links": [],
+      "notes": [],
+      "topics": [
+        "sot",
+        "design",
+        "fabric",
+        "ansible",
+        "clab"
+      ]
     },
     {
-      "code": "C3", "title": "Operationalizing SONiC in Modern Data Centers: Deployment, Telemetry, and Automation",
-      "org": "Nokia", "proctors": ["Reda Laichi", "Saju Salahudeen", "Amer Fakhar"], "levels": "Net Beginner · Linux Beginner · Prog Beginner",
-      "sold_out": false, "room": "Verbena", "slack": "ac6-ws-c3",
+      "code": "C3",
+      "title": "Operationalizing SONiC in Modern Data Centers: Deployment, Telemetry, and Automation",
+      "org": "Nokia",
+      "proctors": [
+        "Reda Laichi",
+        "Saju Salahudeen",
+        "Amer Fakhar"
+      ],
+      "levels": "Net Beginner · Linux Beginner · Prog Beginner",
+      "sold_out": false,
+      "room": "Verbena",
+      "slack": "ac6-ws-c3",
       "tldr": "Deploy a SONiC fabric from scratch in Containerlab, configure interfaces, BGP and EVPN, pull gNMI/OpenConfig telemetry, and get started automating it.",
       "prep": [
         "Bring a laptop with an SSH client.",
@@ -141,48 +369,130 @@
         "You get an instruction card and your own lab instance on the day."
       ],
       "links": [],
-      "notes": ["Lab instructions stay available afterwards in a repo shared during the workshop."]
+      "notes": [
+        "Lab instructions stay available afterwards in a repo shared during the workshop."
+      ],
+      "topics": [
+        "fabric",
+        "telemetry",
+        "clab"
+      ]
     },
     {
-      "code": "C4", "title": "From Network Change to Code: A Hands-on Network as Code Workshop",
-      "org": "Cisco Systems", "proctors": ["Snezana Mitrovic", "Daniel Schmidt", "Justin Burnette"], "levels": "Net Beginner · Linux Beginner · Prog Beginner",
-      "sold_out": true, "room": null, "slack": "ac6-ws-c4",
+      "code": "C4",
+      "title": "From Network Change to Code: A Hands-on Network as Code Workshop",
+      "org": "Cisco Systems",
+      "proctors": [
+        "Snezana Mitrovic",
+        "Daniel Schmidt",
+        "Justin Burnette"
+      ],
+      "levels": "Net Beginner · Linux Beginner · Prog Beginner",
+      "sold_out": true,
+      "room": null,
+      "slack": "ac6-ws-c4",
       "tldr": "Network as Code with Meraki APIs, Terraform and GitHub Actions, plus pre-change validation and Robot Framework testing.",
-      "prep": [], "links": [], "notes": []
+      "prep": [],
+      "links": [],
+      "notes": [],
+      "topics": [
+        "cicd",
+        "iac"
+      ]
     },
     {
-      "code": "D1", "title": "AI for the Network Forward Engineer: Agents & Application Evaluation",
-      "org": "Network Automation Nerds", "proctors": ["Eric Chou", "Adam Byczkowski"], "levels": "Net Intermediate · Linux Intermediate · Prog Intermediate",
-      "sold_out": true, "room": null, "slack": "ac6-ws-d1-ai-for-the-network-forward-engineer",
+      "code": "D1",
+      "title": "AI for the Network Forward Engineer: Agents & Application Evaluation",
+      "org": "Network Automation Nerds",
+      "proctors": [
+        "Eric Chou",
+        "Adam Byczkowski"
+      ],
+      "levels": "Net Intermediate · Linux Intermediate · Prog Intermediate",
+      "sold_out": true,
+      "room": null,
+      "slack": "ac6-ws-d1-ai-for-the-network-forward-engineer",
       "tldr": "Build a network co-pilot on local and cloud LLMs in a browser lab: prompt engineering, Pydantic, a LangChain agent, a Streamlit UI, and evaluation and hallucination testing.",
       "prep": [
         "Before Tuesday, launch the GitHub Codespace from the repo.",
         "Get an Arize API key and space (see WORKSHOP_FAQ.md in the repo).",
         "Watch the setup video (\"AutoCon 6 Workshop - 0 Setting Up\" on the Network Automation Nerds YouTube channel)."
       ],
-      "links": [{"label": "Workshop repo", "url": "https://github.com/ericchou1/autocon6-ws-d1-ai-for-the-network-forward-engineer-workshop"}],
-      "notes": ["Remote option will follow the official NAF Zoom setup."]
+      "links": [
+        {
+          "label": "Workshop repo",
+          "url": "https://github.com/ericchou1/autocon6-ws-d1-ai-for-the-network-forward-engineer-workshop"
+        }
+      ],
+      "notes": [
+        "Remote option will follow the official NAF Zoom setup."
+      ],
+      "topics": [
+        "ai"
+      ]
     },
     {
-      "code": "D2", "title": "Building a Network Source of Intent — From Architecture to Practice",
-      "org": "OpsMill", "proctors": ["Alex Gittings", "Damien Garros", "Pete Crocker", "Adam Byczkowski"], "levels": "Net Beginner · Linux Intermediate · Prog Intermediate",
-      "sold_out": false, "room": null, "slack": "ac6-ws-d2",
+      "code": "D2",
+      "title": "Building a Network Source of Intent — From Architecture to Practice",
+      "org": "OpsMill",
+      "proctors": [
+        "Alex Gittings",
+        "Damien Garros",
+        "Pete Crocker",
+        "Adam Byczkowski"
+      ],
+      "levels": "Net Beginner · Linux Intermediate · Prog Intermediate",
+      "sold_out": false,
+      "room": null,
+      "slack": "ac6-ws-d2",
       "tldr": "Design and run a network source of truth with Infrahub and NAF: schema modelling, GraphQL, validation, branching, Generators and Jinja2 Transforms.",
-      "prep": [], "links": [], "notes": []
-    },
-    {
-      "code": "D3", "title": "Digital Twinning at Scale",
-      "org": "Nokia", "proctors": ["Russ White", "Derick Winkworth"], "levels": "Net Advanced · Linux Intermediate · Prog Intermediate",
-      "sold_out": false, "room": null, "slack": "ac6-ws-d3",
-      "tldr": "Emulate a 200+ router data centre fabric with Containerlab and FRRouting, covering numbering schemes, scripts versus templates, and scaling on limited compute.",
-      "prep": ["A FAQ went out by email."],
+      "prep": [],
       "links": [],
-      "notes": ["Expect it to be interactive and a bit messy: scripts are built live with Claude instead of showing finished work."]
+      "notes": [],
+      "topics": [
+        "sot",
+        "design"
+      ]
     },
     {
-      "code": "D4", "title": "The Self Driving Network: From Drift Detection to Autonomous Remediation with Streaming Telemetry",
-      "org": "HPE", "proctors": ["David Roy", "Mark Harman", "Jessica Garrison"], "levels": "Net Intermediate · Linux Intermediate · Prog Intermediate",
-      "sold_out": true, "room": null, "slack": "ac6-ws-d4",
+      "code": "D3",
+      "title": "Digital Twinning at Scale",
+      "org": "Nokia",
+      "proctors": [
+        "Russ White",
+        "Derick Winkworth"
+      ],
+      "levels": "Net Advanced · Linux Intermediate · Prog Intermediate",
+      "sold_out": false,
+      "room": null,
+      "slack": "ac6-ws-d3",
+      "tldr": "Emulate a 200+ router data centre fabric with Containerlab and FRRouting, covering numbering schemes, scripts versus templates, and scaling on limited compute.",
+      "prep": [
+        "A FAQ went out by email."
+      ],
+      "links": [],
+      "notes": [
+        "Expect it to be interactive and a bit messy: scripts are built live with Claude instead of showing finished work."
+      ],
+      "topics": [
+        "twin",
+        "fabric",
+        "clab"
+      ]
+    },
+    {
+      "code": "D4",
+      "title": "The Self Driving Network: From Drift Detection to Autonomous Remediation with Streaming Telemetry",
+      "org": "HPE",
+      "proctors": [
+        "David Roy",
+        "Mark Harman",
+        "Jessica Garrison"
+      ],
+      "levels": "Net Intermediate · Linux Intermediate · Prog Intermediate",
+      "sold_out": true,
+      "room": null,
+      "slack": "ac6-ws-d4",
       "tldr": "A closed loop that detects and automatically fixes config and state drift on a Containerlab network (Juniper cRPD, cSRX, Alpine), built from NAF framework pieces: NetBox/YAML/Excel intent, Telegraf/gNMI, InfluxDB/Kapacitor, a FastAPI orchestrator, PyEZ/Ansible, and Grafana/ntfy with approve/reject.",
       "prep": [
         "Look for the email with your VM's SSH Host entry and private key.",
@@ -190,7 +500,65 @@
         "Test from your laptop: ssh naf-ac6-ws-vm"
       ],
       "links": [],
-      "notes": ["Use cases: BGP peer-as drift, logging drift, a prefix-limit leak, and swap-a-block."]
+      "notes": [
+        "Use cases: BGP peer-as drift, logging drift, a prefix-limit leak, and swap-a-block."
+      ],
+      "topics": [
+        "telemetry",
+        "closedloop",
+        "clab",
+        "ansible"
+      ]
+    }
+  ],
+  "topics": [
+    {
+      "id": "ai",
+      "label": "AI & agents"
+    },
+    {
+      "id": "sot",
+      "label": "Source of truth"
+    },
+    {
+      "id": "design",
+      "label": "Design-driven"
+    },
+    {
+      "id": "fabric",
+      "label": "EVPN & fabrics"
+    },
+    {
+      "id": "cicd",
+      "label": "CI/CD & testing"
+    },
+    {
+      "id": "telemetry",
+      "label": "Telemetry"
+    },
+    {
+      "id": "closedloop",
+      "label": "Closed loop"
+    },
+    {
+      "id": "linux",
+      "label": "Linux & fundamentals"
+    },
+    {
+      "id": "clab",
+      "label": "Containerlab"
+    },
+    {
+      "id": "twin",
+      "label": "Digital twin"
+    },
+    {
+      "id": "ansible",
+      "label": "Ansible"
+    },
+    {
+      "id": "iac",
+      "label": "Terraform & IaC"
     }
   ]
 }

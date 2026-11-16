@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoCon 6 Workshops</title>
+<meta name="description" content="Unofficial cheat sheet for the AutoCon 6 workshops: TL;DRs, prep steps, rooms and material links.">
+<style>
+:root {
+  --bg:#f7f6f2; --fg:#1d1d1b; --muted:#6b6a65; --card:#fff; --line:#e4e2dc;
+  --accent:#0f6e6e; --mat:#1f7a3a; --mat-bg:#e5f4e4; --prep:#8a5a00; --prep-bg:#f9eeda;
+  --none:#8a8984; --none-bg:#f0efec; --sold:#9b2c2c; --sold-bg:#fbebeb; --open-bg:#e7f1fb; --open:#1d5b99;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:#141413; --fg:#ecebe6; --muted:#a3a29c; --card:#1e1e1c; --line:#33322f;
+  --accent:#5cc2c2; --mat:#8fd89f; --mat-bg:#1f3524; --prep:#f0c26b; --prep-bg:#3a2e17;
+  --none:#a3a29c; --none-bg:#2a2a27; --sold:#f2a3a3; --sold-bg:#3d2020; --open-bg:#1c2c3d; --open:#9cc6f0;
+} }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+a { color:var(--accent); }
+.wrap { max-width:1100px; margin:0 auto; padding:0 16px; }
+.hero { padding:32px 0 16px; }
+.hero h1 { margin:0 0 4px; font-size:clamp(1.8rem,5vw,2.6rem); letter-spacing:-.02em; }
+.hero p { margin:4px 0; color:var(--muted); }
+.stamp { display:inline-block; margin-top:8px; padding:4px 10px; border-radius:999px; background:var(--card); border:1px solid var(--line); font-size:.85rem; }
+.info { margin:12px 0 0; padding-left:18px; color:var(--muted); font-size:.92rem; }
+nav.toc { position:sticky; top:0; z-index:5; background:var(--bg); border-bottom:1px solid var(--line); padding:10px 0; }
+nav.toc .wrap { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+nav.toc a { text-decoration:none; font:600 .85rem ui-monospace,monospace; padding:4px 8px; border-radius:6px; border:1px solid var(--line); color:var(--fg); background:var(--card); }
+nav.toc a.has { border-color:var(--mat); color:var(--mat); }
+nav.toc label { margin-left:auto; font-size:.85rem; color:var(--muted); display:flex; gap:6px; align-items:center; }
+section.block h2 { margin:32px 0 12px; font-size:1.3rem; }
+section.block h2 small { color:var(--muted); font-weight:500; font-size:.9rem; margin-left:6px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+@media (max-width:400px) { .grid { grid-template-columns:1fr; } }
+.card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; display:flex; flex-direction:column; scroll-margin-top:60px; }
+.card header { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
+.code { font:700 .95rem ui-monospace,monospace; color:var(--accent); }
+.badges { display:flex; gap:4px; flex-wrap:wrap; }
+.badge { font-size:.72rem; font-weight:600; padding:2px 8px; border-radius:999px; }
+.mat { background:var(--mat-bg); color:var(--mat); } .prep { background:var(--prep-bg); color:var(--prep); }
+.none { background:var(--none-bg); color:var(--none); } .sold { background:var(--sold-bg); color:var(--sold); }
+.open { background:var(--open-bg); color:var(--open); }
+.card h3 { margin:8px 0 4px; font-size:1.05rem; line-height:1.35; }
+.meta { margin:0 0 10px; color:var(--muted); font-size:.88rem; }
+.tldr { margin:0 0 10px; }
+.tldr span { font:700 .72rem ui-monospace,monospace; background:var(--fg); color:var(--bg); padding:1px 6px; border-radius:4px; margin-right:4px; vertical-align:2px; }
+.card h4 { margin:10px 0 4px; font-size:.8rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+.card ul { margin:0; padding-left:18px; font-size:.92rem; }
+.card ul.links { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:6px; }
+.card ul.links a { display:inline-block; padding:5px 10px; border-radius:8px; background:var(--mat-bg); color:var(--mat); text-decoration:none; font-weight:600; font-size:.88rem; word-break:break-word; }
+.agenda { font-size:.88rem; border-collapse:collapse; }
+.agenda td { padding:1px 8px 1px 0; vertical-align:top; }
+.agenda td:first-child { font-family:ui-monospace,monospace; color:var(--muted); white-space:nowrap; }
+.card footer { margin-top:auto; padding-top:12px; font-size:.78rem; color:var(--muted); word-break:break-word; }
+body.only-mat .card[data-material="0"] { display:none; }
+.foot { margin:40px 0; color:var(--muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap hero">
+  <h1>AutoCon 6 Workshops</h1>
+  <p>Mon 16 &amp; Tue 17 Nov 2026 · The Westin La Paloma Resort &amp; Spa, Tucson, AZ</p>
+  <p>An unofficial cheat sheet: TL;DR, prep steps, rooms and links for all 16 workshops. 5 have material posted so far.</p>
+  <span class="stamp">Last updated Mon 16 Nov, 11:45 MST</span>
+  <ul class="info"><li>Times are local (MST, UTC-7).</li><li>Workshop wifi: use the Autocon6 SSID, which is set aside for workshops.</li><li>Many workshops offer a recording or remote option because of flight cancellations. Check the workshop&#x27;s Slack channel.</li></ul>
+</div>
+<nav class="toc"><div class="wrap"><a href="#a1" class="has">A1</a><a href="#a2" class="">A2</a><a href="#a3" class="has">A3</a><a href="#a4" class="has">A4</a><a href="#b1" class="">B1</a><a href="#b2" class="">B2</a><a href="#b3" class="">B3</a><a href="#b4" class="">B4</a><a href="#c1" class="has">C1</a><a href="#c2" class="">C2</a><a href="#c3" class="">C3</a><a href="#c4" class="">C4</a><a href="#d1" class="has">D1</a><a href="#d2" class="">D2</a><a href="#d3" class="">D3</a><a href="#d4" class="">D4</a><label><input type="checkbox" id="onlymat"> Only with material</label></div></nav>
+<main class="wrap">
+<section class="block" data-block="A"><h2>Monday morning <small>Mon 16 Nov · 09:00–13:00</small></h2><div class="grid"><article class="card" id="a1" data-block="A" data-material="1">
+<header><span class="code">A1</span><div class="badges"><span class="badge mat">Material</span><span class="badge prep">Prep info</span><span class="badge sold">Sold out</span></div></header>
+<h3>Agentic NetOps in Tines: Moving from Brittle Scripts to Autonomous Workflows with Human-in-the-Loop Control</h3>
+<p class="meta">Tines · Mon 16 Nov · 09:00–13:00</p>
+<p class="tldr"><span>TL;DR</span> Build an agentic NetOps workflow in Tines that hooks LLMs and MCP up to telemetry for AI-driven triage, with guardrails and human approval gates.</p>
+<ul class="links"><li><a href="https://bootcamp-training.tines.com" target="_blank" rel="noopener">Tines training login ↗</a></li><li><a href="https://developer.cisco.com/sandbox" target="_blank" rel="noopener">Cisco DevNet sandboxes ↗</a></li></ul>
+<h4>Before you start</h4><ul><li>Log in to the Tines training tenant with the email you used for AutoCon. Use the link below if the invite email never arrived or went to spam.</li><li>Before the session, power on an always-on Cisco DevNet sandbox device that doesn&#x27;t need VPN, and note its address and credentials.</li></ul>
+<h4>Notes</h4><ul><li>Session is being recorded. Remote Zoom link is in the Slack channel.</li></ul>
+<footer>Proctors: Sif Baksh · Net Intermediate · Linux Beginner · Prog Intermediate · <a href="https://app.slack.com/client/T05GX70T5FY/C0CH1Q3023S" target="_blank" rel="noopener">#ac6-ws-a1</a></footer></article>
+<article class="card" id="a2" data-block="A" data-material="0">
+<header><span class="code">A2</span><div class="badges"><span class="badge prep">Prep info</span><span class="badge sold">Sold out</span></div></header>
+<h3>From Intent to Execution: Nautobot and Ansible, Better Together</h3>
+<p class="meta">Network to Code · Mon 16 Nov · 09:00–13:00</p>
+<p class="tldr"><span>TL;DR</span> Use Nautobot as the source of truth driving Ansible/AWX: dynamic inventory, Config Contexts, Dynamic Groups, GraphQL-rendered configs, Job Buttons, writing state back, and event-triggered workflows with approval.</p>
+<h4>Before you start</h4><ul><li>Bring a laptop with a browser and a charger. Nothing to install.</li><li>Your cloud lab link and password arrive by email (Nautobot, AWX, two Arista switches).</li><li>You should have run an Ansible playbook before. No Nautobot, AWX or Python experience needed.</li></ul>
+<h4>Notes</h4><ul><li>AWX stands in for Ansible Automation Platform, so the concepts carry over directly.</li></ul>
+<footer>Proctors: Israel Pineda, Brandon Donohoe, Nikos Kallergis, Chris Murray · Net Intermediate · Linux Intermediate · Prog Intermediate · <a href="https://app.slack.com/client/T05GX70T5FY/C0CG77YDUFL" target="_blank" rel="noopener">#ac6-ws-a2</a></footer></article>
+<article class="card" id="a3" data-block="A" data-material="1">
+<header><span class="code">A3</span><div class="badges"><span class="badge mat">Material</span><span class="badge prep">Prep info</span><span class="badge open">Seats listed</span></div></header>
+<h3>Into the Unknown: Deep Dive into the Linux Network Stack</h3>
+<p class="meta">CodiLime · Mon 16 Nov · 09:00–13:00</p>
+<p class="tldr"><span>TL;DR</span> Linux networking from bridges to OVS/OVN, plus eBPF, DPDK, switchdev offload, BGP/IS-IS/MPLS, EVPN/VXLAN and performance testing.</p>
+<ul class="links"><li><a href="https://codilime.github.io/autocon" target="_blank" rel="noopener">Workshop instructions ↗</a></li></ul>
+<h4>Before you start</h4><ul><li>The FAQ is a canvas in the Slack channel (also sent by email).</li></ul>
+<h4>Notes</h4><ul><li>Recorded. Slides and Containerlab files to run the labs locally are promised after the workshop.</li></ul>
+<footer>Proctors: Adam Kułagowski, Pavel Raunou, Monika Antoniak · Net Intermediate · Linux Beginner · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0C3ZAGE613" target="_blank" rel="noopener">#ac6-ws-a3-into-the-unknown</a></footer></article>
+<article class="card" id="a4" data-block="A" data-material="1">
+<header><span class="code">A4</span><div class="badges"><span class="badge mat">Material</span><span class="badge prep">Prep info</span><span class="badge open">Seats listed</span></div></header>
+<h3>Know Before You Deploy: Hands-On Network CI/CD with Forward Predict</h3>
+<p class="meta">Forward Networks · Mon 16 Nov · 09:00–13:00 · Room <strong>Indigo (lower level)</strong></p>
+<p class="tldr"><span>TL;DR</span> Build a CI/CD pipeline with GitHub Actions and Forward Predict that catches behaviour regressions before deployment.</p>
+<ul class="links"><li><a href="https://tinyurl.com/wsa4go" target="_blank" rel="noopener">Get a seat ↗</a></li></ul>
+<h4>Before you start</h4><ul><li>You need a browser and a GitHub account. The lab runs in a GitHub Codespace.</li><li>Get a seat at the link below (opened 08:30 Monday): press Get a seat, accept the GitHub invite, then open it in Codespaces.</li><li>Stuck? Post &quot;@wsa4 help seat-NN&quot; in Slack.</li></ul>
+<h4>Notes</h4><ul><li>Recorded. Zoom is for remote attendees only (&quot;In room? No Zoom!&quot;).</li></ul>
+<footer>Proctors: Craig Johnson, Sean Deveci, Mike Lossmann · Net Intermediate · Linux Beginner · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0C6A85JGAF" target="_blank" rel="noopener">#ac6-ws-a4</a></footer></article></div></section>
+<section class="block" data-block="B"><h2>Monday afternoon <small>Mon 16 Nov · 14:00–18:00</small></h2><div class="grid"><article class="card" id="b1" data-block="B" data-material="0">
+<header><span class="code">B1</span><div class="badges"><span class="badge none">Nothing posted yet</span><span class="badge sold">Sold out</span></div></header>
+<h3>Old Protocol, New Brain: Hands-On Troubleshooting with an AI-Native SSH Terminal</h3>
+<p class="meta">Supertrace · Mon 16 Nov · 14:00–18:00</p>
+<p class="tldr"><span>TL;DR</span> Troubleshoot a Containerlab network with st-cli using natural language or plain commands, through guided failure scenarios with a human in the loop.</p>
+<footer>Proctors: Mahir Kalra, Alex Typaldos, Pete Cho, Andrei Shevtsov · Net Intermediate · Linux Beginner · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0CG9KPSFLH" target="_blank" rel="noopener">#ac6-ws-b1</a></footer></article>
+<article class="card" id="b2" data-block="B" data-material="0">
+<header><span class="code">B2</span><div class="badges"><span class="badge none">Nothing posted yet</span><span class="badge sold">Sold out</span></div></header>
+<h3>Design Driven Automation: Architect, Validate and Deploy an EVPN VXLAN Fabric with Arista AVD</h3>
+<p class="meta">Arista Networks · Mon 16 Nov · 14:00–18:00</p>
+<p class="tldr"><span>TL;DR</span> Architect, validate and deploy a leaf-spine EVPN/VXLAN fabric as code with arista.avd, pyavd and ANTA, covering Day 0 and Day 2 plus multi-vendor extension.</p>
+<footer>Proctors: Carl Buchmann, Noel Thompson, Marcus McPeek, Jordan Hemann, Kyle Bush · Net Intermediate · Linux Beginner · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0CG2ENQX45" target="_blank" rel="noopener">#ac6-ws-b2</a></footer></article>
+<article class="card" id="b3" data-block="B" data-material="0">
+<header><span class="code">B3</span><div class="badges"><span class="badge prep">Prep info</span><span class="badge open">Seats listed</span></div></header>
+<h3>Who Gets the Truck Roll? Joining Telemetry, Topology, and a Graph through Discovery</h3>
+<p class="meta">ExactNet · Mon 16 Nov · 14:00–18:00</p>
+<p class="tldr"><span>TL;DR</span> Discover a multi-vendor network and join telemetry, inventory and topology in a graph database, on a hosted lab simulating an MPLS/PON backbone.</p>
+<h4>Before you start</h4><ul><li>A FAQ was promised by email.</li></ul>
+<h4>Notes</h4><ul><li>Jeff Cook is presenting remotely because of travel problems. Pieter van Os is in the room.</li><li>The whole workshop is hosted online, so you can also follow it remotely.</li></ul>
+<footer>Proctors: Jeff Cook, Pieter van Os · Net Intermediate · Linux Intermediate · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0CG5D5U19U" target="_blank" rel="noopener">#ac6-ws-b3</a></footer></article>
+<article class="card" id="b4" data-block="B" data-material="0">
+<header><span class="code">B4</span><div class="badges"><span class="badge open">Seats listed</span></div></header>
+<h3>Building Network Automations with BackBox</h3>
+<p class="meta">BackBox · Mon 16 Nov · 14:00–18:00</p>
+<p class="tldr"><span>TL;DR</span> Build, test and deploy automations in BackBox (Kilter) in a live lab: backup, compliance, drift remediation, scheduling, and change verification with rollback.</p>
+<h4>Notes</h4><ul><li>Remote Zoom details are in the Slack channel.</li></ul>
+<footer>Proctors: Sandra Topalovic, Irfahn Khimji · Net Intermediate · Linux Beginner · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0CG9LG5K17" target="_blank" rel="noopener">#ac6-ws-b4</a></footer></article></div></section>
+<section class="block" data-block="C"><h2>Tuesday morning <small>Tue 17 Nov · 09:00–13:00</small></h2><div class="grid"><article class="card" id="c1" data-block="C" data-material="1">
+<header><span class="code">C1</span><div class="badges"><span class="badge mat">Material</span><span class="badge prep">Prep info</span><span class="badge sold">Sold out</span></div></header>
+<h3>Loop Engineering, Spec Driven Development, and the Future of VibeOps</h3>
+<p class="meta">Itential · Tue 17 Nov · 09:00–13:00</p>
+<p class="tldr"><span>TL;DR</span> Lectures on LLMs, Ralph loops and spec-driven development with GitHub Spec Kit, then build a networking game in teams of six and show it off.</p>
+<ul class="links"><li><a href="https://github.com/automateyournetwork/NAF_AC6" target="_blank" rel="noopener">Workshop repo ↗</a></li><li><a href="https://automateyournetwork.com/arcade/" target="_blank" rel="noopener">Example games (Arcade) ↗</a></li></ul>
+<h4>Before you start</h4><ul><li>Set up your build environment from the repo before Tuesday so the session isn&#x27;t spent on setup.</li><li>The FAQ PDF and slides are pinned in the Slack channel.</li><li>When you arrive, get a group-number sticker from John (10 teams of 6). Don&#x27;t leave valuables where you first sit, because groups move.</li></ul>
+<h4>Agenda</h4><table class="agenda"><tr><td>09:00</td><td>Lecture: LLMs, Ralph loops, SDD and Spec Kit</td></tr><tr><td>09:35</td><td>Demo: Itential Builder Skills</td></tr><tr><td>09:45</td><td>Lecture: loop engineering</td></tr><tr><td>09:50</td><td>Set up your project</td></tr><tr><td>10:00</td><td>Lecture: gamification of networking</td></tr><tr><td>10:15</td><td>Group activity: ideas and templates</td></tr><tr><td>10:45</td><td>Break</td></tr><tr><td>11:15</td><td>Group activity, continued</td></tr><tr><td>11:30</td><td>Bring your idea to life</td></tr><tr><td>12:30</td><td>Show your games</td></tr></table>
+<footer>Proctors: John Capobianco, Joksan Flores, Elliot Connor · Net Beginner · Linux Beginner · Prog Intermediate · <a href="https://app.slack.com/client/T05GX70T5FY/C0CG75JV0E5" target="_blank" rel="noopener">#ac6-ws-c1</a></footer></article>
+<article class="card" id="c2" data-block="C" data-material="0">
+<header><span class="code">C2</span><div class="badges"><span class="badge none">Nothing posted yet</span><span class="badge open">Seats listed</span></div></header>
+<h3>Open Source Design-Driven Automation: From Fabric Intent to Running Config with Infrahub and AVD</h3>
+<p class="meta">OpsMill · Tue 17 Nov · 09:00–13:00</p>
+<p class="tldr"><span>TL;DR</span> An open-source pipeline on the NAF framework: Infrahub as the intent source, AVD generating per-device config, and Ansible pushing to a Containerlab fabric.</p>
+<footer>Proctors: Adam Byczkowski, Damien Garros, Pete Crocker, Alex Gittings, Jordan Hemann, Noel Thompson, Carl Buchmann · Net Intermediate · Linux Beginner · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0C47ECQS4R" target="_blank" rel="noopener">#ac6-ws-c2</a></footer></article>
+<article class="card" id="c3" data-block="C" data-material="0">
+<header><span class="code">C3</span><div class="badges"><span class="badge prep">Prep info</span><span class="badge open">Seats listed</span></div></header>
+<h3>Operationalizing SONiC in Modern Data Centers: Deployment, Telemetry, and Automation</h3>
+<p class="meta">Nokia · Tue 17 Nov · 09:00–13:00 · Room <strong>Verbena</strong></p>
+<p class="tldr"><span>TL;DR</span> Deploy a SONiC fabric from scratch in Containerlab, configure interfaces, BGP and EVPN, pull gNMI/OpenConfig telemetry, and get started automating it.</p>
+<h4>Before you start</h4><ul><li>Bring a laptop with an SSH client.</li><li>Make sure your work VPN doesn&#x27;t block SSH to Google Cloud.</li><li>You get an instruction card and your own lab instance on the day.</li></ul>
+<h4>Notes</h4><ul><li>Lab instructions stay available afterwards in a repo shared during the workshop.</li></ul>
+<footer>Proctors: Reda Laichi, Saju Salahudeen, Amer Fakhar · Net Beginner · Linux Beginner · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0CBNG5LAS2" target="_blank" rel="noopener">#ac6-ws-c3</a></footer></article>
+<article class="card" id="c4" data-block="C" data-material="0">
+<header><span class="code">C4</span><div class="badges"><span class="badge none">Nothing posted yet</span><span class="badge sold">Sold out</span></div></header>
+<h3>From Network Change to Code: A Hands-on Network as Code Workshop</h3>
+<p class="meta">Cisco Systems · Tue 17 Nov · 09:00–13:00</p>
+<p class="tldr"><span>TL;DR</span> Network as Code with Meraki APIs, Terraform and GitHub Actions, plus pre-change validation and Robot Framework testing.</p>
+<footer>Proctors: Snezana Mitrovic, Daniel Schmidt, Justin Burnette · Net Beginner · Linux Beginner · Prog Beginner · <a href="https://app.slack.com/client/T05GX70T5FY/C0CGBF2GGEQ" target="_blank" rel="noopener">#ac6-ws-c4</a></footer></article></div></section>
+<section class="block" data-block="D"><h2>Tuesday afternoon <small>Tue 17 Nov · 14:00–18:00</small></h2><div class="grid"><article class="card" id="d1" data-block="D" data-material="1">
+<header><span class="code">D1</span><div class="badges"><span class="badge mat">Material</span><span class="badge prep">Prep info</span><span class="badge sold">Sold out</span></div></header>
+<h3>AI for the Network Forward Engineer: Agents &amp; Application Evaluation</h3>
+<p class="meta">Network Automation Nerds · Tue 17 Nov · 14:00–18:00</p>
+<p class="tldr"><span>TL;DR</span> Build a network co-pilot on local and cloud LLMs in a browser lab: prompt engineering, Pydantic, a LangChain agent, a Streamlit UI, and evaluation and hallucination testing.</p>
+<ul class="links"><li><a href="https://github.com/ericchou1/autocon6-ws-d1-ai-for-the-network-forward-engineer-workshop" target="_blank" rel="noopener">Workshop repo ↗</a></li></ul>
+<h4>Before you start</h4><ul><li>Before Tuesday, launch the GitHub Codespace from the repo.</li><li>Get an Arize API key and space (see WORKSHOP_FAQ.md in the repo).</li><li>Watch the setup video (&quot;AutoCon 6 Workshop - 0 Setting Up&quot; on the Network Automation Nerds YouTube channel).</li></ul>
+<h4>Notes</h4><ul><li>Remote option will follow the official NAF Zoom setup.</li></ul>
+<footer>Proctors: Eric Chou, Adam Byczkowski · Net Intermediate · Linux Intermediate · Prog Intermediate · <a href="https://app.slack.com/client/T05GX70T5FY/C0C3GRUCJ8M" target="_blank" rel="noopener">#ac6-ws-d1-ai-for-the-network-forward-engineer</a></footer></article>
+<article class="card" id="d2" data-block="D" data-material="0">
+<header><span class="code">D2</span><div class="badges"><span class="badge none">Nothing posted yet</span><span class="badge open">Seats listed</span></div></header>
+<h3>Building a Network Source of Intent — From Architecture to Practice</h3>
+<p class="meta">OpsMill · Tue 17 Nov · 14:00–18:00</p>
+<p class="tldr"><span>TL;DR</span> Design and run a network source of truth with Infrahub and NAF: schema modelling, GraphQL, validation, branching, Generators and Jinja2 Transforms.</p>
+<footer>Proctors: Alex Gittings, Damien Garros, Pete Crocker, Adam Byczkowski · Net Beginner · Linux Intermediate · Prog Intermediate · <a href="https://app.slack.com/client/T05GX70T5FY/C0C495T67KN" target="_blank" rel="noopener">#ac6-ws-d2</a></footer></article>
+<article class="card" id="d3" data-block="D" data-material="0">
+<header><span class="code">D3</span><div class="badges"><span class="badge prep">Prep info</span><span class="badge open">Seats listed</span></div></header>
+<h3>Digital Twinning at Scale</h3>
+<p class="meta">Nokia · Tue 17 Nov · 14:00–18:00</p>
+<p class="tldr"><span>TL;DR</span> Emulate a 200+ router data centre fabric with Containerlab and FRRouting, covering numbering schemes, scripts versus templates, and scaling on limited compute.</p>
+<h4>Before you start</h4><ul><li>A FAQ went out by email.</li></ul>
+<h4>Notes</h4><ul><li>Expect it to be interactive and a bit messy: scripts are built live with Claude instead of showing finished work.</li></ul>
+<footer>Proctors: Russ White, Derick Winkworth · Net Advanced · Linux Intermediate · Prog Intermediate · <a href="https://app.slack.com/client/T05GX70T5FY/C0CG1HCCZQB" target="_blank" rel="noopener">#ac6-ws-d3</a></footer></article>
+<article class="card" id="d4" data-block="D" data-material="0">
+<header><span class="code">D4</span><div class="badges"><span class="badge prep">Prep info</span><span class="badge sold">Sold out</span></div></header>
+<h3>The Self Driving Network: From Drift Detection to Autonomous Remediation with Streaming Telemetry</h3>
+<p class="meta">HPE · Tue 17 Nov · 14:00–18:00</p>
+<p class="tldr"><span>TL;DR</span> A closed loop that detects and automatically fixes config and state drift on a Containerlab network (Juniper cRPD, cSRX, Alpine), built from NAF framework pieces: NetBox/YAML/Excel intent, Telegraf/gNMI, InfluxDB/Kapacitor, a FastAPI orchestrator, PyEZ/Ansible, and Grafana/ntfy with approve/reject.</p>
+<h4>Before you start</h4><ul><li>Look for the email with your VM&#x27;s SSH Host entry and private key.</li><li>Install VS Code and the Remote - SSH extension.</li><li>Test from your laptop: ssh naf-ac6-ws-vm</li></ul>
+<h4>Notes</h4><ul><li>Use cases: BGP peer-as drift, logging drift, a prefix-limit leak, and swap-a-block.</li></ul>
+<footer>Proctors: David Roy, Mark Harman, Jessica Garrison · Net Intermediate · Linux Intermediate · Prog Intermediate · <a href="https://app.slack.com/client/T05GX70T5FY/C0CFELQCWVB" target="_blank" rel="noopener">#ac6-ws-d4</a></footer></article></div></section>
+<p class="foot">Not official. Compiled from the <a href="https://networkautomation.forum/autocon6">AutoCon 6 website</a> and what presenters posted in the workshop Slack channels (the Slack links work for Network Automation Forum members). Check the official site and your workshop's channel for anything that changes.</p>
+</main>
+<script>
+const cb=document.getElementById('onlymat');
+try{cb.checked=localStorage.getItem('onlymat')==='1';}catch(e){}
+const apply=()=>{document.body.classList.toggle('only-mat',cb.checked);try{localStorage.setItem('onlymat',cb.checked?'1':'0');}catch(e){}};
+cb.addEventListener('change',apply);apply();
+</script>
+</body>
+</html>

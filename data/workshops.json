@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T14:55:00-07:00",
+  "updated": "2026-11-16T15:10:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -367,7 +367,6 @@
       "tldr": "Lectures on LLMs, Ralph loops and spec-driven development with GitHub Spec Kit, then build a networking game in teams of six and show it off.",
       "prep": [
         "Set up your build environment from the repo before Tuesday so the session isn't spent on setup.",
-        "The final slide deck (updated Mon 16 Nov) is in the Slack channel.",
         "When you arrive, get a group-number sticker from John (10 teams of 6). Don't leave valuables where you first sit, because groups move."
       ],
       "links": [
@@ -376,12 +375,20 @@
           "url": "https://github.com/automateyournetwork/NAF_AC6"
         },
         {
-          "label": "Example games (Arcade)",
-          "url": "https://automateyournetwork.com/arcade/"
+          "label": "Slides (PDF, 14 MB)",
+          "url": "files/c1-slides.pdf"
+        },
+        {
+          "label": "Slides (PowerPoint, 32 MB)",
+          "url": "files/c1-slides.pptx"
         },
         {
           "label": "Workshop FAQ (PDF)",
           "url": "files/c1-workshop-faq.pdf"
+        },
+        {
+          "label": "Example games (Arcade)",
+          "url": "https://automateyournetwork.com/arcade/"
         }
       ],
       "agenda": [
@@ -426,7 +433,9 @@
           "Show your games"
         ]
       ],
-      "notes": [],
+      "notes": [
+        "Slides shared here with John Capobianco's OK. The PDF is a converted copy for phones, so some fonts differ from the original."
+      ],
       "topics": [
         "ai"
       ],

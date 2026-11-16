@@ -221,6 +221,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .status{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:var(--sub)}
 .status button{border:0;background:none;padding:0;text-decoration:underline;text-underline-offset:2px;font-size:13px;color:var(--sub)}
 .status button[hidden]{display:none}
+#showall{color:var(--ink)!important;font-weight:600}
 .wide{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .sr{display:inline-flex;align-items:center;gap:12px}
 .fbtn{padding:6px 11px;font-size:13.5px;color:var(--ink)}
@@ -329,7 +330,7 @@ footer.site a{color:var(--ink)}
       </div>
       <div class="chips" role="group" aria-label="Topics">{{CHIPS}}</div>
     </div>
-    <div class="status"><span id="count" aria-live="polite"></span><span class="sr"><button type="button" id="clear" hidden>Clear filters</button><button type="button" class="fbtn" id="fbtn" aria-expanded="false" aria-controls="panel">Filters <span class="n" id="fcount">0</span></button></span></div>
+    <div class="status"><span><span id="count" aria-live="polite"></span> <button type="button" id="showall" hidden></button></span><span class="sr"><button type="button" id="clear" hidden>Clear filters</button><button type="button" class="fbtn" id="fbtn" aria-expanded="false" aria-controls="panel">Filters <span class="n" id="fcount">0</span></button></span></div>
   </div>
 </div>
 
@@ -350,7 +351,7 @@ footer.site a{color:var(--ink)}
   const cards=$$('.ws'), sections=$$('.blk'), tabs=$$('.tab'), chips=$$('.chip');
   const q=$('#q'), mat=$('#mat'), count=$('#count'), clear=$('#clear'), empty=$('#empty');
   const fbtn=$('#fbtn'), panel=$('#panel'), fcount=$('#fcount');
-  const state={block:'',topics:new Set(),q:'',mat:false};
+  const state={block:'',topics:new Set(),q:'',mat:true};
 
   // jump strip
   const jump=$('#jump');
@@ -361,14 +362,14 @@ footer.site a{color:var(--ink)}
     const p=new URLSearchParams(location.search);
     state.block=(p.get('slot')||'').toUpperCase().replace(/[^A-D]/g,'').slice(0,1);
     state.topics=new Set((p.get('topic')||'').split(',').filter(Boolean));
-    state.q=p.get('q')||''; state.mat=p.get('material')==='1';
+    state.q=p.get('q')||''; state.mat=p.get('material')!=='0';
   }
   function writeURL(){
     const p=new URLSearchParams();
     if(state.block)p.set('slot',state.block);
     if(state.topics.size)p.set('topic',[...state.topics].join(','));
     if(state.q)p.set('q',state.q);
-    if(state.mat)p.set('material','1');
+    if(!state.mat)p.set('material','0');
     const s=p.toString().replace(/%2C/g,',');
     history.replaceState(null,'',(s?'?'+s:location.pathname)+location.hash);
   }
@@ -390,15 +391,17 @@ footer.site a{color:var(--ink)}
       if(on){const t=b.parentElement;t.scrollLeft=Math.max(0,b.offsetLeft-t.clientWidth/2+b.offsetWidth/2);}});
     chips.forEach(b=>b.setAttribute('aria-pressed',String(state.topics.has(b.dataset.topic))));
     q.value=state.q; mat.checked=state.mat;
-    const nf=state.topics.size+(state.q?1:0)+(state.mat?1:0);
+    const nf=state.topics.size+(state.q?1:0);
     fcount.textContent=nf; fbtn.classList.toggle('on',nf>0);
-    const any=nf>0||state.block;
+    const any=nf>0||state.block||!state.mat;
     clear.hidden=!any;
-    count.textContent=shown===cards.length?'Showing all '+cards.length+' workshops':'Showing '+shown+' of '+cards.length;
+    count.textContent=shown===cards.length?'Showing all '+cards.length+' workshops':(state.mat?'Showing '+shown+' with material':'Showing '+shown+' of '+cards.length);
+    const sa=$('#showall'); sa.hidden=!state.mat; sa.textContent='Show all '+cards.length;
     empty.classList.toggle('show',shown===0);
     writeURL();
   }
-  function reset(){state.block='';state.topics.clear();state.q='';state.mat=false;apply();}
+  function reset(){state.block='';state.topics.clear();state.q='';state.mat=true;apply();}
+  $('#showall').addEventListener('click',()=>{state.mat=false;apply();});
 
   tabs.forEach(b=>b.addEventListener('click',()=>{state.block=b.dataset.block;apply();
     const s=state.block&&document.querySelector('.blk[data-block="'+state.block+'"]');

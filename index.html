@@ -97,6 +97,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .tab[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
 .tab .live{display:none;font:600 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:3px 5px;border-radius:4px;background:var(--cactus);color:#fff}
 .tab.is-live .live{display:inline-block}
+.tab .tn{font:600 11px/1 var(--mono);opacity:.55}
+.tab .tn:empty{display:none}
+.tab.zero{opacity:.45}
 .dot{display:inline-block;width:9px;height:9px;border-radius:3px;flex:0 0 auto}
 .b-A{--k:var(--a)} .b-B{--k:var(--b)} .b-C{--k:var(--c)} .b-D{--k:var(--d)}
 .dot{background:var(--k)}
@@ -118,17 +121,21 @@ button{font:inherit;color:inherit;cursor:pointer}
 .chip span{font:600 11px/1 var(--mono);color:var(--sub)}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
 .chip[aria-pressed="true"] span{color:inherit;opacity:.7}
+.chip.zero{opacity:.45}
 .status{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:var(--sub)}
 .status button{border:0;background:none;padding:0;text-decoration:underline;text-underline-offset:2px;font-size:13px;color:var(--sub)}
 .status button[hidden]{display:none}
 #showall{color:var(--ink)!important;font-weight:600}
+.status button,#count{white-space:nowrap}
 .wide{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .sr{display:inline-flex;align-items:center;gap:12px}
 .fbtn{padding:6px 11px;font-size:13.5px;color:var(--ink)}
 @media (max-width:640px){
   .tabs{flex:1 1 100%}
   .tab{padding:7px 9px;font-size:13.5px;gap:6px}
-  .tab .live,.tab.is-live .live{display:none}
+  .tab .live,.tab.is-live .live,.tab .tn{display:none}
+  .status .wk{display:none}
+  .sr{gap:10px}
   .tab.is-live .dot{box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--cactus)}
   .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:16px}
   .chips::-webkit-scrollbar{display:none}
@@ -142,7 +149,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .jump a{font:600 12px/1 var(--mono);text-decoration:none;padding:6px 7px;border-radius:6px;background:var(--panel);border:1px solid var(--hair);color:var(--sub);position:relative}
 .jump a.m{color:var(--ink);border-color:color-mix(in srgb,var(--k) 55%,var(--hair))}
 .jump a.m:after{content:"";position:absolute;top:-3px;right:-3px;width:7px;height:7px;border-radius:50%;background:var(--cactus);border:2px solid var(--bg)}
-.jump a.off{opacity:.3;pointer-events:none}
+.jump a.off{opacity:.35}
+.jump a.off:hover,.jump a.off:focus-visible{opacity:.8}
 
 /* sections */
 .blk{margin-top:28px}
@@ -200,6 +208,14 @@ details[open] summary:before{transform:rotate(45deg)}
 
 .empty{display:none;margin:40px 0;padding:28px;border:1px dashed var(--hair);border-radius:14px;text-align:center;color:var(--sub)}
 .empty.show{display:block}
+.empty p{margin:0}
+.relax{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
+.relax button{border:1px solid var(--hair);background:var(--panel);color:var(--ink);font-size:13.5px;font-weight:600;padding:7px 12px;border-radius:999px}
+.relax button:hover{border-color:var(--ink)}
+.relax button[data-reset]{background:none;color:var(--sub);font-weight:500}
+.note{position:fixed;z-index:30;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);display:flex;align-items:center;gap:12px;padding:9px 14px;border-radius:10px;background:var(--ink);color:var(--panel);font-size:13.5px;line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.note[hidden]{display:none}
+.note button{flex:0 0 auto;border:0;background:none;padding:0;color:inherit;font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .info{margin:28px 0 0;padding:14px 16px 14px 34px;background:var(--panel);border:1px solid var(--hair);border-radius:12px;font-size:14px;color:var(--sub)}
 .info li+li{margin-top:4px}
 /* NAF explorer */
@@ -301,6 +317,8 @@ details[open] summary:before{transform:rotate(45deg)}
 .nr-main b{font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nr-main small{font-size:12.5px;color:var(--sub);line-height:1.4}
 .nr-side{display:flex;align-items:center;gap:6px;font:500 11.5px/1.4 var(--mono);color:var(--sub);white-space:nowrap}
+.nr.off{border-style:dashed;opacity:.6}
+.nr.off .nr-side:after{content:"hidden";font-style:italic}
 .mk-mat{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cactus)}
 .nr-jump{color:var(--ink);font-weight:700}
 .ws-naf{display:flex;align-items:center;gap:8px;margin:0 0 10px;flex-wrap:wrap}
@@ -313,7 +331,8 @@ details[open] summary:before{transform:rotate(45deg)}
 .ws-naf-t{display:flex;align-items:center;flex-wrap:wrap;gap:2px 5px;font-size:12.5px;color:var(--sub)}
 .ws-naf-t .lbl{font:600 10.5px/1 var(--mono);letter-spacing:.08em;margin-right:1px}
 .ws-naf-t button{border:0;background:none;padding:0;font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
-.ws-naf-t button:hover,.ws-naf-t button.hit{text-decoration-color:currentColor}
+.ws-naf-t button:hover{text-decoration-color:currentColor}
+.ws-naf-t button.hit{text-decoration:none;background:var(--ink);color:var(--panel);padding:1px 6px;border-radius:5px}
 .ws-naf-t .plus{font:500 11px/1 var(--mono);color:var(--sub);margin-left:2px}
 .ws-rel{margin-left:auto;font:600 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:4px 7px;border-radius:5px;background:var(--ink);color:var(--panel)}
 .ws-rel:empty{display:none}
@@ -356,7 +375,7 @@ footer.site a{color:var(--ink)}
 <div class="bar" id="bar">
   <div class="in">
     <div class="row">
-      <div class="tabs" role="group" aria-label="Time slot"><button type="button" class="tab" data-block="" aria-pressed="true">All</button><button type="button" class="tab" data-block="A" data-start="2026-11-16T09:00:00-07:00" data-end="2026-11-16T13:00:00-07:00" aria-pressed="false"><i class="dot b-A"></i>Mon AM<span class="live">Live</span></button><button type="button" class="tab" data-block="B" data-start="2026-11-16T14:00:00-07:00" data-end="2026-11-16T18:00:00-07:00" aria-pressed="false"><i class="dot b-B"></i>Mon PM<span class="live">Live</span></button><button type="button" class="tab" data-block="C" data-start="2026-11-17T09:00:00-07:00" data-end="2026-11-17T13:00:00-07:00" aria-pressed="false"><i class="dot b-C"></i>Tue AM<span class="live">Live</span></button><button type="button" class="tab" data-block="D" data-start="2026-11-17T14:00:00-07:00" data-end="2026-11-17T18:00:00-07:00" aria-pressed="false"><i class="dot b-D"></i>Tue PM<span class="live">Live</span></button></div>
+      <div class="tabs" role="group" aria-label="Time slot"><button type="button" class="tab" data-block="" aria-pressed="true">All<span class="tn"></span></button><button type="button" class="tab" data-block="A" data-start="2026-11-16T09:00:00-07:00" data-end="2026-11-16T13:00:00-07:00" aria-pressed="false"><i class="dot b-A"></i>Mon AM<span class="tn"></span><span class="live">Live</span></button><button type="button" class="tab" data-block="B" data-start="2026-11-16T14:00:00-07:00" data-end="2026-11-16T18:00:00-07:00" aria-pressed="false"><i class="dot b-B"></i>Mon PM<span class="tn"></span><span class="live">Live</span></button><button type="button" class="tab" data-block="C" data-start="2026-11-17T09:00:00-07:00" data-end="2026-11-17T13:00:00-07:00" aria-pressed="false"><i class="dot b-C"></i>Tue AM<span class="tn"></span><span class="live">Live</span></button><button type="button" class="tab" data-block="D" data-start="2026-11-17T14:00:00-07:00" data-end="2026-11-17T18:00:00-07:00" aria-pressed="false"><i class="dot b-D"></i>Tue PM<span class="tn"></span><span class="live">Live</span></button></div>
     </div>
     <div class="panel" id="panel">
       <div class="wide">
@@ -367,189 +386,218 @@ footer.site a{color:var(--ink)}
       </div>
       <div class="chips" role="group" aria-label="Topics"><button type="button" class="chip" data-topic="ai" aria-pressed="false">AI &amp; agents<span>4</span></button><button type="button" class="chip" data-topic="sot" aria-pressed="false">Source of truth<span>4</span></button><button type="button" class="chip" data-topic="design" aria-pressed="false">Design-driven<span>3</span></button><button type="button" class="chip" data-topic="fabric" aria-pressed="false">EVPN &amp; fabrics<span>5</span></button><button type="button" class="chip" data-topic="cicd" aria-pressed="false">CI/CD &amp; testing<span>4</span></button><button type="button" class="chip" data-topic="telemetry" aria-pressed="false">Telemetry<span>3</span></button><button type="button" class="chip" data-topic="closedloop" aria-pressed="false">Closed loop<span>3</span></button><button type="button" class="chip" data-topic="linux" aria-pressed="false">Linux &amp; fundamentals<span>1</span></button><button type="button" class="chip" data-topic="clab" aria-pressed="false">Containerlab<span>6</span></button><button type="button" class="chip" data-topic="twin" aria-pressed="false">Digital twin<span>2</span></button><button type="button" class="chip" data-topic="ansible" aria-pressed="false">Ansible<span>3</span></button><button type="button" class="chip" data-topic="iac" aria-pressed="false">Terraform &amp; IaC<span>1</span></button></div>
     </div>
-    <div class="status"><span><span id="count" aria-live="polite"></span> <button type="button" id="showall" hidden></button></span><span class="sr"><button type="button" id="nafchip" class="nafchip" data-naf-clear hidden>NAF: <span></span> ✕</button><button type="button" id="clear" hidden>Clear filters</button><button type="button" class="fbtn" id="fbtn" aria-expanded="false" aria-controls="panel">Filters <span class="n" id="fcount">0</span></button></span></div>
+    <div class="status"><span><span id="count" aria-live="polite"></span> <button type="button" id="showall" hidden></button></span><span class="sr"><button type="button" id="nafchip" class="nafchip" data-naf-clear hidden>NAF: <span></span> ✕</button><button type="button" id="clear" hidden>Reset<span class="wk"> filters</span></button><button type="button" class="fbtn" id="fbtn" aria-expanded="false" aria-controls="panel">Filters <span class="n" id="fcount">0</span></button></span></div>
   </div>
 </div>
 
 <main class="in">
   <nav class="jump" id="jump" aria-label="Jump to workshop"></nav>
-<section class="blk" data-block="A" data-start="2026-11-16T09:00:00-07:00" data-end="2026-11-16T13:00:00-07:00"><h2><i class="dot b-A"></i>Monday morning <span>09:00–13:00</span><em class="live">Happening now</em></h2><div class="grid"><article class="ws" id="a1" data-block="A" data-mat="1" data-oss="product" data-core="orchestration observability" data-touch="presentation collector executor" data-topics="ai closedloop" data-search="a1 agentic netops in tines: moving from brittle scripts to autonomous workflows with human-in-the-loop control tines build an agentic netops workflow in tines that hooks llms and mcp up to telemetry for ai-driven triage, with guardrails and human approval gates. sif baksh ai &amp; agents closed loop">
+<section class="blk" data-block="A" data-start="2026-11-16T09:00:00-07:00" data-end="2026-11-16T13:00:00-07:00"><h2><i class="dot b-A"></i>Monday morning <span>09:00–13:00</span><em class="live">Happening now</em></h2><div class="grid"><article class="ws" id="a1" data-block="A" data-mat="1" data-oss="product" data-core="orchestration observability" data-touch="presentation collector executor" data-topics="ai closedloop" data-search="a1 agentic netops in tines: moving from brittle scripts to autonomous workflows with human-in-the-loop control tines build an agentic netops workflow in tines that hooks llms and mcp up to telemetry for ai-driven triage, with guardrails and human approval gates. sif baksh ai &amp; agents closed loop orchestration observability">
 <div class="ws-top"><a class="ws-code b-A" href="#a1">A1</a><span class="ws-org">Tines</span><span class="flags"><span class="flag flag-product" title="Built around Tines, a commercial automation platform.">Vendor product</span><span class="flag flag-mat">Material</span><span class="flag flag-sold">Sold out</span></span></div>
 <h3>Agentic NetOps in Tines: Moving from Brittle Scripts to Autonomous Workflows with Human-in-the-Loop Control</h3>
 <p class="ws-when">Mon 16 Nov · 09:00–13:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Build an agentic NetOps workflow in Tines that hooks LLMs and MCP up to telemetry for AI-driven triage, with guardrails and human approval gates.</p>
 <div class="ws-links"><a href="https://bootcamp-training.tines.com" target="_blank" rel="noopener">Tines training login<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a><a href="https://developer.cisco.com/sandbox" target="_blank" rel="noopener">Cisco DevNet sandboxes<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a></div>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation touch"></i><i class="g-observability core"></i><i class="g-orchestration core"></i><i class="g-intent "></i><i class="g-collector touch"></i><i class="g-executor touch"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="orchestration">Orchestration</button> · <button type="button" data-naf="observability">Observability</button><span class="plus">+3</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation touch"></i><i class="g-observability core"></i><i class="g-orchestration core"></i><i class="g-intent "></i><i class="g-collector touch"></i><i class="g-executor touch"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="orchestration" aria-pressed="false" title="Filter by this NAF block">Orchestration</button> · <button type="button" data-naf="observability" aria-pressed="false" title="Filter by this NAF block">Observability</button><span class="plus">+3</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="ai">AI &amp; agents</button><button type="button" class="tag" data-topic="closedloop">Closed loop</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>Log in to the Tines training tenant with the email you used for AutoCon. Use the link below if the invite email never arrived or went to spam.</li><li>Before the session, power on an always-on Cisco DevNet sandbox device that doesn&#x27;t need VPN, and note its address and credentials.</li></ul><h4>Good to know</h4><ul><li>Session is being recorded. Remote Zoom link is in the Slack channel.</li></ul><h4>People</h4><p>Sif Baksh</p><h4>Level</h4><p>Net Intermediate · Linux Beginner · Prog Intermediate</p><h4>NAF Framework</h4><p>Tines workflows orchestrate LLM/MCP triage over telemetry, with human approval gates. Also touches Presentation, Collector, Executor.</p><h4>Vendor product</h4><p>Built around Tines, a commercial automation platform.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CH1Q3023S" target="_blank" rel="noopener">#ac6-ws-a1</a></p></div></details>
 </article>
-<article class="ws" id="a2" data-block="A" data-mat="0" data-oss="open" data-core="intent executor orchestration" data-touch="presentation collector" data-topics="sot ansible" data-search="a2 from intent to execution: nautobot and ansible, better together network to code use nautobot as the source of truth driving ansible/awx: dynamic inventory, config contexts, dynamic groups, graphql-rendered configs, job buttons, writing state back, and event-triggered workflows with approval. israel pineda brandon donohoe nikos kallergis chris murray source of truth ansible">
+<article class="ws" id="a2" data-block="A" data-mat="0" data-oss="open" data-core="intent executor orchestration" data-touch="presentation collector" data-topics="sot ansible" data-search="a2 from intent to execution: nautobot and ansible, better together network to code use nautobot as the source of truth driving ansible/awx: dynamic inventory, config contexts, dynamic groups, graphql-rendered configs, job buttons, writing state back, and event-triggered workflows with approval. israel pineda brandon donohoe nikos kallergis chris murray source of truth ansible intent executor orchestration">
 <div class="ws-top"><a class="ws-code b-A" href="#a2">A2</a><span class="ws-org">Network to Code</span><span class="flags"><span class="flag flag-open" title="Nautobot and AWX are both open source.">Open source</span><span class="flag flag-prep">Setup info</span><span class="flag flag-sold">Sold out</span></span></div>
 <h3>From Intent to Execution: Nautobot and Ansible, Better Together</h3>
 <p class="ws-when">Mon 16 Nov · 09:00–13:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Use Nautobot as the source of truth driving Ansible/AWX: dynamic inventory, Config Contexts, Dynamic Groups, GraphQL-rendered configs, Job Buttons, writing state back, and event-triggered workflows with approval.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation touch"></i><i class="g-observability "></i><i class="g-orchestration core"></i><i class="g-intent core"></i><i class="g-collector touch"></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent">Intent</button> · <button type="button" data-naf="executor">Executor</button> · <button type="button" data-naf="orchestration">Orchestration</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation touch"></i><i class="g-observability "></i><i class="g-orchestration core"></i><i class="g-intent core"></i><i class="g-collector touch"></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent" aria-pressed="false" title="Filter by this NAF block">Intent</button> · <button type="button" data-naf="executor" aria-pressed="false" title="Filter by this NAF block">Executor</button> · <button type="button" data-naf="orchestration" aria-pressed="false" title="Filter by this NAF block">Orchestration</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="sot">Source of truth</button><button type="button" class="tag" data-topic="ansible">Ansible</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>Bring a laptop with a browser and a charger. Nothing to install.</li><li>Your cloud lab link and password arrive by email (Nautobot, AWX, two Arista switches).</li><li>You should have run an Ansible playbook before. No Nautobot, AWX or Python experience needed.</li></ul><h4>Good to know</h4><ul><li>AWX stands in for Ansible Automation Platform, so the concepts carry over directly.</li></ul><h4>People</h4><p>Israel Pineda, Brandon Donohoe, Nikos Kallergis, Chris Murray</p><h4>Level</h4><p>Net Intermediate · Linux Intermediate · Prog Intermediate</p><h4>NAF Framework</h4><p>Nautobot is the intent, Ansible executes, and AWX workflows with approvals orchestrate. Also touches Presentation, Collector.</p><h4>Open source</h4><p>Nautobot and AWX are both open source.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CG77YDUFL" target="_blank" rel="noopener">#ac6-ws-a2</a></p></div></details>
 </article>
-<article class="ws" id="a3" data-block="A" data-mat="1" data-oss="open" data-core="infrastructure" data-touch="collector" data-topics="linux fabric clab" data-search="a3 into the unknown: deep dive into the linux network stack codilime linux networking from bridges to ovs/ovn, plus ebpf, dpdk, switchdev offload, bgp/is-is/mpls, evpn/vxlan and performance testing. adam kułagowski pavel raunou monika antoniak linux &amp; fundamentals evpn &amp; fabrics containerlab">
+<article class="ws" id="a3" data-block="A" data-mat="1" data-oss="open" data-core="infrastructure" data-touch="collector" data-topics="linux fabric clab" data-search="a3 into the unknown: deep dive into the linux network stack codilime linux networking from bridges to ovs/ovn, plus ebpf, dpdk, switchdev offload, bgp/is-is/mpls, evpn/vxlan and performance testing. adam kułagowski pavel raunou monika antoniak linux &amp; fundamentals evpn &amp; fabrics containerlab infrastructure">
 <div class="ws-top"><a class="ws-code b-A" href="#a3">A3</a><span class="ws-org">CodiLime</span><span class="flags"><span class="flag flag-open" title="Plain Linux networking: OVS/OVN, eBPF, DPDK, FRR.">Open source</span><span class="flag flag-mat">Material</span></span></div>
 <h3>Into the Unknown: Deep Dive into the Linux Network Stack</h3>
 <p class="ws-when">Mon 16 Nov · 09:00–13:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Linux networking from bridges to OVS/OVN, plus eBPF, DPDK, switchdev offload, BGP/IS-IS/MPLS, EVPN/VXLAN and performance testing.</p>
 <div class="ws-links"><a href="https://codilime.github.io/autocon" target="_blank" rel="noopener">Workshop instructions<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a></div>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector touch"></i><i class="g-executor "></i><i class="g-infrastructure core"></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="infrastructure">Infrastructure</button><span class="plus">+1</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector touch"></i><i class="g-executor "></i><i class="g-infrastructure core"></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="infrastructure" aria-pressed="false" title="Filter by this NAF block">Infrastructure</button><span class="plus">+1</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="linux">Linux &amp; fundamentals</button><button type="button" class="tag" data-topic="fabric">EVPN &amp; fabrics</button><button type="button" class="tag" data-topic="clab">Containerlab</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>The FAQ is a canvas in the Slack channel (also sent by email).</li></ul><h4>Good to know</h4><ul><li>Recorded. Slides and Containerlab files to run the labs locally are promised after the workshop.</li></ul><h4>People</h4><p>Adam Kułagowski, Pavel Raunou, Monika Antoniak</p><h4>Level</h4><p>Net Intermediate · Linux Beginner · Prog Beginner</p><h4>NAF Framework</h4><p>Linux as the network: bridges, OVS/OVN, eBPF, DPDK and switchdev offload. Also touches Collector.</p><h4>Open source</h4><p>Plain Linux networking: OVS/OVN, eBPF, DPDK, FRR.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0C3ZAGE613" target="_blank" rel="noopener">#ac6-ws-a3-into-the-unknown</a></p></div></details>
 </article>
-<article class="ws" id="a4" data-block="A" data-mat="1" data-oss="product" data-core="intent practices" data-touch="orchestration observability" data-topics="cicd twin" data-search="a4 know before you deploy: hands-on network ci/cd with forward predict forward networks build a ci/cd pipeline with github actions and forward predict that catches behaviour regressions before deployment. craig johnson sean deveci mike lossmann ci/cd &amp; testing digital twin">
+<article class="ws" id="a4" data-block="A" data-mat="1" data-oss="product" data-core="intent practices" data-touch="orchestration observability" data-topics="cicd twin" data-search="a4 know before you deploy: hands-on network ci/cd with forward predict forward networks build a ci/cd pipeline with github actions and forward predict that catches behaviour regressions before deployment. craig johnson sean deveci mike lossmann ci/cd &amp; testing digital twin intent practices">
 <div class="ws-top"><a class="ws-code b-A" href="#a4">A4</a><span class="ws-org">Forward Networks</span><span class="flags"><span class="flag flag-product" title="Built around Forward Predict, a commercial product.">Vendor product</span><span class="flag flag-mat">Material</span></span></div>
 <h3>Know Before You Deploy: Hands-On Network CI/CD with Forward Predict</h3>
 <p class="ws-when">Mon 16 Nov · 09:00–13:00 <span class="room">Room Indigo (lower level)</span></p>
 <p class="ws-sum">Build a CI/CD pipeline with GitHub Actions and Forward Predict that catches behaviour regressions before deployment.</p>
 <div class="ws-links"><a href="https://tinyurl.com/wsa4go" target="_blank" rel="noopener">Get a seat<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a></div>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability touch"></i><i class="g-orchestration touch"></i><i class="g-intent core"></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent">Intent</button> · <button type="button" data-naf="practices">Practices</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability touch"></i><i class="g-orchestration touch"></i><i class="g-intent core"></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent" aria-pressed="false" title="Filter by this NAF block">Intent</button> · <button type="button" data-naf="practices" aria-pressed="false" title="Filter by this NAF block">Practices</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="cicd">CI/CD &amp; testing</button><button type="button" class="tag" data-topic="twin">Digital twin</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>You need a browser and a GitHub account. The lab runs in a GitHub Codespace.</li><li>Get a seat at the link below (opened 08:30 Monday): press Get a seat, accept the GitHub invite, then open it in Codespaces.</li><li>Stuck? Post &quot;@wsa4 help seat-NN&quot; in Slack.</li></ul><h4>Good to know</h4><ul><li>Recorded. Zoom is for remote attendees only (&quot;In room? No Zoom!&quot;).</li></ul><h4>People</h4><p>Craig Johnson, Sean Deveci, Mike Lossmann</p><h4>Level</h4><p>Net Intermediate · Linux Beginner · Prog Beginner</p><h4>NAF Framework</h4><p>A GitHub Actions pipeline uses Forward Predict to validate intended changes before they ship. Also touches Orchestration, Observability.</p><h4>Vendor product</h4><p>Built around Forward Predict, a commercial product.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0C6A85JGAF" target="_blank" rel="noopener">#ac6-ws-a4</a></p></div></details>
 </article></div></section>
-<section class="blk" data-block="B" data-start="2026-11-16T14:00:00-07:00" data-end="2026-11-16T18:00:00-07:00"><h2><i class="dot b-B"></i>Monday afternoon <span>14:00–18:00</span><em class="live">Happening now</em></h2><div class="grid"><article class="ws" id="b1" data-block="B" data-mat="0" data-oss="product" data-core="presentation collector" data-touch="executor observability" data-topics="ai clab" data-search="b1 old protocol, new brain: hands-on troubleshooting with an ai-native ssh terminal supertrace troubleshoot a containerlab network with st-cli using natural language or plain commands, through guided failure scenarios with a human in the loop. mahir kalra alex typaldos pete cho andrei shevtsov ai &amp; agents containerlab">
+<section class="blk" data-block="B" data-start="2026-11-16T14:00:00-07:00" data-end="2026-11-16T18:00:00-07:00"><h2><i class="dot b-B"></i>Monday afternoon <span>14:00–18:00</span><em class="live">Happening now</em></h2><div class="grid"><article class="ws" id="b1" data-block="B" data-mat="0" data-oss="product" data-core="presentation collector" data-touch="executor observability" data-topics="ai clab" data-search="b1 old protocol, new brain: hands-on troubleshooting with an ai-native ssh terminal supertrace troubleshoot a containerlab network with st-cli using natural language or plain commands, through guided failure scenarios with a human in the loop. mahir kalra alex typaldos pete cho andrei shevtsov ai &amp; agents containerlab presentation collector">
 <div class="ws-top"><a class="ws-code b-B" href="#b1">B1</a><span class="ws-org">Supertrace</span><span class="flags"><span class="flag flag-product" title="Built around Supertrace&#x27;s st-cli, a commercial tool.">Vendor product</span><span class="flag flag-none">Nothing posted yet</span><span class="flag flag-sold">Sold out</span></span></div>
 <h3>Old Protocol, New Brain: Hands-On Troubleshooting with an AI-Native SSH Terminal</h3>
 <p class="ws-when">Mon 16 Nov · 14:00–18:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Troubleshoot a Containerlab network with st-cli using natural language or plain commands, through guided failure scenarios with a human in the loop.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation core"></i><i class="g-observability touch"></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector core"></i><i class="g-executor touch"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="presentation">Presentation</button> · <button type="button" data-naf="collector">Collector</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation core"></i><i class="g-observability touch"></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector core"></i><i class="g-executor touch"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="presentation" aria-pressed="false" title="Filter by this NAF block">Presentation</button> · <button type="button" data-naf="collector" aria-pressed="false" title="Filter by this NAF block">Collector</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="ai">AI &amp; agents</button><button type="button" class="tag" data-topic="clab">Containerlab</button></div>
 <details><summary>People &amp; level</summary><div class="ws-more"><h4>People</h4><p>Mahir Kalra, Alex Typaldos, Pete Cho, Andrei Shevtsov</p><h4>Level</h4><p>Net Intermediate · Linux Beginner · Prog Beginner</p><h4>NAF Framework</h4><p>An AI-native SSH terminal as the interface for reading and troubleshooting the network. Also touches Executor, Observability.</p><h4>Vendor product</h4><p>Built around Supertrace&#x27;s st-cli, a commercial tool.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CG9KPSFLH" target="_blank" rel="noopener">#ac6-ws-b1</a></p></div></details>
 </article>
-<article class="ws" id="b2" data-block="B" data-mat="0" data-oss="mostly" data-core="intent executor" data-touch="collector observability orchestration" data-topics="design fabric cicd" data-search="b2 design driven automation: architect, validate and deploy an evpn vxlan fabric with arista avd arista networks architect, validate and deploy a leaf-spine evpn/vxlan fabric as code with arista.avd, pyavd and anta, covering day 0 and day 2 plus multi-vendor extension. carl buchmann noel thompson marcus mcpeek jordan hemann kyle bush design-driven evpn &amp; fabrics ci/cd &amp; testing">
+<article class="ws" id="b2" data-block="B" data-mat="0" data-oss="mostly" data-core="intent executor" data-touch="collector observability orchestration" data-topics="design fabric cicd" data-search="b2 design driven automation: architect, validate and deploy an evpn vxlan fabric with arista avd arista networks architect, validate and deploy a leaf-spine evpn/vxlan fabric as code with arista.avd, pyavd and anta, covering day 0 and day 2 plus multi-vendor extension. carl buchmann noel thompson marcus mcpeek jordan hemann kyle bush design-driven evpn &amp; fabrics ci/cd &amp; testing intent executor">
 <div class="ws-top"><a class="ws-code b-B" href="#b2">B2</a><span class="ws-org">Arista Networks</span><span class="flags"><span class="flag flag-mostly" title="AVD, pyavd and ANTA are open source, but it&#x27;s all aimed at Arista EOS.">Mostly open</span><span class="flag flag-none">Nothing posted yet</span><span class="flag flag-sold">Sold out</span></span></div>
 <h3>Design Driven Automation: Architect, Validate and Deploy an EVPN VXLAN Fabric with Arista AVD</h3>
 <p class="ws-when">Mon 16 Nov · 14:00–18:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Architect, validate and deploy a leaf-spine EVPN/VXLAN fabric as code with arista.avd, pyavd and ANTA, covering Day 0 and Day 2 plus multi-vendor extension.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability touch"></i><i class="g-orchestration touch"></i><i class="g-intent core"></i><i class="g-collector touch"></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent">Intent</button> · <button type="button" data-naf="executor">Executor</button><span class="plus">+3</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability touch"></i><i class="g-orchestration touch"></i><i class="g-intent core"></i><i class="g-collector touch"></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent" aria-pressed="false" title="Filter by this NAF block">Intent</button> · <button type="button" data-naf="executor" aria-pressed="false" title="Filter by this NAF block">Executor</button><span class="plus">+3</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="design">Design-driven</button><button type="button" class="tag" data-topic="fabric">EVPN &amp; fabrics</button><button type="button" class="tag" data-topic="cicd">CI/CD &amp; testing</button></div>
 <details><summary>People &amp; level</summary><div class="ws-more"><h4>People</h4><p>Carl Buchmann, Noel Thompson, Marcus McPeek, Jordan Hemann, Kyle Bush</p><h4>Level</h4><p>Net Intermediate · Linux Beginner · Prog Beginner</p><h4>NAF Framework</h4><p>AVD turns the design into config and deploys it, and ANTA tests the running network. Also touches Collector, Observability, Orchestration.</p><h4>Mostly open</h4><p>AVD, pyavd and ANTA are open source, but it&#x27;s all aimed at Arista EOS.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CG2ENQX45" target="_blank" rel="noopener">#ac6-ws-b2</a></p></div></details>
 </article>
-<article class="ws" id="b3" data-block="B" data-mat="0" data-oss="product" data-core="collector observability" data-touch="intent" data-topics="telemetry sot" data-search="b3 who gets the truck roll? joining telemetry, topology, and a graph through discovery exactnet discover a multi-vendor network and join telemetry, inventory and topology in a graph database, on a hosted lab simulating an mpls/pon backbone. jeff cook pieter van os telemetry source of truth">
+<article class="ws" id="b3" data-block="B" data-mat="0" data-oss="product" data-core="collector observability" data-touch="intent" data-topics="telemetry sot" data-search="b3 who gets the truck roll? joining telemetry, topology, and a graph through discovery exactnet discover a multi-vendor network and join telemetry, inventory and topology in a graph database, on a hosted lab simulating an mpls/pon backbone. jeff cook pieter van os telemetry source of truth collector observability">
 <div class="ws-top"><a class="ws-code b-B" href="#b3">B3</a><span class="ws-org">ExactNet</span><span class="flags"><span class="flag flag-product" title="Built around ExactNet&#x27;s discovery platform.">Vendor product</span><span class="flag flag-prep">Setup info</span></span></div>
 <h3>Who Gets the Truck Roll? Joining Telemetry, Topology, and a Graph through Discovery</h3>
 <p class="ws-when">Mon 16 Nov · 14:00–18:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Discover a multi-vendor network and join telemetry, inventory and topology in a graph database, on a hosted lab simulating an MPLS/PON backbone.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability core"></i><i class="g-orchestration "></i><i class="g-intent touch"></i><i class="g-collector core"></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="collector">Collector</button> · <button type="button" data-naf="observability">Observability</button><span class="plus">+1</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability core"></i><i class="g-orchestration "></i><i class="g-intent touch"></i><i class="g-collector core"></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="collector" aria-pressed="false" title="Filter by this NAF block">Collector</button> · <button type="button" data-naf="observability" aria-pressed="false" title="Filter by this NAF block">Observability</button><span class="plus">+1</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="telemetry">Telemetry</button><button type="button" class="tag" data-topic="sot">Source of truth</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>A FAQ was promised by email.</li></ul><h4>Good to know</h4><ul><li>Jeff Cook is presenting remotely because of travel problems. Pieter van Os is in the room.</li><li>The whole workshop is hosted online, so you can also follow it remotely.</li></ul><h4>People</h4><p>Jeff Cook, Pieter van Os</p><h4>Level</h4><p>Net Intermediate · Linux Intermediate · Prog Beginner</p><h4>NAF Framework</h4><p>Discovery feeds telemetry, inventory and topology into a graph for analysis. Also touches Intent.</p><h4>Vendor product</h4><p>Built around ExactNet&#x27;s discovery platform.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CG5D5U19U" target="_blank" rel="noopener">#ac6-ws-b3</a></p></div></details>
 </article>
-<article class="ws" id="b4" data-block="B" data-mat="0" data-oss="product" data-core="orchestration executor observability" data-touch="collector intent" data-topics="cicd closedloop" data-search="b4 building network automations with backbox backbox build, test and deploy automations in backbox (kilter) in a live lab: backup, compliance, drift remediation, scheduling, and change verification with rollback. sandra topalovic irfahn khimji ci/cd &amp; testing closed loop">
+<article class="ws" id="b4" data-block="B" data-mat="0" data-oss="product" data-core="orchestration executor observability" data-touch="collector intent" data-topics="cicd closedloop" data-search="b4 building network automations with backbox backbox build, test and deploy automations in backbox (kilter) in a live lab: backup, compliance, drift remediation, scheduling, and change verification with rollback. sandra topalovic irfahn khimji ci/cd &amp; testing closed loop orchestration executor observability">
 <div class="ws-top"><a class="ws-code b-B" href="#b4">B4</a><span class="ws-org">BackBox</span><span class="flags"><span class="flag flag-product" title="Built around BackBox (Kilter), a commercial product.">Vendor product</span></span></div>
 <h3>Building Network Automations with BackBox</h3>
 <p class="ws-when">Mon 16 Nov · 14:00–18:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Build, test and deploy automations in BackBox (Kilter) in a live lab: backup, compliance, drift remediation, scheduling, and change verification with rollback.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability core"></i><i class="g-orchestration core"></i><i class="g-intent touch"></i><i class="g-collector touch"></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="orchestration">Orchestration</button> · <button type="button" data-naf="executor">Executor</button> · <button type="button" data-naf="observability">Observability</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability core"></i><i class="g-orchestration core"></i><i class="g-intent touch"></i><i class="g-collector touch"></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="orchestration" aria-pressed="false" title="Filter by this NAF block">Orchestration</button> · <button type="button" data-naf="executor" aria-pressed="false" title="Filter by this NAF block">Executor</button> · <button type="button" data-naf="observability" aria-pressed="false" title="Filter by this NAF block">Observability</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="cicd">CI/CD &amp; testing</button><button type="button" class="tag" data-topic="closedloop">Closed loop</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Good to know</h4><ul><li>Remote Zoom details are in the Slack channel.</li></ul><h4>People</h4><p>Sandra Topalovic, Irfahn Khimji</p><h4>Level</h4><p>Net Intermediate · Linux Beginner · Prog Beginner</p><h4>NAF Framework</h4><p>Scheduled backups and compliance checks, with drift remediation and verified changes that can roll back. Also touches Collector, Intent.</p><h4>Vendor product</h4><p>Built around BackBox (Kilter), a commercial product.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CG9LG5K17" target="_blank" rel="noopener">#ac6-ws-b4</a></p></div></details>
 </article></div></section>
-<section class="blk" data-block="C" data-start="2026-11-17T09:00:00-07:00" data-end="2026-11-17T13:00:00-07:00"><h2><i class="dot b-C"></i>Tuesday morning <span>09:00–13:00</span><em class="live">Happening now</em></h2><div class="grid"><article class="ws" id="c1" data-block="C" data-mat="1" data-oss="mostly" data-core="practices" data-touch="" data-topics="ai" data-search="c1 loop engineering, spec driven development, and the future of vibeops itential lectures on llms, ralph loops and spec-driven development with github spec kit, then build a networking game in teams of six and show it off. john capobianco joksan flores elliot connor ai &amp; agents">
+<section class="blk" data-block="C" data-start="2026-11-17T09:00:00-07:00" data-end="2026-11-17T13:00:00-07:00"><h2><i class="dot b-C"></i>Tuesday morning <span>09:00–13:00</span><em class="live">Happening now</em></h2><div class="grid"><article class="ws" id="c1" data-block="C" data-mat="1" data-oss="mostly" data-core="practices" data-touch="" data-topics="ai" data-search="c1 loop engineering, spec driven development, and the future of vibeops itential lectures on llms, ralph loops and spec-driven development with github spec kit, then build a networking game in teams of six and show it off. john capobianco joksan flores elliot connor ai &amp; agents practices">
 <div class="ws-top"><a class="ws-code b-C" href="#c1">C1</a><span class="ws-org">Itential</span><span class="flags"><span class="flag flag-mostly" title="Spec Kit and the techniques are open; there&#x27;s a short Itential demo and it uses commercial LLMs.">Mostly open</span><span class="flag flag-mat">Material</span><span class="flag flag-sold">Sold out</span></span></div>
 <h3>Loop Engineering, Spec Driven Development, and the Future of VibeOps</h3>
 <p class="ws-when">Tue 17 Nov · 09:00–13:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Lectures on LLMs, Ralph loops and spec-driven development with GitHub Spec Kit, then build a networking game in teams of six and show it off.</p>
 <div class="ws-links"><a href="https://github.com/automateyournetwork/NAF_AC6" target="_blank" rel="noopener">Workshop repo<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a><a href="https://automateyournetwork.com/arcade/" target="_blank" rel="noopener">Example games (Arcade)<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a></div>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="practices">Practices</button></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="practices" aria-pressed="false" title="Filter by this NAF block">Practices</button></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="ai">AI &amp; agents</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>Set up your build environment from the repo before Tuesday so the session isn&#x27;t spent on setup.</li><li>The FAQ PDF and the final slide deck (updated Mon 16 Nov) are in the Slack channel.</li><li>When you arrive, get a group-number sticker from John (10 teams of 6). Don&#x27;t leave valuables where you first sit, because groups move.</li></ul><h4>Agenda</h4><table class='agenda'><tr><td>09:00</td><td>Lecture: LLMs, Ralph loops, SDD and Spec Kit</td></tr><tr><td>09:35</td><td>Demo: Itential Builder Skills</td></tr><tr><td>09:45</td><td>Lecture: loop engineering</td></tr><tr><td>09:50</td><td>Set up your project</td></tr><tr><td>10:00</td><td>Lecture: gamification of networking</td></tr><tr><td>10:15</td><td>Group activity: ideas and templates</td></tr><tr><td>10:45</td><td>Break</td></tr><tr><td>11:15</td><td>Group activity, continued</td></tr><tr><td>11:30</td><td>Bring your idea to life</td></tr><tr><td>12:30</td><td>Show your games</td></tr></table><h4>People</h4><p>John Capobianco, Joksan Flores, Elliot Connor</p><h4>Level</h4><p>Net Beginner · Linux Beginner · Prog Intermediate</p><h4>NAF Framework</h4><p>Loop engineering and spec-driven development with AI coding agents. This is a way of working rather than a single block.</p><h4>Mostly open</h4><p>Spec Kit and the techniques are open; there&#x27;s a short Itential demo and it uses commercial LLMs.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CG75JV0E5" target="_blank" rel="noopener">#ac6-ws-c1</a></p></div></details>
 </article>
-<article class="ws" id="c2" data-block="C" data-mat="0" data-oss="open" data-core="intent executor" data-touch="orchestration" data-topics="sot design fabric ansible clab" data-search="c2 open source design-driven automation: from fabric intent to running config with infrahub and avd opsmill an open-source pipeline on the naf framework: infrahub as the intent source, avd generating per-device config, and ansible pushing to a containerlab fabric. adam byczkowski damien garros pete crocker alex gittings jordan hemann noel thompson carl buchmann source of truth design-driven evpn &amp; fabrics ansible containerlab">
+<article class="ws" id="c2" data-block="C" data-mat="0" data-oss="open" data-core="intent executor" data-touch="orchestration" data-topics="sot design fabric ansible clab" data-search="c2 open source design-driven automation: from fabric intent to running config with infrahub and avd opsmill an open-source pipeline on the naf framework: infrahub as the intent source, avd generating per-device config, and ansible pushing to a containerlab fabric. adam byczkowski damien garros pete crocker alex gittings jordan hemann noel thompson carl buchmann source of truth design-driven evpn &amp; fabrics ansible containerlab intent executor">
 <div class="ws-top"><a class="ws-code b-C" href="#c2">C2</a><span class="ws-org">OpsMill</span><span class="flags"><span class="flag flag-open" title="Infrahub (community), AVD, Ansible and Containerlab are all open source.">Open source</span><span class="flag flag-none">Nothing posted yet</span></span></div>
 <h3>Open Source Design-Driven Automation: From Fabric Intent to Running Config with Infrahub and AVD</h3>
 <p class="ws-when">Tue 17 Nov · 09:00–13:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">An open-source pipeline on the NAF framework: Infrahub as the intent source, AVD generating per-device config, and Ansible pushing to a Containerlab fabric.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration touch"></i><i class="g-intent core"></i><i class="g-collector "></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent">Intent</button> · <button type="button" data-naf="executor">Executor</button><span class="plus">+1</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration touch"></i><i class="g-intent core"></i><i class="g-collector "></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent" aria-pressed="false" title="Filter by this NAF block">Intent</button> · <button type="button" data-naf="executor" aria-pressed="false" title="Filter by this NAF block">Executor</button><span class="plus">+1</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="sot">Source of truth</button><button type="button" class="tag" data-topic="design">Design-driven</button><button type="button" class="tag" data-topic="fabric">EVPN &amp; fabrics</button><button type="button" class="tag" data-topic="ansible">Ansible</button><button type="button" class="tag" data-topic="clab">Containerlab</button></div>
 <details><summary>People &amp; level</summary><div class="ws-more"><h4>People</h4><p>Adam Byczkowski, Damien Garros, Pete Crocker, Alex Gittings, Jordan Hemann, Noel Thompson, Carl Buchmann</p><h4>Level</h4><p>Net Intermediate · Linux Beginner · Prog Beginner</p><h4>NAF Framework</h4><p>Infrahub holds the fabric intent, AVD renders per-device config, and Ansible pushes it. Also touches Orchestration.</p><h4>Open source</h4><p>Infrahub (community), AVD, Ansible and Containerlab are all open source.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0C47ECQS4R" target="_blank" rel="noopener">#ac6-ws-c2</a></p></div></details>
 </article>
-<article class="ws" id="c3" data-block="C" data-mat="0" data-oss="open" data-core="infrastructure collector" data-touch="executor observability" data-topics="fabric telemetry clab" data-search="c3 operationalizing sonic in modern data centers: deployment, telemetry, and automation nokia deploy a sonic fabric from scratch in containerlab, configure interfaces, bgp and evpn, pull gnmi/openconfig telemetry, and get started automating it. reda laichi saju salahudeen amer fakhar evpn &amp; fabrics telemetry containerlab">
+<article class="ws" id="c3" data-block="C" data-mat="0" data-oss="open" data-core="infrastructure collector" data-touch="executor observability" data-topics="fabric telemetry clab" data-search="c3 operationalizing sonic in modern data centers: deployment, telemetry, and automation nokia deploy a sonic fabric from scratch in containerlab, configure interfaces, bgp and evpn, pull gnmi/openconfig telemetry, and get started automating it. reda laichi saju salahudeen amer fakhar evpn &amp; fabrics telemetry containerlab infrastructure collector">
 <div class="ws-top"><a class="ws-code b-C" href="#c3">C3</a><span class="ws-org">Nokia</span><span class="flags"><span class="flag flag-open" title="SONiC, FRR, Containerlab and gNMI/OpenConfig are open source.">Open source</span><span class="flag flag-prep">Setup info</span></span></div>
 <h3>Operationalizing SONiC in Modern Data Centers: Deployment, Telemetry, and Automation</h3>
 <p class="ws-when">Tue 17 Nov · 09:00–13:00 <span class="room">Room Verbena</span></p>
 <p class="ws-sum">Deploy a SONiC fabric from scratch in Containerlab, configure interfaces, BGP and EVPN, pull gNMI/OpenConfig telemetry, and get started automating it.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability touch"></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector core"></i><i class="g-executor touch"></i><i class="g-infrastructure core"></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="infrastructure">Infrastructure</button> · <button type="button" data-naf="collector">Collector</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability touch"></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector core"></i><i class="g-executor touch"></i><i class="g-infrastructure core"></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="infrastructure" aria-pressed="false" title="Filter by this NAF block">Infrastructure</button> · <button type="button" data-naf="collector" aria-pressed="false" title="Filter by this NAF block">Collector</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="fabric">EVPN &amp; fabrics</button><button type="button" class="tag" data-topic="telemetry">Telemetry</button><button type="button" class="tag" data-topic="clab">Containerlab</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>Bring a laptop with an SSH client.</li><li>Make sure your work VPN doesn&#x27;t block SSH to Google Cloud.</li><li>You get an instruction card and your own lab instance on the day.</li></ul><h4>Good to know</h4><ul><li>Lab instructions stay available afterwards in a repo shared during the workshop.</li></ul><h4>People</h4><p>Reda Laichi, Saju Salahudeen, Amer Fakhar</p><h4>Level</h4><p>Net Beginner · Linux Beginner · Prog Beginner</p><h4>NAF Framework</h4><p>SONiC as the NOS, with gNMI/OpenConfig telemetry and automated config deployment. Also touches Executor, Observability.</p><h4>Open source</h4><p>SONiC, FRR, Containerlab and gNMI/OpenConfig are open source.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CBNG5LAS2" target="_blank" rel="noopener">#ac6-ws-c3</a></p></div></details>
 </article>
-<article class="ws" id="c4" data-block="C" data-mat="0" data-oss="product" data-core="intent executor practices" data-touch="orchestration observability" data-topics="cicd iac" data-search="c4 from network change to code: a hands-on network as code workshop cisco systems network as code with meraki apis, terraform and github actions, plus pre-change validation and robot framework testing. snezana mitrovic daniel schmidt justin burnette ci/cd &amp; testing terraform &amp; iac">
+<article class="ws" id="c4" data-block="C" data-mat="0" data-oss="product" data-core="intent executor practices" data-touch="orchestration observability" data-topics="cicd iac" data-search="c4 from network change to code: a hands-on network as code workshop cisco systems network as code with meraki apis, terraform and github actions, plus pre-change validation and robot framework testing. snezana mitrovic daniel schmidt justin burnette ci/cd &amp; testing terraform &amp; iac intent executor practices">
 <div class="ws-top"><a class="ws-code b-C" href="#c4">C4</a><span class="ws-org">Cisco Systems</span><span class="flags"><span class="flag flag-product" title="Open tooling (Terraform, Robot Framework), but it drives Cisco Meraki.">Vendor product</span><span class="flag flag-none">Nothing posted yet</span><span class="flag flag-sold">Sold out</span></span></div>
 <h3>From Network Change to Code: A Hands-on Network as Code Workshop</h3>
 <p class="ws-when">Tue 17 Nov · 09:00–13:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Network as Code with Meraki APIs, Terraform and GitHub Actions, plus pre-change validation and Robot Framework testing.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability touch"></i><i class="g-orchestration touch"></i><i class="g-intent core"></i><i class="g-collector "></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent">Intent</button> · <button type="button" data-naf="executor">Executor</button> · <button type="button" data-naf="practices">Practices</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability touch"></i><i class="g-orchestration touch"></i><i class="g-intent core"></i><i class="g-collector "></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent" aria-pressed="false" title="Filter by this NAF block">Intent</button> · <button type="button" data-naf="executor" aria-pressed="false" title="Filter by this NAF block">Executor</button> · <button type="button" data-naf="practices" aria-pressed="false" title="Filter by this NAF block">Practices</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="cicd">CI/CD &amp; testing</button><button type="button" class="tag" data-topic="iac">Terraform &amp; IaC</button></div>
 <details><summary>People &amp; level</summary><div class="ws-more"><h4>People</h4><p>Snezana Mitrovic, Daniel Schmidt, Justin Burnette</p><h4>Level</h4><p>Net Beginner · Linux Beginner · Prog Beginner</p><h4>NAF Framework</h4><p>Network as Code: YAML/Terraform intent, applied to Meraki through a CI pipeline with Robot tests. Also touches Orchestration, Observability.</p><h4>Vendor product</h4><p>Open tooling (Terraform, Robot Framework), but it drives Cisco Meraki.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CGBF2GGEQ" target="_blank" rel="noopener">#ac6-ws-c4</a></p></div></details>
 </article></div></section>
-<section class="blk" data-block="D" data-start="2026-11-17T14:00:00-07:00" data-end="2026-11-17T18:00:00-07:00"><h2><i class="dot b-D"></i>Tuesday afternoon <span>14:00–18:00</span><em class="live">Happening now</em></h2><div class="grid"><article class="ws" id="d1" data-block="D" data-mat="1" data-oss="mostly" data-core="presentation practices" data-touch="observability" data-topics="ai" data-search="d1 ai for the network forward engineer: agents &amp; application evaluation network automation nerds build a network co-pilot on local and cloud llms in a browser lab: prompt engineering, pydantic, a langchain agent, a streamlit ui, and evaluation and hallucination testing. eric chou adam byczkowski ai &amp; agents">
+<section class="blk" data-block="D" data-start="2026-11-17T14:00:00-07:00" data-end="2026-11-17T18:00:00-07:00"><h2><i class="dot b-D"></i>Tuesday afternoon <span>14:00–18:00</span><em class="live">Happening now</em></h2><div class="grid"><article class="ws" id="d1" data-block="D" data-mat="1" data-oss="mostly" data-core="presentation practices" data-touch="observability" data-topics="ai" data-search="d1 ai for the network forward engineer: agents &amp; application evaluation network automation nerds build a network co-pilot on local and cloud llms in a browser lab: prompt engineering, pydantic, a langchain agent, a streamlit ui, and evaluation and hallucination testing. eric chou adam byczkowski ai &amp; agents presentation practices">
 <div class="ws-top"><a class="ws-code b-D" href="#d1">D1</a><span class="ws-org">Network Automation Nerds</span><span class="flags"><span class="flag flag-mostly" title="Vendor-neutral and mostly open source (LangChain, Pydantic, Streamlit); uses cloud LLMs and Arize.">Mostly open</span><span class="flag flag-mat">Material</span><span class="flag flag-sold">Sold out</span></span></div>
 <h3>AI for the Network Forward Engineer: Agents &amp; Application Evaluation</h3>
 <p class="ws-when">Tue 17 Nov · 14:00–18:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Build a network co-pilot on local and cloud LLMs in a browser lab: prompt engineering, Pydantic, a LangChain agent, a Streamlit UI, and evaluation and hallucination testing.</p>
 <div class="ws-links"><a href="https://github.com/ericchou1/autocon6-ws-d1-ai-for-the-network-forward-engineer-workshop" target="_blank" rel="noopener">Workshop repo<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a></div>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation core"></i><i class="g-observability touch"></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="presentation">Presentation</button> · <button type="button" data-naf="practices">Practices</button><span class="plus">+1</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation core"></i><i class="g-observability touch"></i><i class="g-orchestration "></i><i class="g-intent "></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="presentation" aria-pressed="false" title="Filter by this NAF block">Presentation</button> · <button type="button" data-naf="practices" aria-pressed="false" title="Filter by this NAF block">Practices</button><span class="plus">+1</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="ai">AI &amp; agents</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>Before Tuesday, launch the GitHub Codespace from the repo.</li><li>Get an Arize API key and space (see WORKSHOP_FAQ.md in the repo).</li><li>Watch the setup video (&quot;AutoCon 6 Workshop - 0 Setting Up&quot; on the Network Automation Nerds YouTube channel).</li></ul><h4>Good to know</h4><ul><li>Remote option will follow the official NAF Zoom setup.</li></ul><h4>People</h4><p>Eric Chou, Adam Byczkowski</p><h4>Level</h4><p>Net Intermediate · Linux Intermediate · Prog Intermediate</p><h4>NAF Framework</h4><p>A chat co-pilot UI for the network, with proper evaluation and hallucination testing. Also touches Observability.</p><h4>Mostly open</h4><p>Vendor-neutral and mostly open source (LangChain, Pydantic, Streamlit); uses cloud LLMs and Arize.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0C3GRUCJ8M" target="_blank" rel="noopener">#ac6-ws-d1-ai-for-the-network-forward-engineer</a></p></div></details>
 </article>
-<article class="ws" id="d2" data-block="D" data-mat="0" data-oss="open" data-core="intent" data-touch="" data-topics="sot design" data-search="d2 building a network source of intent — from architecture to practice opsmill design and run a network source of truth with infrahub and naf: schema modelling, graphql, validation, branching, generators and jinja2 transforms. alex gittings damien garros pete crocker adam byczkowski source of truth design-driven">
+<article class="ws" id="d2" data-block="D" data-mat="0" data-oss="open" data-core="intent" data-touch="" data-topics="sot design" data-search="d2 building a network source of intent — from architecture to practice opsmill design and run a network source of truth with infrahub and naf: schema modelling, graphql, validation, branching, generators and jinja2 transforms. alex gittings damien garros pete crocker adam byczkowski source of truth design-driven intent">
 <div class="ws-top"><a class="ws-code b-D" href="#d2">D2</a><span class="ws-org">OpsMill</span><span class="flags"><span class="flag flag-open" title="Infrahub community edition and the NAF framework.">Open source</span><span class="flag flag-none">Nothing posted yet</span></span></div>
 <h3>Building a Network Source of Intent — From Architecture to Practice</h3>
 <p class="ws-when">Tue 17 Nov · 14:00–18:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Design and run a network source of truth with Infrahub and NAF: schema modelling, GraphQL, validation, branching, Generators and Jinja2 Transforms.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration "></i><i class="g-intent core"></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent">Intent</button></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration "></i><i class="g-intent core"></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent" aria-pressed="false" title="Filter by this NAF block">Intent</button></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="sot">Source of truth</button><button type="button" class="tag" data-topic="design">Design-driven</button></div>
 <details><summary>People &amp; level</summary><div class="ws-more"><h4>People</h4><p>Alex Gittings, Damien Garros, Pete Crocker, Adam Byczkowski</p><h4>Level</h4><p>Net Beginner · Linux Intermediate · Prog Intermediate</p><h4>NAF Framework</h4><p>Designing a source of intent in Infrahub: schemas, GraphQL, validation, branches, generators and transforms.</p><h4>Open source</h4><p>Infrahub community edition and the NAF framework.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0C495T67KN" target="_blank" rel="noopener">#ac6-ws-d2</a></p></div></details>
 </article>
-<article class="ws" id="d3" data-block="D" data-mat="0" data-oss="open" data-core="infrastructure" data-touch="intent practices" data-topics="twin fabric clab" data-search="d3 digital twinning at scale nokia emulate a 200+ router data centre fabric with containerlab and frrouting, covering numbering schemes, scripts versus templates, and scaling on limited compute. russ white derick winkworth digital twin evpn &amp; fabrics containerlab">
+<article class="ws" id="d3" data-block="D" data-mat="0" data-oss="open" data-core="infrastructure" data-touch="intent practices" data-topics="twin fabric clab" data-search="d3 digital twinning at scale nokia emulate a 200+ router data centre fabric with containerlab and frrouting, covering numbering schemes, scripts versus templates, and scaling on limited compute. russ white derick winkworth digital twin evpn &amp; fabrics containerlab infrastructure">
 <div class="ws-top"><a class="ws-code b-D" href="#d3">D3</a><span class="ws-org">Nokia</span><span class="flags"><span class="flag flag-open" title="Containerlab and FRRouting.">Open source</span><span class="flag flag-prep">Setup info</span></span></div>
 <h3>Digital Twinning at Scale</h3>
 <p class="ws-when">Tue 17 Nov · 14:00–18:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">Emulate a 200+ router data centre fabric with Containerlab and FRRouting, covering numbering schemes, scripts versus templates, and scaling on limited compute.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration "></i><i class="g-intent touch"></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure core"></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="infrastructure">Infrastructure</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation "></i><i class="g-observability "></i><i class="g-orchestration "></i><i class="g-intent touch"></i><i class="g-collector "></i><i class="g-executor "></i><i class="g-infrastructure core"></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="infrastructure" aria-pressed="false" title="Filter by this NAF block">Infrastructure</button><span class="plus">+2</span></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="twin">Digital twin</button><button type="button" class="tag" data-topic="fabric">EVPN &amp; fabrics</button><button type="button" class="tag" data-topic="clab">Containerlab</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>A FAQ went out by email.</li></ul><h4>Good to know</h4><ul><li>Expect it to be interactive and a bit messy: scripts are built live with Claude instead of showing finished work.</li></ul><h4>People</h4><p>Russ White, Derick Winkworth</p><h4>Level</h4><p>Net Advanced · Linux Intermediate · Prog Intermediate</p><h4>NAF Framework</h4><p>Emulating a 200+ router fabric with Containerlab and FRR, with scripts generated live. Also touches Intent, Practices.</p><h4>Open source</h4><p>Containerlab and FRRouting.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CG1HCCZQB" target="_blank" rel="noopener">#ac6-ws-d3</a></p></div></details>
 </article>
-<article class="ws" id="d4" data-block="D" data-mat="0" data-oss="mostly" data-core="intent collector observability orchestration executor presentation" data-touch="" data-topics="telemetry closedloop clab ansible" data-search="d4 the self driving network: from drift detection to autonomous remediation with streaming telemetry hpe a closed loop that detects and automatically fixes config and state drift on a containerlab network (juniper crpd, csrx, alpine), built from naf framework pieces: netbox/yaml/excel intent, telegraf/gnmi, influxdb/kapacitor, a fastapi orchestrator, pyez/ansible, and grafana/ntfy with approve/reject. david roy mark harman jessica garrison telemetry closed loop containerlab ansible">
+<article class="ws" id="d4" data-block="D" data-mat="0" data-oss="mostly" data-core="intent collector observability orchestration executor presentation" data-touch="" data-topics="telemetry closedloop clab ansible" data-search="d4 the self driving network: from drift detection to autonomous remediation with streaming telemetry hpe a closed loop that detects and automatically fixes config and state drift on a containerlab network (juniper crpd, csrx, alpine), built from naf framework pieces: netbox/yaml/excel intent, telegraf/gnmi, influxdb/kapacitor, a fastapi orchestrator, pyez/ansible, and grafana/ntfy with approve/reject. david roy mark harman jessica garrison telemetry closed loop containerlab ansible intent collector observability orchestration executor presentation">
 <div class="ws-top"><a class="ws-code b-D" href="#d4">D4</a><span class="ws-org">HPE</span><span class="flags"><span class="flag flag-mostly" title="Open-source stack (Telegraf, InfluxDB, Grafana, NetBox, Ansible), running on Juniper cRPD/cSRX.">Mostly open</span><span class="flag flag-prep">Setup info</span><span class="flag flag-sold">Sold out</span></span></div>
 <h3>The Self Driving Network: From Drift Detection to Autonomous Remediation with Streaming Telemetry</h3>
 <p class="ws-when">Tue 17 Nov · 14:00–18:00 <span class="room room-tbd">Room not posted</span></p>
 <p class="ws-sum">A closed loop that detects and automatically fixes config and state drift on a Containerlab network (Juniper cRPD, cSRX, Alpine), built from NAF framework pieces: NetBox/YAML/Excel intent, Telegraf/gNMI, InfluxDB/Kapacitor, a FastAPI orchestrator, PyEZ/Ansible, and Grafana/ntfy with approve/reject.</p>
-<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation core"></i><i class="g-observability core"></i><i class="g-orchestration core"></i><i class="g-intent core"></i><i class="g-collector core"></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent">Intent</button> · <button type="button" data-naf="collector">Collector</button> · <button type="button" data-naf="observability">Observability</button> · <button type="button" data-naf="orchestration">Orchestration</button> · <button type="button" data-naf="executor">Executor</button> · <button type="button" data-naf="presentation">Presentation</button></span><span class="ws-rel"></span></div>
+<div class="ws-naf"><span class="glyph" aria-hidden="true"><i class="g-presentation core"></i><i class="g-observability core"></i><i class="g-orchestration core"></i><i class="g-intent core"></i><i class="g-collector core"></i><i class="g-executor core"></i><i class="g-infrastructure "></i></span><span class="ws-naf-t"><span class="lbl">NAF</span><button type="button" data-naf="intent" aria-pressed="false" title="Filter by this NAF block">Intent</button> · <button type="button" data-naf="collector" aria-pressed="false" title="Filter by this NAF block">Collector</button> · <button type="button" data-naf="observability" aria-pressed="false" title="Filter by this NAF block">Observability</button> · <button type="button" data-naf="orchestration" aria-pressed="false" title="Filter by this NAF block">Orchestration</button> · <button type="button" data-naf="executor" aria-pressed="false" title="Filter by this NAF block">Executor</button> · <button type="button" data-naf="presentation" aria-pressed="false" title="Filter by this NAF block">Presentation</button></span><span class="ws-rel"></span></div>
 <div class="ws-tags"><button type="button" class="tag" data-topic="telemetry">Telemetry</button><button type="button" class="tag" data-topic="closedloop">Closed loop</button><button type="button" class="tag" data-topic="clab">Containerlab</button><button type="button" class="tag" data-topic="ansible">Ansible</button></div>
 <details><summary>Setup, notes &amp; people</summary><div class="ws-more"><h4>Before you start</h4><ul><li>Look for the email with your VM&#x27;s SSH Host entry and private key.</li><li>Install VS Code and the Remote - SSH extension.</li><li>Test from your laptop: ssh naf-ac6-ws-vm</li></ul><h4>Good to know</h4><ul><li>Use cases: BGP peer-as drift, logging drift, a prefix-limit leak, and swap-a-block.</li></ul><h4>People</h4><p>David Roy, Mark Harman, Jessica Garrison</p><h4>Level</h4><p>Net Intermediate · Linux Intermediate · Prog Intermediate</p><h4>NAF Framework</h4><p>The full NAF loop: NetBox/YAML intent, Telegraf/gNMI collection, InfluxDB/Kapacitor, the NAF orchestrator, PyEZ/Ansible, and Grafana/ntfy.</p><h4>Mostly open</h4><p>Open-source stack (Telegraf, InfluxDB, Grafana, NetBox, Ansible), running on Juniper cRPD/cSRX.</p><h4>Slack</h4><p><a href="https://app.slack.com/client/T05GX70T5FY/C0CFELQCWVB" target="_blank" rel="noopener">#ac6-ws-d4</a></p></div></details>
 </article></div></section>
-  <div class="empty" id="empty">Nothing matches those filters. <button type="button" class="tag" id="clear2">Clear filters</button></div>
+  <div class="empty" id="empty"><p>Nothing matches all of those filters together.</p><div class="relax" id="relax"></div></div>
   <ul class="info"><li>Times are local (MST, UTC-7).</li><li>Workshop wifi: use the Autocon6 SSID, which is set aside for workshops.</li><li>Many workshops offer a recording or remote option because of flight cancellations. Check the workshop&#x27;s Slack channel.</li><li>&quot;Open source&quot; means the whole stack is free and open. &quot;Mostly open&quot; means open-source tooling with some vendor kit or SaaS. &quot;Vendor product&quot; means it&#x27;s mainly a tutorial for a commercial product. The Free &amp; open source toggle hides that last group.</li><li>The NAF Framework mapping is a best guess from each workshop&#x27;s description. It isn&#x27;t an official NAF classification.</li></ul>
   <footer class="site">
     Not an official NAF page. Built from the <a href="https://networkautomation.forum/autocon6">AutoCon 6 agenda</a> and what the presenters posted in the #ac6-ws channels on the NAF Slack (the channel links only work if you're in that workspace). Refreshed a few times a day through Wednesday.
     Something wrong or missing? <a href="https://github.com/steinzi/autocon6-workshops/issues">Open an issue</a>.
   </footer>
 </main>
+<div class="note" id="note" role="status" hidden><span></span><button type="button" id="undo">Undo</button></div>
 
 <script>
 (function(){
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-  const cards=$$('.ws'), sections=$$('.blk'), tabs=$$('.tab'), chips=$$('.chip');
-  const q=$('#q'), mat=$('#mat'), oss=$('#oss'), count=$('#count'), clear=$('#clear'), empty=$('#empty');
-  const fbtn=$('#fbtn'), panel=$('#panel'), fcount=$('#fcount');
-  const state={block:'',topics:new Set(),q:'',mat:true,oss:false,naf:''};
+  const cards=$$('.ws'), sections=$$('.blk'), tabs=$$('.tab'), chips=$$('.chip'), N=cards.length;
+  const q=$('#q'), mat=$('#mat'), oss=$('#oss'), count=$('#count'), clear=$('#clear'), showall=$('#showall');
+  const empty=$('#empty'), relaxBox=$('#relax'), note=$('#note'), undo=$('#undo');
+  const fbtn=$('#fbtn'), panel=$('#panel'), fcount=$('#fcount'), bar=$('#bar'), jump=$('#jump');
   const dia=$('#nafDia'), nbs=$$('.nb'), panes=$$('.np'), nafchip=$('#nafchip');
   const NAME={}; nbs.forEach(b=>NAME[b.dataset.naf]=b.querySelector('b').textContent);
+  const TOPICS=new Set(chips.map(c=>c.dataset.topic));
+  const state={block:'',topics:new Set(),q:'',mat:true,oss:false,naf:''};
+  const has=(list,x)=>(' '+list+' ').includes(' '+x+' ');
+  const relTo=(c,id)=>has(c.dataset.core,id)||has(c.dataset.touch,id);
+  const topOf=el=>el.getBoundingClientRect().top+scrollY;
+  const pl=(n,w)=>n+' '+w+(n===1?'':'s');
 
   // jump strip
-  const jump=$('#jump');
   cards.forEach(c=>{const a=document.createElement('a');a.href='#'+c.id;a.textContent=c.id.toUpperCase();
-    a.className='b-'+c.dataset.block+(c.dataset.mat==='1'?' m':'');a.dataset.for=c.id;a.title=c.querySelector('h3').textContent;jump.appendChild(a);});
+    a.className='b-'+c.dataset.block+(c.dataset.mat==='1'?' m':'');a.dataset.for=c.id;a.dataset.t=c.querySelector('h3').textContent;jump.appendChild(a);});
+
+  // Every filter is AND-ed with the others; topics are OR-ed among themselves.
+  // fails(c) lists the active filters that hide card c, so [] means visible.
+  function fails(c){
+    const f=[];
+    if(state.block&&c.dataset.block!==state.block)f.push('block');
+    if(state.topics.size&&!c.dataset.topics.split(' ').some(t=>state.topics.has(t)))f.push('topics');
+    const w=state.q.toLowerCase().split(/\s+/).filter(Boolean);
+    if(w.length&&!w.every(x=>c.dataset.search.includes(x)))f.push('q');
+    if(state.mat&&c.dataset.mat!=='1')f.push('mat');
+    if(state.oss&&c.dataset.oss==='product')f.push('oss');
+    if(state.naf&&!relTo(c,state.naf))f.push('naf');
+    return f;
+  }
+  const without=(f,k)=>f.length===0||(f.length===1&&f[0]===k); // visible once filter k is dropped
+  const onlyBy=(f,k)=>f.length===1&&f[0]===k;                    // hidden by filter k and nothing else
+  const DROP={block:()=>state.block='',topics:()=>state.topics.clear(),q:()=>state.q='',mat:()=>state.mat=false,oss:()=>state.oss=false,naf:()=>state.naf=''};
+  const DID={block:'showing every time slot',topics:'cleared the topic filter',q:'cleared the search',mat:'included workshops without material',oss:'included vendor product workshops',naf:'cleared the NAF filter'};
+  const RELAX={mat:n=>'Show '+n+' without material',oss:n=>'Show '+pl(n,'vendor workshop'),block:n=>'Show '+n+' in other time slots',
+    topics:n=>'Show '+n+' with other topics',q:n=>'Show '+n+' without the search',naf:n=>'Show '+n+' outside '+NAME[state.naf]};
+  const changed=()=>!!(state.block||state.topics.size||state.q||!state.mat||state.oss||state.naf);
+  const snap=()=>({...state,topics:new Set(state.topics)});
 
   function readURL(){
     const p=new URLSearchParams(location.search);
     state.block=(p.get('slot')||'').toUpperCase().replace(/[^A-D]/g,'').slice(0,1);
-    state.topics=new Set((p.get('topic')||'').split(',').filter(Boolean));
-    state.q=p.get('q')||''; state.mat=p.get('material')!=='0'; state.oss=p.get('oss')==='1'; const n=p.get('naf')||''; state.naf=NAME[n]?n:'';
+    state.topics=new Set((p.get('topic')||'').split(',').filter(t=>TOPICS.has(t)));
+    state.q=(p.get('q')||'').trim(); state.mat=p.get('material')!=='0'; state.oss=p.get('oss')==='1';
+    const n=p.get('naf')||''; state.naf=NAME[n]?n:'';
   }
   function writeURL(){
     const p=new URLSearchParams();
@@ -562,85 +610,134 @@ footer.site a{color:var(--ink)}
     const s=p.toString().replace(/%2C/g,',');
     history.replaceState(null,'',(s?'?'+s:location.pathname)+location.hash);
   }
+
+  let F=new Map(), nt, prev=null;
+  const cnt=pred=>cards.filter(c=>pred(F.get(c),c)).length;
   function apply(){
-    const words=state.q.toLowerCase().split(/\s+/).filter(Boolean);
+    note.hidden=true; prev=null; // any new filter change makes an earlier undo stale
+    F=new Map(cards.map(c=>[c,fails(c)]));
     let shown=0;
     cards.forEach(c=>{
-      const t=c.dataset.topics.split(' ');
-      const ok=(!state.block||c.dataset.block===state.block)
-        &&(!state.topics.size||t.some(x=>state.topics.has(x)))
-        &&(!state.mat||c.dataset.mat==='1')
-        &&(!state.oss||c.dataset.oss!=='product')
-        &&(!state.naf||(' '+c.dataset.core+' '+c.dataset.touch+' ').includes(' '+state.naf+' '))
-        &&words.every(w=>c.dataset.search.includes(w));
-      c.hidden=!ok; if(ok)shown++;
+      const ok=!F.get(c).length; c.hidden=!ok; if(ok)shown++;
       c.querySelectorAll('.tag').forEach(g=>g.classList.toggle('hit',state.topics.has(g.dataset.topic)));
-      const rc=!!state.naf&&c.dataset.core.split(' ').includes(state.naf), rt=!rc&&!!state.naf&&c.dataset.touch.split(' ').includes(state.naf);
+      const rc=!!state.naf&&has(c.dataset.core,state.naf), rt=!rc&&!!state.naf&&has(c.dataset.touch,state.naf);
       c.classList.toggle('rel-core',rc); c.classList.toggle('rel-touch',rt);
       c.querySelector('.ws-rel').textContent=rc?'Core: '+NAME[state.naf]:rt?'Touches '+NAME[state.naf]:'';
-      c.querySelectorAll('.ws-naf button').forEach(b=>b.classList.toggle('hit',b.dataset.naf===state.naf));
-      const j=jump.querySelector('[data-for="'+c.id+'"]'); if(j)j.classList.toggle('off',!ok);
+      c.querySelectorAll('.ws-naf button').forEach(b=>{const on=b.dataset.naf===state.naf;b.classList.toggle('hit',on);b.setAttribute('aria-pressed',String(on));});
+      const j=jump.querySelector('[data-for="'+c.id+'"]');
+      if(j){j.classList.toggle('off',!ok);j.title=j.dataset.t+(ok?'':' (hidden by your filters, click to show it)');}
     });
     sections.forEach(s=>s.hidden=!s.querySelector('.ws:not([hidden])'));
-    tabs.forEach(b=>{const on=b.dataset.block===state.block;b.setAttribute('aria-pressed',String(on));
+
+    // facet counts: what you would see if you picked this option, given every other filter
+    tabs.forEach(b=>{const k=b.dataset.block, on=k===state.block, n=cnt((f,c)=>without(f,'block')&&(!k||c.dataset.block===k));
+      b.setAttribute('aria-pressed',String(on)); b.querySelector('.tn').textContent=n; b.classList.toggle('zero',!n&&!on);
+      b.title=n?'':'Nothing here with your other filters';
       if(on){const t=b.parentElement;t.scrollLeft=Math.max(0,b.offsetLeft-t.clientWidth/2+b.offsetWidth/2);}});
-    chips.forEach(b=>b.setAttribute('aria-pressed',String(state.topics.has(b.dataset.topic))));
-    q.value=state.q; mat.checked=state.mat; oss.checked=state.oss;
+    chips.forEach(b=>{const t=b.dataset.topic, on=state.topics.has(t), n=cnt((f,c)=>without(f,'topics')&&has(c.dataset.topics,t));
+      b.setAttribute('aria-pressed',String(on)); b.querySelector('span').textContent=n; b.classList.toggle('zero',!n&&!on);});
+    if(q.value.trim()!==state.q)q.value=state.q;
+    mat.checked=state.mat; oss.checked=state.oss;
+
+    // NAF explorer
     nbs.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.naf===state.naf)));
     dia.classList.toggle('has-sel',!!state.naf);
     panes.forEach(p=>p.hidden=p.dataset.panel!==state.naf);
     nafchip.hidden=!state.naf; nafchip.querySelector('span').textContent=NAME[state.naf]||'';
-    if(state.naf){const rel=cards.filter(c=>(' '+c.dataset.core+' '+c.dataset.touch+' ').includes(' '+state.naf+' ')), vis=rel.filter(c=>!c.hidden).length;
-      const pn=$('.np[data-panel="'+state.naf+'"]'), go=pn.querySelector('[data-go]'), all=pn.querySelector('[data-showrel]');
-      go.textContent=vis?('Jump to '+(vis===rel.length?'the ':'')+vis+' card'+(vis===1?'':'s')+' ↓'):'No cards match your other filters';
-      go.disabled=!vis; all.hidden=vis===rel.length; all.textContent='Show all '+rel.length;}
-    const nf=state.topics.size+(state.q?1:0)+(state.oss?1:0)+(state.naf?1:0);
-    fcount.textContent=nf; fbtn.classList.toggle('on',nf>0);
-    const any=nf>0||state.block||!state.mat;
-    clear.hidden=!any;
-    count.textContent=shown===cards.length?'Showing all '+cards.length+' workshops':(state.mat?shown+' with material':shown+' of '+cards.length)+(state.oss&&shown<cards.length?' · open source':'')+(state.naf&&shown<cards.length?' · '+NAME[state.naf]:'');
-    const sa=$('#showall'); sa.hidden=!state.mat; sa.textContent='Show all '+cards.length;
-    empty.classList.toggle('show',shown===0);
+    if(state.naf){
+      const pn=$('.np[data-panel="'+state.naf+'"]'), rel=cards.filter(c=>relTo(c,state.naf)), vis=rel.filter(c=>!c.hidden).length;
+      pn.querySelectorAll('.nr').forEach(r=>{const c=document.getElementById(r.dataset.ws), off=!!c&&c.hidden;
+        r.classList.toggle('off',off); r.title=off?'Hidden by your other filters. Click to show it.':'';});
+      const go=pn.querySelector('[data-go]'), all=pn.querySelector('[data-showrel]');
+      go.textContent=!vis?'No cards match your other filters':vis===rel.length?'Jump to the '+(vis===1?'card':vis+' cards')+' ↓':'Jump to '+vis+' of '+rel.length+' cards ↓';
+      go.disabled=!vis; all.hidden=vis===rel.length; all.textContent='Show all '+rel.length;
+    }
+
+    // status row
+    const inPanel=state.topics.size+(state.q?1:0)+(state.mat?1:0)+(state.oss?1:0);
+    fcount.textContent=inPanel; fbtn.classList.toggle('on',inPanel>0);
+    clear.hidden=!changed();
+    count.innerHTML=(shown===N?'All '+N:shown+' of '+N)+'<span class="wk"> workshops</span>';
+    const more=cnt(f=>onlyBy(f,'mat'));
+    showall.hidden=!shown||!more; showall.textContent='+'+more+' without material';
+
+    // empty state: offer to drop whichever single filter would bring results back
+    empty.classList.toggle('show',!shown);
+    relaxBox.textContent='';
+    if(!shown){
+      ['mat','oss','block','topics','q','naf'].forEach(k=>{const n=cnt(f=>onlyBy(f,k));if(!n)return;
+        const b=document.createElement('button');b.type='button';b.dataset.relax=k;b.textContent=RELAX[k](n);relaxBox.appendChild(b);});
+      const r=document.createElement('button');r.type='button';r.dataset.reset='';r.textContent='Reset filters';relaxBox.appendChild(r);
+    }
     writeURL();
   }
+
+  // small toast when we change filters for the user, with undo
+  function notify(msg,before){note.firstChild.textContent=msg;prev=before;undo.hidden=!before;note.hidden=false;clearTimeout(nt);nt=setTimeout(()=>note.hidden=true,6000);}
+  undo.addEventListener('click',()=>{if(!prev)return;Object.assign(state,prev,{topics:new Set(prev.topics)});prev=null;note.hidden=true;apply();toResults();});
+
   function reset(){state.block='';state.topics.clear();state.q='';state.mat=true;state.oss=false;state.naf='';apply();}
-  $('#showall').addEventListener('click',()=>{state.mat=false;apply();});
+  // If the user has scrolled down into the results, bring the top of the results back under the bar.
+  function toResults(){const y=topOf(jump)-bar.offsetHeight-8;if(scrollY>y+2)scrollTo({top:y,behavior:'smooth'});}
+  // For clicks on a card: keep that card where it was on screen while the list re-flows around it.
+  function anchored(el,fn){const t0=el.getBoundingClientRect().top;fn();
+    if(el.offsetParent){const d=el.getBoundingClientRect().top-t0;if(Math.abs(d)>1)scrollTo(0,scrollY+d);}else toResults();}
+  // Show one card: drop only the filters that hide it, and say so.
+  function reveal(c){
+    const f=fails(c); if(!f.length){note.hidden=true;return;}
+    const before=snap(); f.forEach(k=>DROP[k]()); apply();
+    notify('Showing '+c.id.toUpperCase()+': '+f.map(k=>DID[k]).join(' and ')+'.',before);
+  }
+  function goTo(c,smooth=true){
+    history.replaceState(null,'',location.pathname+location.search+'#'+c.id);
+    scrollTo({top:topOf(c)-bar.offsetHeight-12,behavior:smooth?'smooth':'auto'});
+    c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
+  }
+  const toggleTopic=t=>{state.topics.has(t)?state.topics.delete(t):state.topics.add(t);};
 
-  tabs.forEach(b=>b.addEventListener('click',()=>{state.block=b.dataset.block;apply();
-    const s=state.block&&document.querySelector('.blk[data-block="'+state.block+'"]');
-    if(s){const y=s.getBoundingClientRect().top+scrollY-$('#bar').offsetHeight-8;if(scrollY>y||y-scrollY>innerHeight*.6)scrollTo({top:y,behavior:'smooth'});}}));
-  chips.forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.topic;state.topics.has(t)?state.topics.delete(t):state.topics.add(t);apply();}));
-  document.addEventListener('click',ev=>{const g=ev.target.closest('.tag[data-topic]');if(!g)return;
-    const t=g.dataset.topic;state.topics.has(t)?state.topics.delete(t):state.topics.add(t);apply();});
-  let tm;q.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{state.q=q.value.trim();apply();},120);});
-  mat.addEventListener('change',()=>{state.mat=mat.checked;apply();});
-  oss.addEventListener('change',()=>{state.oss=oss.checked;apply();});
+  // control bar
+  tabs.forEach(b=>b.addEventListener('click',()=>{state.block=b.dataset.block;apply();toResults();}));
+  chips.forEach(b=>b.addEventListener('click',()=>{toggleTopic(b.dataset.topic);apply();toResults();}));
+  let tm;q.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{const v=q.value.trim();if(v===state.q)return;state.q=v;apply();toResults();},150);});
+  mat.addEventListener('change',()=>{state.mat=mat.checked;apply();toResults();});
+  oss.addEventListener('change',()=>{state.oss=oss.checked;apply();toResults();});
+  showall.addEventListener('click',()=>{state.mat=false;apply();toResults();});
+  clear.addEventListener('click',()=>{reset();toResults();});
+  fbtn.addEventListener('click',()=>{const o=panel.classList.toggle('open');fbtn.setAttribute('aria-expanded',String(o));if(o)q.focus({preventScroll:true});});
+  document.addEventListener('keydown',ev=>{if(ev.key==='/'&&!/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){ev.preventDefault();panel.classList.add('open');fbtn.setAttribute('aria-expanded','true');q.focus();}});
 
-  // NAF framework explorer
-  const topOf=el=>el.getBoundingClientRect().top+scrollY;
   document.addEventListener('click',ev=>{
-    const nb=ev.target.closest('[data-naf]');
+    const t=ev.target;
+    // topic tag on a card
+    const g=t.closest('.ws .tag[data-topic]');
+    if(g){anchored(g,()=>{toggleTopic(g.dataset.topic);apply();});return;}
+    // NAF block: on a card it filters in place, in the diagram/coverage list it toggles and shows the panel
+    const nb=t.closest('[data-naf]');
     if(nb){
-      const id=nb.dataset.naf, fromCard=!!nb.closest('.ws');
-      state.naf=(state.naf===id&&!fromCard)?'':id; apply();
-      if(fromCard){scrollTo({top:topOf($('#framework'))-8,behavior:'smooth'});}
-      else if(state.naf&&nb.classList.contains('nb')){const pn=$('#nafPanel'),r=pn.getBoundingClientRect();
-        if(r.top>innerHeight-140)scrollTo({top:topOf(pn)-16,behavior:'smooth'});}
+      const id=nb.dataset.naf;
+      if(nb.closest('.ws')){anchored(nb,()=>{state.naf=state.naf===id?'':id;apply();});return;}
+      state.naf=state.naf===id?'':id; apply();
+      if(state.naf){const pn=$('#nafPanel'),r=pn.getBoundingClientRect();if(r.top>innerHeight-140)scrollTo({top:topOf(pn)-16,behavior:'smooth'});}
       return;
     }
-    if(ev.target.closest('[data-naf-clear]')){state.naf='';apply();return;}
-    if(ev.target.closest('[data-showrel]')){state.block='';state.topics.clear();state.q='';state.mat=false;state.oss=false;apply();}
-    if(ev.target.closest('[data-go],[data-showrel]')){const f=$('.ws:not([hidden])')||$('#empty');scrollTo({top:topOf(f)-$('#bar').offsetHeight-12,behavior:'smooth'});return;}
-    const r=ev.target.closest('.nr,.nr-jump');
-    if(r){
-      ev.preventDefault();
-      const c=document.getElementById(r.dataset.ws); if(!c)return;
-      if(c.hidden){state.block='';state.topics.clear();state.q='';state.mat=false;state.oss=false;apply();}
-      history.replaceState(null,'',location.pathname+location.search+'#'+c.id);
-      scrollTo({top:topOf(c)-$('#bar').offsetHeight-12,behavior:'smooth'});
-      c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
+    const nc=t.closest('[data-naf-clear]');
+    if(nc){state.naf='';apply();if(nc.id==='nafchip')toResults();return;}
+    if(t.closest('[data-showrel]')){
+      const rel=cards.filter(c=>relTo(c,state.naf)), drop=new Set(rel.flatMap(fails));
+      if(drop.size){const before=snap();drop.forEach(k=>DROP[k]());apply();
+        notify('Showing all '+rel.length+' '+NAME[state.naf]+' workshops: '+[...drop].map(k=>DID[k]).join(' and ')+'.',before);}
     }
+    if(t.closest('[data-go],[data-showrel]')){const f=$('.ws:not([hidden])')||empty;scrollTo({top:topOf(f)-bar.offsetHeight-12,behavior:'smooth'});return;}
+    const rx=t.closest('[data-relax]');
+    if(rx){DROP[rx.dataset.relax]();apply();toResults();return;}
+    if(t.closest('[data-reset]')){reset();toResults();return;}
+    // any in-page link to a workshop (jump strip, NAF rows, card codes): reveal it if filtered out, then scroll to it
+    const a=t.closest('a[href^="#"]');
+    if(a){const c=document.getElementById(a.getAttribute('href').slice(1));
+      if(c&&c.classList.contains('ws')){ev.preventDefault();reveal(c);goTo(c);}}
   });
+  addEventListener('hashchange',()=>{const c=document.getElementById(location.hash.slice(1));if(c&&c.classList.contains('ws')){reveal(c);goTo(c);}});
+
   const hl=(core,touch)=>{nbs.forEach(b=>{const k=b.dataset.naf;b.classList.toggle('hl-core',core.includes(k));b.classList.toggle('hl-touch',!core.includes(k)&&touch.includes(k));});
     dia.classList.toggle('hovering',core.length+touch.length>0);};
   const onRow=ev=>{const r=ev.target.closest('.nr');r?hl(r.dataset.core.split(' ').filter(Boolean),r.dataset.touch.split(' ').filter(Boolean)):hl([],[]);};
@@ -648,9 +745,6 @@ footer.site a{color:var(--ink)}
   $('#nafPanel').addEventListener('focusin',onRow);
   $('#nafPanel').addEventListener('pointerleave',()=>hl([],[]));
   $('#nafPanel').addEventListener('focusout',ev=>{if(!$('#nafPanel').contains(ev.relatedTarget))hl([],[]);});
-  clear.addEventListener('click',reset); $('#clear2').addEventListener('click',reset);
-  fbtn.addEventListener('click',()=>{const o=panel.classList.toggle('open');fbtn.setAttribute('aria-expanded',String(o));if(o)q.focus({preventScroll:true});});
-  document.addEventListener('keydown',ev=>{if(ev.key==='/'&&document.activeElement!==q){ev.preventDefault();panel.classList.add('open');q.focus();}});
 
   // live slot
   function markLive(){
@@ -672,7 +766,9 @@ footer.site a{color:var(--ink)}
   tick(); setInterval(tick,1000);
 
   readURL(); apply();
-  if(location.hash){const t=document.querySelector(location.hash);if(t)setTimeout(()=>t.scrollIntoView(),50);}
+  // shared link to one workshop (#c3): make sure it is visible even if the default filters would hide it
+  if(location.hash){const el=document.getElementById(location.hash.slice(1));
+    if(el){if(el.classList.contains('ws'))reveal(el);setTimeout(()=>el.classList.contains('ws')?goTo(el,false):el.scrollIntoView(),60);}}
 })();
 </script>
 </body>

@@ -141,7 +141,8 @@ def card(w, blocks, topic_labels):
     has_links = bool(w.get("links"))
     empty = not (w.get("links") or w.get("prep") or w.get("notes"))
     search = " ".join([w["code"], w["title"], w["org"], w["tldr"], " ".join(w["proctors"]),
-                       " ".join(topic_labels[t] for t in w.get("topics", []))]).lower()
+                       " ".join(topic_labels[t] for t in w.get("topics", [])),
+                       " ".join(NAF_NAMES.get(x, x) for x in w.get("naf_core", []))]).lower()
 
     flags = []
     op = w.get("openness", "product")
@@ -171,7 +172,7 @@ def card(w, blocks, topic_labels):
             f'<a href="{e(l["url"])}" target="_blank" rel="noopener">{e(l["label"])}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a>'
             for l in w["links"]) + "</div>")
     core_names = " · ".join(
-        f'<button type="button" data-naf="{b}">{e(NAF_NAMES.get(b, b))}</button>' for b in w.get("naf_core", []))
+        f'<button type="button" data-naf="{b}" aria-pressed="false" title="Filter by this NAF block">{e(NAF_NAMES.get(b, b))}</button>' for b in w.get("naf_core", []))
     touch_n = len(w.get("naf_touch", []))
     out.append(f'<div class="ws-naf">{glyph(w)}<span class="ws-naf-t"><span class="lbl">NAF</span>{core_names}'
                + (f'<span class="plus">+{touch_n}</span>' if touch_n else "") + '</span><span class="ws-rel"></span></div>')
@@ -216,10 +217,10 @@ def main():
     counts = {t["id"]: sum(1 for w in ws if t["id"] in w.get("topics", [])) for t in topics}
     n_mat = sum(1 for w in ws if w.get("links"))
 
-    tabs = ['<button type="button" class="tab" data-block="" aria-pressed="true">All</button>']
+    tabs = ['<button type="button" class="tab" data-block="" aria-pressed="true">All<span class="tn"></span></button>']
     for code, short, _, start, end in BLOCKS:
         tabs.append(f'<button type="button" class="tab" data-block="{code}" data-start="{start}" data-end="{end}" aria-pressed="false">'
-                    f'<i class="dot b-{code}"></i>{e(short)}<span class="live">Live</span></button>')
+                    f'<i class="dot b-{code}"></i>{e(short)}<span class="tn"></span><span class="live">Live</span></button>')
 
     chips = "".join(
         f'<button type="button" class="chip" data-topic="{t["id"]}" aria-pressed="false">{e(t["label"])}<span>{counts[t["id"]]}</span></button>'
@@ -351,6 +352,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .tab[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
 .tab .live{display:none;font:600 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:3px 5px;border-radius:4px;background:var(--cactus);color:#fff}
 .tab.is-live .live{display:inline-block}
+.tab .tn{font:600 11px/1 var(--mono);opacity:.55}
+.tab .tn:empty{display:none}
+.tab.zero{opacity:.45}
 .dot{display:inline-block;width:9px;height:9px;border-radius:3px;flex:0 0 auto}
 .b-A{--k:var(--a)} .b-B{--k:var(--b)} .b-C{--k:var(--c)} .b-D{--k:var(--d)}
 .dot{background:var(--k)}
@@ -372,17 +376,21 @@ button{font:inherit;color:inherit;cursor:pointer}
 .chip span{font:600 11px/1 var(--mono);color:var(--sub)}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
 .chip[aria-pressed="true"] span{color:inherit;opacity:.7}
+.chip.zero{opacity:.45}
 .status{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:var(--sub)}
 .status button{border:0;background:none;padding:0;text-decoration:underline;text-underline-offset:2px;font-size:13px;color:var(--sub)}
 .status button[hidden]{display:none}
 #showall{color:var(--ink)!important;font-weight:600}
+.status button,#count{white-space:nowrap}
 .wide{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .sr{display:inline-flex;align-items:center;gap:12px}
 .fbtn{padding:6px 11px;font-size:13.5px;color:var(--ink)}
 @media (max-width:640px){
   .tabs{flex:1 1 100%}
   .tab{padding:7px 9px;font-size:13.5px;gap:6px}
-  .tab .live,.tab.is-live .live{display:none}
+  .tab .live,.tab.is-live .live,.tab .tn{display:none}
+  .status .wk{display:none}
+  .sr{gap:10px}
   .tab.is-live .dot{box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--cactus)}
   .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:16px}
   .chips::-webkit-scrollbar{display:none}
@@ -396,7 +404,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .jump a{font:600 12px/1 var(--mono);text-decoration:none;padding:6px 7px;border-radius:6px;background:var(--panel);border:1px solid var(--hair);color:var(--sub);position:relative}
 .jump a.m{color:var(--ink);border-color:color-mix(in srgb,var(--k) 55%,var(--hair))}
 .jump a.m:after{content:"";position:absolute;top:-3px;right:-3px;width:7px;height:7px;border-radius:50%;background:var(--cactus);border:2px solid var(--bg)}
-.jump a.off{opacity:.3;pointer-events:none}
+.jump a.off{opacity:.35}
+.jump a.off:hover,.jump a.off:focus-visible{opacity:.8}
 
 /* sections */
 .blk{margin-top:28px}
@@ -454,6 +463,14 @@ details[open] summary:before{transform:rotate(45deg)}
 
 .empty{display:none;margin:40px 0;padding:28px;border:1px dashed var(--hair);border-radius:14px;text-align:center;color:var(--sub)}
 .empty.show{display:block}
+.empty p{margin:0}
+.relax{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
+.relax button{border:1px solid var(--hair);background:var(--panel);color:var(--ink);font-size:13.5px;font-weight:600;padding:7px 12px;border-radius:999px}
+.relax button:hover{border-color:var(--ink)}
+.relax button[data-reset]{background:none;color:var(--sub);font-weight:500}
+.note{position:fixed;z-index:30;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);display:flex;align-items:center;gap:12px;padding:9px 14px;border-radius:10px;background:var(--ink);color:var(--panel);font-size:13.5px;line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.note[hidden]{display:none}
+.note button{flex:0 0 auto;border:0;background:none;padding:0;color:inherit;font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .info{margin:28px 0 0;padding:14px 16px 14px 34px;background:var(--panel);border:1px solid var(--hair);border-radius:12px;font-size:14px;color:var(--sub)}
 .info li+li{margin-top:4px}
 /* NAF explorer */
@@ -555,6 +572,8 @@ details[open] summary:before{transform:rotate(45deg)}
 .nr-main b{font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nr-main small{font-size:12.5px;color:var(--sub);line-height:1.4}
 .nr-side{display:flex;align-items:center;gap:6px;font:500 11.5px/1.4 var(--mono);color:var(--sub);white-space:nowrap}
+.nr.off{border-style:dashed;opacity:.6}
+.nr.off .nr-side:after{content:"hidden";font-style:italic}
 .mk-mat{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cactus)}
 .nr-jump{color:var(--ink);font-weight:700}
 .ws-naf{display:flex;align-items:center;gap:8px;margin:0 0 10px;flex-wrap:wrap}
@@ -567,7 +586,8 @@ details[open] summary:before{transform:rotate(45deg)}
 .ws-naf-t{display:flex;align-items:center;flex-wrap:wrap;gap:2px 5px;font-size:12.5px;color:var(--sub)}
 .ws-naf-t .lbl{font:600 10.5px/1 var(--mono);letter-spacing:.08em;margin-right:1px}
 .ws-naf-t button{border:0;background:none;padding:0;font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
-.ws-naf-t button:hover,.ws-naf-t button.hit{text-decoration-color:currentColor}
+.ws-naf-t button:hover{text-decoration-color:currentColor}
+.ws-naf-t button.hit{text-decoration:none;background:var(--ink);color:var(--panel);padding:1px 6px;border-radius:5px}
 .ws-naf-t .plus{font:500 11px/1 var(--mono);color:var(--sub);margin-left:2px}
 .ws-rel{margin-left:auto;font:600 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:4px 7px;border-radius:5px;background:var(--ink);color:var(--panel)}
 .ws-rel:empty{display:none}
@@ -621,41 +641,70 @@ footer.site a{color:var(--ink)}
       </div>
       <div class="chips" role="group" aria-label="Topics">{{CHIPS}}</div>
     </div>
-    <div class="status"><span><span id="count" aria-live="polite"></span> <button type="button" id="showall" hidden></button></span><span class="sr"><button type="button" id="nafchip" class="nafchip" data-naf-clear hidden>NAF: <span></span> ✕</button><button type="button" id="clear" hidden>Clear filters</button><button type="button" class="fbtn" id="fbtn" aria-expanded="false" aria-controls="panel">Filters <span class="n" id="fcount">0</span></button></span></div>
+    <div class="status"><span><span id="count" aria-live="polite"></span> <button type="button" id="showall" hidden></button></span><span class="sr"><button type="button" id="nafchip" class="nafchip" data-naf-clear hidden>NAF: <span></span> ✕</button><button type="button" id="clear" hidden>Reset<span class="wk"> filters</span></button><button type="button" class="fbtn" id="fbtn" aria-expanded="false" aria-controls="panel">Filters <span class="n" id="fcount">0</span></button></span></div>
   </div>
 </div>
 
 <main class="in">
   <nav class="jump" id="jump" aria-label="Jump to workshop"></nav>
 {{SECTIONS}}
-  <div class="empty" id="empty">Nothing matches those filters. <button type="button" class="tag" id="clear2">Clear filters</button></div>
+  <div class="empty" id="empty"><p>Nothing matches all of those filters together.</p><div class="relax" id="relax"></div></div>
   <ul class="info">{{NOTES}}</ul>
   <footer class="site">
     Not an official NAF page. Built from the <a href="{{OFFICIAL}}">AutoCon 6 agenda</a> and what the presenters posted in the #ac6-ws channels on the NAF Slack (the channel links only work if you're in that workspace). Refreshed a few times a day through Wednesday.
     Something wrong or missing? <a href="{{REPO}}/issues">Open an issue</a>.
   </footer>
 </main>
+<div class="note" id="note" role="status" hidden><span></span><button type="button" id="undo">Undo</button></div>
 
 <script>
 (function(){
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-  const cards=$$('.ws'), sections=$$('.blk'), tabs=$$('.tab'), chips=$$('.chip');
-  const q=$('#q'), mat=$('#mat'), oss=$('#oss'), count=$('#count'), clear=$('#clear'), empty=$('#empty');
-  const fbtn=$('#fbtn'), panel=$('#panel'), fcount=$('#fcount');
-  const state={block:'',topics:new Set(),q:'',mat:true,oss:false,naf:''};
+  const cards=$$('.ws'), sections=$$('.blk'), tabs=$$('.tab'), chips=$$('.chip'), N=cards.length;
+  const q=$('#q'), mat=$('#mat'), oss=$('#oss'), count=$('#count'), clear=$('#clear'), showall=$('#showall');
+  const empty=$('#empty'), relaxBox=$('#relax'), note=$('#note'), undo=$('#undo');
+  const fbtn=$('#fbtn'), panel=$('#panel'), fcount=$('#fcount'), bar=$('#bar'), jump=$('#jump');
   const dia=$('#nafDia'), nbs=$$('.nb'), panes=$$('.np'), nafchip=$('#nafchip');
   const NAME={}; nbs.forEach(b=>NAME[b.dataset.naf]=b.querySelector('b').textContent);
+  const TOPICS=new Set(chips.map(c=>c.dataset.topic));
+  const state={block:'',topics:new Set(),q:'',mat:true,oss:false,naf:''};
+  const has=(list,x)=>(' '+list+' ').includes(' '+x+' ');
+  const relTo=(c,id)=>has(c.dataset.core,id)||has(c.dataset.touch,id);
+  const topOf=el=>el.getBoundingClientRect().top+scrollY;
+  const pl=(n,w)=>n+' '+w+(n===1?'':'s');
 
   // jump strip
-  const jump=$('#jump');
   cards.forEach(c=>{const a=document.createElement('a');a.href='#'+c.id;a.textContent=c.id.toUpperCase();
-    a.className='b-'+c.dataset.block+(c.dataset.mat==='1'?' m':'');a.dataset.for=c.id;a.title=c.querySelector('h3').textContent;jump.appendChild(a);});
+    a.className='b-'+c.dataset.block+(c.dataset.mat==='1'?' m':'');a.dataset.for=c.id;a.dataset.t=c.querySelector('h3').textContent;jump.appendChild(a);});
+
+  // Every filter is AND-ed with the others; topics are OR-ed among themselves.
+  // fails(c) lists the active filters that hide card c, so [] means visible.
+  function fails(c){
+    const f=[];
+    if(state.block&&c.dataset.block!==state.block)f.push('block');
+    if(state.topics.size&&!c.dataset.topics.split(' ').some(t=>state.topics.has(t)))f.push('topics');
+    const w=state.q.toLowerCase().split(/\s+/).filter(Boolean);
+    if(w.length&&!w.every(x=>c.dataset.search.includes(x)))f.push('q');
+    if(state.mat&&c.dataset.mat!=='1')f.push('mat');
+    if(state.oss&&c.dataset.oss==='product')f.push('oss');
+    if(state.naf&&!relTo(c,state.naf))f.push('naf');
+    return f;
+  }
+  const without=(f,k)=>f.length===0||(f.length===1&&f[0]===k); // visible once filter k is dropped
+  const onlyBy=(f,k)=>f.length===1&&f[0]===k;                    // hidden by filter k and nothing else
+  const DROP={block:()=>state.block='',topics:()=>state.topics.clear(),q:()=>state.q='',mat:()=>state.mat=false,oss:()=>state.oss=false,naf:()=>state.naf=''};
+  const DID={block:'showing every time slot',topics:'cleared the topic filter',q:'cleared the search',mat:'included workshops without material',oss:'included vendor product workshops',naf:'cleared the NAF filter'};
+  const RELAX={mat:n=>'Show '+n+' without material',oss:n=>'Show '+pl(n,'vendor workshop'),block:n=>'Show '+n+' in other time slots',
+    topics:n=>'Show '+n+' with other topics',q:n=>'Show '+n+' without the search',naf:n=>'Show '+n+' outside '+NAME[state.naf]};
+  const changed=()=>!!(state.block||state.topics.size||state.q||!state.mat||state.oss||state.naf);
+  const snap=()=>({...state,topics:new Set(state.topics)});
 
   function readURL(){
     const p=new URLSearchParams(location.search);
     state.block=(p.get('slot')||'').toUpperCase().replace(/[^A-D]/g,'').slice(0,1);
-    state.topics=new Set((p.get('topic')||'').split(',').filter(Boolean));
-    state.q=p.get('q')||''; state.mat=p.get('material')!=='0'; state.oss=p.get('oss')==='1'; const n=p.get('naf')||''; state.naf=NAME[n]?n:'';
+    state.topics=new Set((p.get('topic')||'').split(',').filter(t=>TOPICS.has(t)));
+    state.q=(p.get('q')||'').trim(); state.mat=p.get('material')!=='0'; state.oss=p.get('oss')==='1';
+    const n=p.get('naf')||''; state.naf=NAME[n]?n:'';
   }
   function writeURL(){
     const p=new URLSearchParams();
@@ -668,85 +717,134 @@ footer.site a{color:var(--ink)}
     const s=p.toString().replace(/%2C/g,',');
     history.replaceState(null,'',(s?'?'+s:location.pathname)+location.hash);
   }
+
+  let F=new Map(), nt, prev=null;
+  const cnt=pred=>cards.filter(c=>pred(F.get(c),c)).length;
   function apply(){
-    const words=state.q.toLowerCase().split(/\s+/).filter(Boolean);
+    note.hidden=true; prev=null; // any new filter change makes an earlier undo stale
+    F=new Map(cards.map(c=>[c,fails(c)]));
     let shown=0;
     cards.forEach(c=>{
-      const t=c.dataset.topics.split(' ');
-      const ok=(!state.block||c.dataset.block===state.block)
-        &&(!state.topics.size||t.some(x=>state.topics.has(x)))
-        &&(!state.mat||c.dataset.mat==='1')
-        &&(!state.oss||c.dataset.oss!=='product')
-        &&(!state.naf||(' '+c.dataset.core+' '+c.dataset.touch+' ').includes(' '+state.naf+' '))
-        &&words.every(w=>c.dataset.search.includes(w));
-      c.hidden=!ok; if(ok)shown++;
+      const ok=!F.get(c).length; c.hidden=!ok; if(ok)shown++;
       c.querySelectorAll('.tag').forEach(g=>g.classList.toggle('hit',state.topics.has(g.dataset.topic)));
-      const rc=!!state.naf&&c.dataset.core.split(' ').includes(state.naf), rt=!rc&&!!state.naf&&c.dataset.touch.split(' ').includes(state.naf);
+      const rc=!!state.naf&&has(c.dataset.core,state.naf), rt=!rc&&!!state.naf&&has(c.dataset.touch,state.naf);
       c.classList.toggle('rel-core',rc); c.classList.toggle('rel-touch',rt);
       c.querySelector('.ws-rel').textContent=rc?'Core: '+NAME[state.naf]:rt?'Touches '+NAME[state.naf]:'';
-      c.querySelectorAll('.ws-naf button').forEach(b=>b.classList.toggle('hit',b.dataset.naf===state.naf));
-      const j=jump.querySelector('[data-for="'+c.id+'"]'); if(j)j.classList.toggle('off',!ok);
+      c.querySelectorAll('.ws-naf button').forEach(b=>{const on=b.dataset.naf===state.naf;b.classList.toggle('hit',on);b.setAttribute('aria-pressed',String(on));});
+      const j=jump.querySelector('[data-for="'+c.id+'"]');
+      if(j){j.classList.toggle('off',!ok);j.title=j.dataset.t+(ok?'':' (hidden by your filters, click to show it)');}
     });
     sections.forEach(s=>s.hidden=!s.querySelector('.ws:not([hidden])'));
-    tabs.forEach(b=>{const on=b.dataset.block===state.block;b.setAttribute('aria-pressed',String(on));
+
+    // facet counts: what you would see if you picked this option, given every other filter
+    tabs.forEach(b=>{const k=b.dataset.block, on=k===state.block, n=cnt((f,c)=>without(f,'block')&&(!k||c.dataset.block===k));
+      b.setAttribute('aria-pressed',String(on)); b.querySelector('.tn').textContent=n; b.classList.toggle('zero',!n&&!on);
+      b.title=n?'':'Nothing here with your other filters';
       if(on){const t=b.parentElement;t.scrollLeft=Math.max(0,b.offsetLeft-t.clientWidth/2+b.offsetWidth/2);}});
-    chips.forEach(b=>b.setAttribute('aria-pressed',String(state.topics.has(b.dataset.topic))));
-    q.value=state.q; mat.checked=state.mat; oss.checked=state.oss;
+    chips.forEach(b=>{const t=b.dataset.topic, on=state.topics.has(t), n=cnt((f,c)=>without(f,'topics')&&has(c.dataset.topics,t));
+      b.setAttribute('aria-pressed',String(on)); b.querySelector('span').textContent=n; b.classList.toggle('zero',!n&&!on);});
+    if(q.value.trim()!==state.q)q.value=state.q;
+    mat.checked=state.mat; oss.checked=state.oss;
+
+    // NAF explorer
     nbs.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.naf===state.naf)));
     dia.classList.toggle('has-sel',!!state.naf);
     panes.forEach(p=>p.hidden=p.dataset.panel!==state.naf);
     nafchip.hidden=!state.naf; nafchip.querySelector('span').textContent=NAME[state.naf]||'';
-    if(state.naf){const rel=cards.filter(c=>(' '+c.dataset.core+' '+c.dataset.touch+' ').includes(' '+state.naf+' ')), vis=rel.filter(c=>!c.hidden).length;
-      const pn=$('.np[data-panel="'+state.naf+'"]'), go=pn.querySelector('[data-go]'), all=pn.querySelector('[data-showrel]');
-      go.textContent=vis?('Jump to '+(vis===rel.length?'the ':'')+vis+' card'+(vis===1?'':'s')+' ↓'):'No cards match your other filters';
-      go.disabled=!vis; all.hidden=vis===rel.length; all.textContent='Show all '+rel.length;}
-    const nf=state.topics.size+(state.q?1:0)+(state.oss?1:0)+(state.naf?1:0);
-    fcount.textContent=nf; fbtn.classList.toggle('on',nf>0);
-    const any=nf>0||state.block||!state.mat;
-    clear.hidden=!any;
-    count.textContent=shown===cards.length?'Showing all '+cards.length+' workshops':(state.mat?shown+' with material':shown+' of '+cards.length)+(state.oss&&shown<cards.length?' · open source':'')+(state.naf&&shown<cards.length?' · '+NAME[state.naf]:'');
-    const sa=$('#showall'); sa.hidden=!state.mat; sa.textContent='Show all '+cards.length;
-    empty.classList.toggle('show',shown===0);
+    if(state.naf){
+      const pn=$('.np[data-panel="'+state.naf+'"]'), rel=cards.filter(c=>relTo(c,state.naf)), vis=rel.filter(c=>!c.hidden).length;
+      pn.querySelectorAll('.nr').forEach(r=>{const c=document.getElementById(r.dataset.ws), off=!!c&&c.hidden;
+        r.classList.toggle('off',off); r.title=off?'Hidden by your other filters. Click to show it.':'';});
+      const go=pn.querySelector('[data-go]'), all=pn.querySelector('[data-showrel]');
+      go.textContent=!vis?'No cards match your other filters':vis===rel.length?'Jump to the '+(vis===1?'card':vis+' cards')+' ↓':'Jump to '+vis+' of '+rel.length+' cards ↓';
+      go.disabled=!vis; all.hidden=vis===rel.length; all.textContent='Show all '+rel.length;
+    }
+
+    // status row
+    const inPanel=state.topics.size+(state.q?1:0)+(state.mat?1:0)+(state.oss?1:0);
+    fcount.textContent=inPanel; fbtn.classList.toggle('on',inPanel>0);
+    clear.hidden=!changed();
+    count.innerHTML=(shown===N?'All '+N:shown+' of '+N)+'<span class="wk"> workshops</span>';
+    const more=cnt(f=>onlyBy(f,'mat'));
+    showall.hidden=!shown||!more; showall.textContent='+'+more+' without material';
+
+    // empty state: offer to drop whichever single filter would bring results back
+    empty.classList.toggle('show',!shown);
+    relaxBox.textContent='';
+    if(!shown){
+      ['mat','oss','block','topics','q','naf'].forEach(k=>{const n=cnt(f=>onlyBy(f,k));if(!n)return;
+        const b=document.createElement('button');b.type='button';b.dataset.relax=k;b.textContent=RELAX[k](n);relaxBox.appendChild(b);});
+      const r=document.createElement('button');r.type='button';r.dataset.reset='';r.textContent='Reset filters';relaxBox.appendChild(r);
+    }
     writeURL();
   }
+
+  // small toast when we change filters for the user, with undo
+  function notify(msg,before){note.firstChild.textContent=msg;prev=before;undo.hidden=!before;note.hidden=false;clearTimeout(nt);nt=setTimeout(()=>note.hidden=true,6000);}
+  undo.addEventListener('click',()=>{if(!prev)return;Object.assign(state,prev,{topics:new Set(prev.topics)});prev=null;note.hidden=true;apply();toResults();});
+
   function reset(){state.block='';state.topics.clear();state.q='';state.mat=true;state.oss=false;state.naf='';apply();}
-  $('#showall').addEventListener('click',()=>{state.mat=false;apply();});
+  // If the user has scrolled down into the results, bring the top of the results back under the bar.
+  function toResults(){const y=topOf(jump)-bar.offsetHeight-8;if(scrollY>y+2)scrollTo({top:y,behavior:'smooth'});}
+  // For clicks on a card: keep that card where it was on screen while the list re-flows around it.
+  function anchored(el,fn){const t0=el.getBoundingClientRect().top;fn();
+    if(el.offsetParent){const d=el.getBoundingClientRect().top-t0;if(Math.abs(d)>1)scrollTo(0,scrollY+d);}else toResults();}
+  // Show one card: drop only the filters that hide it, and say so.
+  function reveal(c){
+    const f=fails(c); if(!f.length){note.hidden=true;return;}
+    const before=snap(); f.forEach(k=>DROP[k]()); apply();
+    notify('Showing '+c.id.toUpperCase()+': '+f.map(k=>DID[k]).join(' and ')+'.',before);
+  }
+  function goTo(c,smooth=true){
+    history.replaceState(null,'',location.pathname+location.search+'#'+c.id);
+    scrollTo({top:topOf(c)-bar.offsetHeight-12,behavior:smooth?'smooth':'auto'});
+    c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
+  }
+  const toggleTopic=t=>{state.topics.has(t)?state.topics.delete(t):state.topics.add(t);};
 
-  tabs.forEach(b=>b.addEventListener('click',()=>{state.block=b.dataset.block;apply();
-    const s=state.block&&document.querySelector('.blk[data-block="'+state.block+'"]');
-    if(s){const y=s.getBoundingClientRect().top+scrollY-$('#bar').offsetHeight-8;if(scrollY>y||y-scrollY>innerHeight*.6)scrollTo({top:y,behavior:'smooth'});}}));
-  chips.forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.topic;state.topics.has(t)?state.topics.delete(t):state.topics.add(t);apply();}));
-  document.addEventListener('click',ev=>{const g=ev.target.closest('.tag[data-topic]');if(!g)return;
-    const t=g.dataset.topic;state.topics.has(t)?state.topics.delete(t):state.topics.add(t);apply();});
-  let tm;q.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{state.q=q.value.trim();apply();},120);});
-  mat.addEventListener('change',()=>{state.mat=mat.checked;apply();});
-  oss.addEventListener('change',()=>{state.oss=oss.checked;apply();});
+  // control bar
+  tabs.forEach(b=>b.addEventListener('click',()=>{state.block=b.dataset.block;apply();toResults();}));
+  chips.forEach(b=>b.addEventListener('click',()=>{toggleTopic(b.dataset.topic);apply();toResults();}));
+  let tm;q.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{const v=q.value.trim();if(v===state.q)return;state.q=v;apply();toResults();},150);});
+  mat.addEventListener('change',()=>{state.mat=mat.checked;apply();toResults();});
+  oss.addEventListener('change',()=>{state.oss=oss.checked;apply();toResults();});
+  showall.addEventListener('click',()=>{state.mat=false;apply();toResults();});
+  clear.addEventListener('click',()=>{reset();toResults();});
+  fbtn.addEventListener('click',()=>{const o=panel.classList.toggle('open');fbtn.setAttribute('aria-expanded',String(o));if(o)q.focus({preventScroll:true});});
+  document.addEventListener('keydown',ev=>{if(ev.key==='/'&&!/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){ev.preventDefault();panel.classList.add('open');fbtn.setAttribute('aria-expanded','true');q.focus();}});
 
-  // NAF framework explorer
-  const topOf=el=>el.getBoundingClientRect().top+scrollY;
   document.addEventListener('click',ev=>{
-    const nb=ev.target.closest('[data-naf]');
+    const t=ev.target;
+    // topic tag on a card
+    const g=t.closest('.ws .tag[data-topic]');
+    if(g){anchored(g,()=>{toggleTopic(g.dataset.topic);apply();});return;}
+    // NAF block: on a card it filters in place, in the diagram/coverage list it toggles and shows the panel
+    const nb=t.closest('[data-naf]');
     if(nb){
-      const id=nb.dataset.naf, fromCard=!!nb.closest('.ws');
-      state.naf=(state.naf===id&&!fromCard)?'':id; apply();
-      if(fromCard){scrollTo({top:topOf($('#framework'))-8,behavior:'smooth'});}
-      else if(state.naf&&nb.classList.contains('nb')){const pn=$('#nafPanel'),r=pn.getBoundingClientRect();
-        if(r.top>innerHeight-140)scrollTo({top:topOf(pn)-16,behavior:'smooth'});}
+      const id=nb.dataset.naf;
+      if(nb.closest('.ws')){anchored(nb,()=>{state.naf=state.naf===id?'':id;apply();});return;}
+      state.naf=state.naf===id?'':id; apply();
+      if(state.naf){const pn=$('#nafPanel'),r=pn.getBoundingClientRect();if(r.top>innerHeight-140)scrollTo({top:topOf(pn)-16,behavior:'smooth'});}
       return;
     }
-    if(ev.target.closest('[data-naf-clear]')){state.naf='';apply();return;}
-    if(ev.target.closest('[data-showrel]')){state.block='';state.topics.clear();state.q='';state.mat=false;state.oss=false;apply();}
-    if(ev.target.closest('[data-go],[data-showrel]')){const f=$('.ws:not([hidden])')||$('#empty');scrollTo({top:topOf(f)-$('#bar').offsetHeight-12,behavior:'smooth'});return;}
-    const r=ev.target.closest('.nr,.nr-jump');
-    if(r){
-      ev.preventDefault();
-      const c=document.getElementById(r.dataset.ws); if(!c)return;
-      if(c.hidden){state.block='';state.topics.clear();state.q='';state.mat=false;state.oss=false;apply();}
-      history.replaceState(null,'',location.pathname+location.search+'#'+c.id);
-      scrollTo({top:topOf(c)-$('#bar').offsetHeight-12,behavior:'smooth'});
-      c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
+    const nc=t.closest('[data-naf-clear]');
+    if(nc){state.naf='';apply();if(nc.id==='nafchip')toResults();return;}
+    if(t.closest('[data-showrel]')){
+      const rel=cards.filter(c=>relTo(c,state.naf)), drop=new Set(rel.flatMap(fails));
+      if(drop.size){const before=snap();drop.forEach(k=>DROP[k]());apply();
+        notify('Showing all '+rel.length+' '+NAME[state.naf]+' workshops: '+[...drop].map(k=>DID[k]).join(' and ')+'.',before);}
     }
+    if(t.closest('[data-go],[data-showrel]')){const f=$('.ws:not([hidden])')||empty;scrollTo({top:topOf(f)-bar.offsetHeight-12,behavior:'smooth'});return;}
+    const rx=t.closest('[data-relax]');
+    if(rx){DROP[rx.dataset.relax]();apply();toResults();return;}
+    if(t.closest('[data-reset]')){reset();toResults();return;}
+    // any in-page link to a workshop (jump strip, NAF rows, card codes): reveal it if filtered out, then scroll to it
+    const a=t.closest('a[href^="#"]');
+    if(a){const c=document.getElementById(a.getAttribute('href').slice(1));
+      if(c&&c.classList.contains('ws')){ev.preventDefault();reveal(c);goTo(c);}}
   });
+  addEventListener('hashchange',()=>{const c=document.getElementById(location.hash.slice(1));if(c&&c.classList.contains('ws')){reveal(c);goTo(c);}});
+
   const hl=(core,touch)=>{nbs.forEach(b=>{const k=b.dataset.naf;b.classList.toggle('hl-core',core.includes(k));b.classList.toggle('hl-touch',!core.includes(k)&&touch.includes(k));});
     dia.classList.toggle('hovering',core.length+touch.length>0);};
   const onRow=ev=>{const r=ev.target.closest('.nr');r?hl(r.dataset.core.split(' ').filter(Boolean),r.dataset.touch.split(' ').filter(Boolean)):hl([],[]);};
@@ -754,9 +852,6 @@ footer.site a{color:var(--ink)}
   $('#nafPanel').addEventListener('focusin',onRow);
   $('#nafPanel').addEventListener('pointerleave',()=>hl([],[]));
   $('#nafPanel').addEventListener('focusout',ev=>{if(!$('#nafPanel').contains(ev.relatedTarget))hl([],[]);});
-  clear.addEventListener('click',reset); $('#clear2').addEventListener('click',reset);
-  fbtn.addEventListener('click',()=>{const o=panel.classList.toggle('open');fbtn.setAttribute('aria-expanded',String(o));if(o)q.focus({preventScroll:true});});
-  document.addEventListener('keydown',ev=>{if(ev.key==='/'&&document.activeElement!==q){ev.preventDefault();panel.classList.add('open');q.focus();}});
 
   // live slot
   function markLive(){
@@ -778,7 +873,9 @@ footer.site a{color:var(--ink)}
   tick(); setInterval(tick,1000);
 
   readURL(); apply();
-  if(location.hash){const t=document.querySelector(location.hash);if(t)setTimeout(()=>t.scrollIntoView(),50);}
+  // shared link to one workshop (#c3): make sure it is visible even if the default filters would hide it
+  if(location.hash){const el=document.getElementById(location.hash.slice(1));
+    if(el){if(el.classList.contains('ws'))reveal(el);setTimeout(()=>el.classList.contains('ws')?goTo(el,false):el.scrollIntoView(),60);}}
 })();
 </script>
 </body>

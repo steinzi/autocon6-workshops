@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T12:20:00-07:00",
+  "updated": "2026-11-16T14:30:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -209,8 +209,19 @@
       "slack": "ac6-ws-b1",
       "tldr": "Troubleshoot a Containerlab network with st-cli using natural language or plain commands, through guided failure scenarios with a human in the loop.",
       "prep": [],
-      "links": [],
-      "notes": [],
+      "links": [
+        {
+          "label": "Slide deck",
+          "url": "https://supertrace.ai/ac6-deck"
+        },
+        {
+          "label": "Lab repo (Containerlab)",
+          "url": "https://github.com/super-trace/ac6-workshop-lab"
+        }
+      ],
+      "notes": [
+        "The lab repo is an SR Linux + FRRouting Containerlab environment for st-cli."
+      ],
       "topics": [
         "ai",
         "clab"
@@ -314,7 +325,12 @@
       "slack": "ac6-ws-b4",
       "tldr": "Build, test and deploy automations in BackBox (Kilter) in a live lab: backup, compliance, drift remediation, scheduling, and change verification with rollback.",
       "prep": [],
-      "links": [],
+      "links": [
+        {
+          "label": "Workshop syllabus (PDF, Slack members)",
+          "url": "https://networkautomationfrm.slack.com/archives/C0CG9LG5K17/p1794862730402529"
+        }
+      ],
       "notes": [
         "Remote Zoom details are in the Slack channel."
       ],

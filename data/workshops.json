@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T04:05:00-07:00",
+  "updated": "2026-11-17T04:15:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -266,8 +266,8 @@
           "url": "https://github.com/aristanetworks/aclabs/blob/main/labs/atd-automation-l3ls-dual-dc/README.md"
         },
         {
-          "label": "Slides (PDF, Slack members)",
-          "url": "https://networkautomationfrm.slack.com/archives/C0CG2ENQX45/p1794881675628279"
+          "label": "Slides (PDF, 4.6 MB)",
+          "url": "files/b2-slides.pdf"
         }
       ],
       "notes": [],

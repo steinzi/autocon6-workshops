@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T15:10:00-07:00",
+  "updated": "2026-11-17T04:05:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -16,6 +16,7 @@
       "Times are local (MST, UTC-7).",
       "Workshop wifi: use the Autocon6 SSID, which is set aside for workshops.",
       "Many workshops offer a recording or remote option because of flight cancellations. Check the workshop's Slack channel.",
+      "Went to a Monday workshop? The organisers' feedback survey is at surveymonkey.com/r/ac6ws-mon.",
       "\"Open source\" means the whole stack is free and open. \"Mostly open\" means open-source tooling with some vendor kit or SaaS. \"Vendor product\" means it's mainly a tutorial for a commercial product. The Free & open source toggle hides that last group.",
       "The NAF Framework mapping is a best guess from each workshop's description. It isn't an official NAF classification."
     ]
@@ -132,7 +133,7 @@
         }
       ],
       "notes": [
-        "Recorded. Slides and Containerlab files to run the labs locally are promised after the workshop."
+        "Recorded. The workshop lab VMs have been shut down. CodiLime says self-service labs you can run yourself, plus the slides, are on the way."
       ],
       "topics": [
         "linux",
@@ -217,6 +218,10 @@
         {
           "label": "Lab repo (Containerlab)",
           "url": "https://github.com/super-trace/ac6-workshop-lab"
+        },
+        {
+          "label": "st-cli configuration docs",
+          "url": "https://github.com/super-trace/stcli-releases/blob/main/docs/configuration.md"
         }
       ],
       "notes": [
@@ -255,7 +260,16 @@
       "slack": "ac6-ws-b2",
       "tldr": "Architect, validate and deploy a leaf-spine EVPN/VXLAN fabric as code with arista.avd, pyavd and ANTA, covering Day 0 and Day 2 plus multi-vendor extension.",
       "prep": [],
-      "links": [],
+      "links": [
+        {
+          "label": "Lab guide (Arista ACLabs)",
+          "url": "https://github.com/aristanetworks/aclabs/blob/main/labs/atd-automation-l3ls-dual-dc/README.md"
+        },
+        {
+          "label": "Slides (PDF, Slack members)",
+          "url": "https://networkautomationfrm.slack.com/archives/C0CG2ENQX45/p1794881675628279"
+        }
+      ],
       "notes": [],
       "topics": [
         "design",

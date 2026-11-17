@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T04:15:00-07:00",
+  "updated": "2026-11-17T09:15:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -376,7 +376,7 @@
       ],
       "levels": "Net Beginner · Linux Beginner · Prog Intermediate",
       "sold_out": true,
-      "room": null,
+      "room": "Lantana",
       "slack": "ac6-ws-c1",
       "tldr": "Lectures on LLMs, Ralph loops and spec-driven development with GitHub Spec Kit, then build a networking game in teams of six and show it off.",
       "prep": [
@@ -448,6 +448,7 @@
         ]
       ],
       "notes": [
+        "Lantana is downstairs, at the very end of the hallway.",
         "Slides shared here with John Capobianco's OK. The PDF is a converted copy for phones, so some fonts differ from the original."
       ],
       "topics": [
@@ -480,8 +481,21 @@
       "slack": "ac6-ws-c2",
       "tldr": "An open-source pipeline on the NAF framework: Infrahub as the intent source, AVD generating per-device config, and Ansible pushing to a Containerlab fabric.",
       "prep": [],
-      "links": [],
-      "notes": [],
+      "links": [
+        {
+          "label": "Slides: Infrahub and AVD labs (PDF, 18 MB)",
+          "url": "files/c2-infrahub-avd-slides.pdf"
+        },
+        {
+          "label": "Self-service labs (Instruqt)",
+          "url": "https://opsmill.com/labs1"
+        }
+      ],
+      "notes": [
+        "The three labs (Infrahub, AVD, and both together) run in Instruqt, which asks for your name and work email first.",
+        "Arista's AVD slides are in the Slack channel; they're marked confidential, so they aren't posted here.",
+        "Alex posted a Google Meet link in Slack for anyone who couldn't make it in person."
+      ],
       "topics": [
         "sot",
         "design",
@@ -521,7 +535,8 @@
       ],
       "links": [],
       "notes": [
-        "Lab instructions stay available afterwards in a repo shared during the workshop."
+        "Lab instructions stay available afterwards in a repo shared during the workshop.",
+        "Reda posted a Teams link in Slack for anyone stuck on a delayed flight."
       ],
       "topics": [
         "fabric",
@@ -599,7 +614,7 @@
         }
       ],
       "notes": [
-        "Remote option will follow the official NAF Zoom setup."
+        "Eric posted a Zoom link in Slack for remote attendees, and the session is being recorded for anyone stuck travelling."
       ],
       "topics": [
         "ai"
@@ -632,7 +647,9 @@
       "tldr": "Design and run a network source of truth with Infrahub and NAF: schema modelling, GraphQL, validation, branching, Generators and Jinja2 Transforms.",
       "prep": [],
       "links": [],
-      "notes": [],
+      "notes": [
+        "Alex posted a Google Meet link in Slack for anyone who couldn't make it in person."
+      ],
       "topics": [
         "sot",
         "design"
@@ -663,7 +680,8 @@
       ],
       "links": [],
       "notes": [
-        "Expect it to be interactive and a bit messy: scripts are built live with Claude instead of showing finished work."
+        "Expect it to be interactive and a bit messy: scripts are built live with Claude instead of showing finished work.",
+        "Russ is pushing the scripts and outline docs to a git repo as they're built, so you can grab them afterwards. The repo link isn't posted yet."
       ],
       "topics": [
         "twin",

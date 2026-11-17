@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T13:00:00-07:00",
+  "updated": "2026-11-17T15:05:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -133,7 +133,7 @@
         }
       ],
       "notes": [
-        "Recorded. The workshop lab VMs have been shut down. CodiLime says self-service labs you can run yourself, plus the slides, are on the way."
+        "Recorded. The workshop lab VMs have been shut down. CodiLime has emailed attendees instructions for running the labs locally and posted the slides in Slack, but asked that neither be shared, so they aren't posted here."
       ],
       "topics": [
         "linux",
@@ -270,7 +270,9 @@
           "url": "files/b2-slides.pdf"
         }
       ],
-      "notes": [],
+      "notes": [
+        "Carl reopened the Arista labs until 8 PM Tuesday for anyone who didn't finish. The link is in Slack."
+      ],
       "topics": [
         "design",
         "fabric",
@@ -454,7 +456,7 @@
       "notes": [
         "Lantana is downstairs, at the very end of the hallway.",
         "Slides shared here with John Capobianco's OK. The PDF is a converted copy for phones, so some fonts differ from the original.",
-        "Teams' finished games are going up on the Arcade page as they're submitted."
+        "Attendees can send John their GitHub repo with an ARCADE.md file any time this week to get their game published on the Arcade."
       ],
       "topics": [
         "ai"
@@ -498,11 +500,32 @@
         {
           "label": "Self-service labs (Instruqt)",
           "url": "https://opsmill.com/labs1"
+        },
+        {
+          "label": "Infrahub AVD reference design docs",
+          "url": "https://docs.infrahub.app/arista-avd"
+        },
+        {
+          "label": "Arista AVD data model docs",
+          "url": "https://avd.arista.com/6.5/docs/data-models/index.html"
+        },
+        {
+          "label": "Infrahub docs",
+          "url": "https://docs.infrahub.app/"
+        },
+        {
+          "label": "Infrahub always-on sandbox",
+          "url": "https://sandbox.infrahub.app/"
+        },
+        {
+          "label": "On-demand Infrahub labs",
+          "url": "https://docs.infrahub.app/labs"
         }
       ],
       "notes": [
         "The three labs (Infrahub, AVD, and both together) run in Instruqt, which asks for your name and work email first. Finishing one lab doesn't open the next, so go back to the labs page to start the next one.",
-        "Alex posted a Google Meet link in Slack for anyone who couldn't make it in person."
+        "Alex posted a Google Meet link in Slack for anyone who couldn't make it in person.",
+        "OpsMill's happy hour is tonight, Tuesday 5 to 8 PM. RSVP at opsmill.com/ac6-social."
       ],
       "topics": [
         "sot",
@@ -612,7 +635,7 @@
       ],
       "levels": "Net Intermediate · Linux Intermediate · Prog Intermediate",
       "sold_out": true,
-      "room": null,
+      "room": "Lantana",
       "slack": "ac6-ws-d1-ai-for-the-network-forward-engineer",
       "tldr": "Build a network co-pilot on local and cloud LLMs in a browser lab: prompt engineering, Pydantic, a LangChain agent, a Streamlit UI, and evaluation and hallucination testing.",
       "prep": [
@@ -659,8 +682,18 @@
       "slack": "ac6-ws-d2",
       "tldr": "Design and run a network source of truth with Infrahub and NAF: schema modelling, GraphQL, validation, branching, Generators and Jinja2 Transforms.",
       "prep": [],
-      "links": [],
+      "links": [
+        {
+          "label": "Slides (PDF, 19 MB)",
+          "url": "files/d2-slides.pdf"
+        },
+        {
+          "label": "Self-service labs (Instruqt)",
+          "url": "https://opsmill.com/labs2"
+        }
+      ],
       "notes": [
+        "The labs run in Instruqt, which asks for your name and work email first.",
         "Alex posted a Google Meet link in Slack for anyone who couldn't make it in person."
       ],
       "topics": [
@@ -691,11 +724,16 @@
       "prep": [
         "A FAQ went out by email."
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "Workshop files (Russ's repo)",
+          "url": "https://github.com/riw777/autocon26"
+        }
+      ],
       "notes": [
         "Expect it to be interactive and a bit messy: scripts are built live with Claude instead of showing finished work.",
-        "Russ is pushing the scripts and outline docs to a git repo as they're built, so you can grab them afterwards. The repo link isn't posted yet.",
-        "Russ made it to Tucson and is setting up a Zoom for people stuck travelling. Watch the Slack channel for the link."
+        "Russ made it to Tucson and is setting up a Zoom for people stuck travelling. Watch the Slack channel for the link.",
+        "Russ is adding the scripts and outline docs to the repo as they're built."
       ],
       "topics": [
         "twin",
@@ -735,7 +773,7 @@
       "links": [],
       "notes": [
         "Use cases: BGP peer-as drift, logging drift, a prefix-limit leak, and swap-a-block.",
-        "The proctors say there will be a remote option, and they'll post the link in the Slack channel."
+        "A Teams link for remote attendees is in the Slack channel."
       ],
       "topics": [
         "telemetry",

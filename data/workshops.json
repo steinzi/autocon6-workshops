@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T09:15:00-07:00",
+  "updated": "2026-11-17T09:25:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -487,13 +487,16 @@
           "url": "files/c2-infrahub-avd-slides.pdf"
         },
         {
+          "label": "Slides: Arista AVD (PDF, 3 MB)",
+          "url": "files/c2-avd-slides.pdf"
+        },
+        {
           "label": "Self-service labs (Instruqt)",
           "url": "https://opsmill.com/labs1"
         }
       ],
       "notes": [
         "The three labs (Infrahub, AVD, and both together) run in Instruqt, which asks for your name and work email first.",
-        "Arista's AVD slides are in the Slack channel; they're marked confidential, so they aren't posted here.",
         "Alex posted a Google Meet link in Slack for anyone who couldn't make it in person."
       ],
       "topics": [

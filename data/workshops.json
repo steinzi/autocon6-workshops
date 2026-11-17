@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T11:40:00-07:00",
+  "updated": "2026-11-17T13:00:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -453,7 +453,8 @@
       ],
       "notes": [
         "Lantana is downstairs, at the very end of the hallway.",
-        "Slides shared here with John Capobianco's OK. The PDF is a converted copy for phones, so some fonts differ from the original."
+        "Slides shared here with John Capobianco's OK. The PDF is a converted copy for phones, so some fonts differ from the original.",
+        "Teams' finished games are going up on the Arcade page as they're submitted."
       ],
       "topics": [
         "ai"
@@ -500,7 +501,7 @@
         }
       ],
       "notes": [
-        "The three labs (Infrahub, AVD, and both together) run in Instruqt, which asks for your name and work email first.",
+        "The three labs (Infrahub, AVD, and both together) run in Instruqt, which asks for your name and work email first. Finishing one lab doesn't open the next, so go back to the labs page to start the next one.",
         "Alex posted a Google Meet link in Slack for anyone who couldn't make it in person."
       ],
       "topics": [
@@ -513,13 +514,13 @@
       "openness": "open",
       "openness_note": "Infrahub (community), AVD, Ansible and Containerlab are all open source.",
       "naf_core": [
-        "intent",
-        "executor"
+        "intent"
       ],
       "naf_touch": [
+        "executor",
         "orchestration"
       ],
-      "naf_note": "Infrahub holds the fabric intent, AVD renders per-device config, and Ansible pushes it."
+      "naf_note": "Alex says the workshop centres on the Intent block, with Infrahub. The AVD lab deploys with Ansible and the Arista collection, which touches Executor and Orchestration."
     },
     {
       "code": "C3",
@@ -733,7 +734,8 @@
       ],
       "links": [],
       "notes": [
-        "Use cases: BGP peer-as drift, logging drift, a prefix-limit leak, and swap-a-block."
+        "Use cases: BGP peer-as drift, logging drift, a prefix-limit leak, and swap-a-block.",
+        "The proctors say there will be a remote option, and they'll post the link in the Slack channel."
       ],
       "topics": [
         "telemetry",

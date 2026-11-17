@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T09:25:00-07:00",
+  "updated": "2026-11-17T11:40:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -403,6 +403,10 @@
         {
           "label": "Example games (Arcade)",
           "url": "https://automateyournetwork.com/arcade/"
+        },
+        {
+          "label": "Itential's free virtual workshop in December",
+          "url": "https://www.itential.com/infrastructure-ai-agent-workshop/"
         }
       ],
       "agenda": [
@@ -536,9 +540,14 @@
         "Make sure your work VPN doesn't block SSH to Google Cloud.",
         "You get an instruction card and your own lab instance on the day."
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "Lab repo (also runs in Codespaces)",
+          "url": "https://github.com/srlinuxamericas/ac6-sonic"
+        }
+      ],
       "notes": [
-        "Lab instructions stay available afterwards in a repo shared during the workshop.",
+        "The lab repo has every section's instructions and runs free in GitHub Codespaces, so you can redo it afterwards. The workshop VMs are deleted when the session ends, so save your work to your laptop.",
         "Reda posted a Teams link in Slack for anyone stuck on a delayed flight."
       ],
       "topics": [
@@ -684,7 +693,8 @@
       "links": [],
       "notes": [
         "Expect it to be interactive and a bit messy: scripts are built live with Claude instead of showing finished work.",
-        "Russ is pushing the scripts and outline docs to a git repo as they're built, so you can grab them afterwards. The repo link isn't posted yet."
+        "Russ is pushing the scripts and outline docs to a git repo as they're built, so you can grab them afterwards. The repo link isn't posted yet.",
+        "Russ made it to Tucson and is setting up a Zoom for people stuck travelling. Watch the Slack channel for the link."
       ],
       "topics": [
         "twin",

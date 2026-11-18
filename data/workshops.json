@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T15:05:00-07:00",
+  "updated": "2026-11-18T13:20:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -16,7 +16,7 @@
       "Times are local (MST, UTC-7).",
       "Workshop wifi: use the Autocon6 SSID, which is set aside for workshops.",
       "Many workshops offer a recording or remote option because of flight cancellations. Check the workshop's Slack channel.",
-      "Went to a Monday workshop? The organisers' feedback survey is at surveymonkey.com/r/ac6ws-mon.",
+      "Went to a workshop? The organisers' feedback surveys are at surveymonkey.com/r/ac6ws-mon (Monday) and surveymonkey.com/r/ac6ws-tue (Tuesday).",
       "\"Open source\" means the whole stack is free and open. \"Mostly open\" means open-source tooling with some vendor kit or SaaS. \"Vendor product\" means it's mainly a tutorial for a commercial product. The Free & open source toggle hides that last group.",
       "The NAF Framework mapping is a best guess from each workshop's description. It isn't an official NAF classification."
     ]
@@ -46,10 +46,19 @@
         {
           "label": "Cisco DevNet sandboxes",
           "url": "https://developer.cisco.com/sandbox"
+        },
+        {
+          "label": "Mockit, the open-source device emulator the lab ran on",
+          "url": "https://gitlab.com/slurpit.io/mockit"
+        },
+        {
+          "label": "Mockit BGP troubleshooting lab (ZIP, 74 KB)",
+          "url": "files/a1-mockit-bgp-lab.zip"
         }
       ],
       "notes": [
-        "Session is being recorded. Remote Zoom link is in the Slack channel."
+        "Session is being recorded. Remote Zoom link is in the Slack channel.",
+        "Sif shared the Mockit lab used in the workshop: eight emulated Cisco routers and switches with one planted BGP fault. Run it with docker compose; the README has the steps and ANSWERS.md has the answer."
       ],
       "topics": [
         "ai",
@@ -456,7 +465,7 @@
       "notes": [
         "Lantana is downstairs, at the very end of the hallway.",
         "Slides shared here with John Capobianco's OK. The PDF is a converted copy for phones, so some fonts differ from the original.",
-        "Attendees can send John their GitHub repo with an ARCADE.md file any time this week to get their game published on the Arcade."
+        "Attendees can send John their GitHub repo with an ARCADE.md file to get their game on the Arcade. Games sent by Friday around 1 PM can be featured in John's write-up about the workshop. 15 games are live so far."
       ],
       "topics": [
         "ai"
@@ -770,10 +779,25 @@
         "Install VS Code and the Remote - SSH extension.",
         "Test from your laptop: ssh naf-ac6-ws-vm"
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "Workshop repo (GitHub)",
+          "url": "https://github.com/JNPRAutomate/naf-ac6-workshop"
+        },
+        {
+          "label": "Slides (PDF, 9 MB)",
+          "url": "files/d4-slides.pdf"
+        },
+        {
+          "label": "Example run reports with screenshots, one per use case (ZIP, 17 MB)",
+          "url": "files/d4-run-reports.zip"
+        }
+      ],
       "notes": [
         "Use cases: BGP peer-as drift, logging drift, a prefix-limit leak, and swap-a-block.",
-        "A Teams link for remote attendees is in the Slack channel."
+        "A Teams link for remote attendees is in the Slack channel.",
+        "The workshop labs stay up through Saturday. The access link is in the Slack channel.",
+        "The repo is open source, has setup steps for macOS and Windows, and works with Juniper's JCL."
       ],
       "topics": [
         "telemetry",

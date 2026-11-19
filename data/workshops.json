@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T17:30:00-07:00",
+  "updated": "2026-11-19T09:10:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -180,12 +180,17 @@
       ],
       "links": [
         {
+          "label": "Workshop repo (runs in your own Codespace)",
+          "url": "https://github.com/forwardnetworks/autocon6-know-before-you-deploy"
+        },
+        {
           "label": "Get a seat",
           "url": "https://tinyurl.com/wsa4go"
         }
       ],
       "notes": [
-        "Recorded. Zoom is for remote attendees only (\"In room? No Zoom!\")."
+        "Recorded. Zoom is for remote attendees only (\"In room? No Zoom!\").",
+        "Craig posted the repo so anyone can finish the exercises or go deeper. It runs in your own GitHub Codespace, so usage is billed to your account."
       ],
       "topics": [
         "cicd",
@@ -400,6 +405,10 @@
           "url": "https://github.com/automateyournetwork/NAF_AC6"
         },
         {
+          "label": "Follow along: lecture and lab (WORKSHOP folder)",
+          "url": "https://github.com/automateyournetwork/NAF_AC6/tree/main/WORKSHOP"
+        },
+        {
           "label": "Slides (PDF, 14 MB)",
           "url": "files/c1-slides.pdf"
         },
@@ -418,6 +427,10 @@
         {
           "label": "Itential's free virtual workshop in December",
           "url": "https://www.itential.com/infrastructure-ai-agent-workshop/"
+        },
+        {
+          "label": "John's AutoCon 6 talk deck (TALK folder)",
+          "url": "https://github.com/automateyournetwork/NAF_AC6/tree/main/TALK"
         }
       ],
       "agenda": [
@@ -465,7 +478,8 @@
       "notes": [
         "Lantana is downstairs, at the very end of the hallway.",
         "Slides shared here with John Capobianco's OK. The PDF is a converted copy for phones, so some fonts differ from the original.",
-        "Attendees can send John their GitHub repo with an ARCADE.md file to get their game on the Arcade. Games sent by Friday around 1 PM can be featured in John's write-up about the workshop. 15 games are live so far."
+        "Anyone can do the workshop now: the repo's WORKSHOP folder has the lecture and lab. You need an AI coding harness (Claude Code, Codex, Copilot or Cursor), a model with plenty of usage, GitHub Spec Kit and Ralph loops.",
+        "Send John your game's GitHub repo with an ARCADE.md file by about noon Friday to be part of his write-up and the Arcade launch. 17 games are live so far."
       ],
       "topics": [
         "ai"

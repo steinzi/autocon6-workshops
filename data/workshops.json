@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T13:20:00-07:00",
+  "updated": "2026-11-18T17:30:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -577,11 +577,16 @@
         {
           "label": "Lab repo (also runs in Codespaces)",
           "url": "https://github.com/srlinuxamericas/ac6-sonic"
+        },
+        {
+          "label": "Slides (PDF, 3 MB)",
+          "url": "files/c3-slides.pdf"
         }
       ],
       "notes": [
         "The lab repo has every section's instructions and runs free in GitHub Codespaces, so you can redo it afterwards. The workshop VMs are deleted when the session ends, so save your work to your laptop.",
-        "Reda posted a Teams link in Slack for anyone stuck on a delayed flight."
+        "Reda posted a Teams link in Slack for anyone stuck on a delayed flight.",
+        "Reda shared the slides after the workshop. The password for the workshop VMs is blanked out on slide 14, since those VMs are gone."
       ],
       "topics": [
         "fabric",

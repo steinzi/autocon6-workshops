@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T09:10:00-07:00",
+  "updated": "2026-11-19T09:30:00-07:00",
   "event": {
     "name": "AutoCon 6",
     "city": "Tucson, AZ",
@@ -293,7 +293,7 @@
         "cicd"
       ],
       "openness": "mostly",
-      "openness_note": "AVD, pyavd and ANTA are open source, but it's all aimed at Arista EOS.",
+      "openness_note": "AVD, pyavd and ANTA are open source. The workshop used Arista EOS and also showed how to extend AVD to third-party platforms such as FRR.",
       "naf_core": [
         "intent",
         "executor"
